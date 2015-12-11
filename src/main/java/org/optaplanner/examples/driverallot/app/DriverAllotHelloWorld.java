@@ -1,0 +1,133 @@
+/*
+ * Copyright 2010 JBoss Inc
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.optaplanner.examples.driverallot.app;
+
+import java.io.BufferedOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
+
+import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScoreHolder;
+import org.optaplanner.core.api.solver.Solver;
+import org.optaplanner.core.api.solver.SolverFactory;
+import org.optaplanner.core.api.solver.event.BestSolutionChangedEvent;
+import org.optaplanner.core.api.solver.event.SolverEventListener;
+import org.optaplanner.examples.curriculumcourse.app.CurriculumCourseApp;
+import org.optaplanner.examples.driverallot.DriverTestCase;
+import org.optaplanner.examples.driverallot.domain.Driver;
+import org.optaplanner.examples.driverallot.domain.DriverAllot;
+import org.optaplanner.examples.driverallot.domain.RouteTrip;
+import org.optaplanner.examples.driverallot.persistence.DriverAllotGenerator;
+
+import javafx.util.Pair;
+
+/**
+ * Examination is super optimized and a bit complex.
+ * {@link CurriculumCourseApp} is arguably a better example to learn from.
+ */
+public class DriverAllotHelloWorld {
+
+	public static void main(String[] args) throws FileNotFoundException {
+		
+		//System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream("sysoutfile"))));
+
+		ArrayList<DriverAllot> DriverAllotResults = new ArrayList<>();
+		int countCorrect = 0;
+		// Build the Solver
+		SolverFactory solverFactory = SolverFactory.createFromXmlResource(
+				"org/optaplanner/examples/driverallot/solver/driverAllotSolverConfig.xml");
+		Solver solver = solverFactory.buildSolver();
+
+		// Load a problem with 400 computers and 1200 processes
+		for(int i = 0; i < DriverTestCase.GLOBALDRIVERLIST.length; i++) {
+			DriverAllot unsolvedDriverAllot = new DriverAllotGenerator().createDriverAllot(i);
+
+			// Solve the problem
+			solver.solve(unsolvedDriverAllot);
+
+
+			/*solver.addEventListener(new SolverEventListener<DriverAllot>() {
+
+			@Override
+			public void bestSolutionChanged(BestSolutionChangedEvent<DriverAllot> event) {
+				// TODO Auto-generated method stub
+				//if (event.isNewBestSolutionInitialized()
+	            //        && event.getNewBestSolution().getScore().isFeasible()) {
+					System.out.println("We have a feasible solution");
+				//}
+			}
+
+        	});*/
+
+
+			DriverAllot solvedDriverAllot = (DriverAllot) solver.getBestSolution();
+
+			DriverAllotResults.add(solvedDriverAllot);
+		}
+		for(int i = 0; i < DriverAllotResults.size(); i++) {
+			DriverAllot solvedDriverAllot = DriverAllotResults.get(i);
+			boolean wrong = true;
+			for(int k = 0; k < DriverTestCase.GLOBALRESULTLIST[i].length; k++) {
+				Pair[] pairList = DriverTestCase.GLOBALRESULTLIST[i][k];
+				boolean wrongTestCaseResult = false;
+				for(int j = 0; j < solvedDriverAllot.getRouteTripList().size(); j++) {
+					RouteTrip routeTrip = solvedDriverAllot.getRouteTripList().get(j);
+					Driver driver = routeTrip.getDriver();
+					if(driver != null) {
+						Integer testRouteTripId = (Integer)pairList[j].getKey();
+						Integer testDriverId = (Integer)pairList[j].getValue();
+						if(!(routeTrip.getId() == testRouteTripId.longValue() && driver.getId() == testDriverId.longValue())) {
+							wrongTestCaseResult = true;
+							break;
+						}
+					}
+				}
+				wrong &= wrongTestCaseResult;
+			}
+			if(wrong) {
+				System.out.println("\nTest Case #" + i + "\nSolved DriverAllot with " + solvedDriverAllot.getDriverList().size() + " drivers and " + solvedDriverAllot.getRouteTripList().size() + " routeTrips:\n"
+						+ toDisplayString(solvedDriverAllot));
+				
+				/*for(RouteTrip routeTrip : solvedDriverAllot.getRouteTripList()) {
+					System.out.println(routeTrip.tostring());
+					//System.out.println(routeTrip.getLabel() + "\t" + routeTrip.getTimeStart() + "\t" + routeTrip.getTimeEnd());
+				}
+				System.out.println();
+				for(Driver driver : solvedDriverAllot.getDriverList()) {
+					System.out.println(driver.tostring());
+					//System.out.println(driver.getLabel() + "\t" + driver.getTimeIn() + "\t" + driver.getTimeOut());
+				}*/
+			}
+			else
+				countCorrect ++;
+		}
+		System.out.println("\n" + countCorrect + " test cases out of " + DriverTestCase.GLOBALDRIVERLIST.length + " were correct");
+	}
+
+	public static String toDisplayString(DriverAllot solvedDriverAllot) {
+		StringBuilder displayString = new StringBuilder();
+		for (RouteTrip routeTrip : solvedDriverAllot.getRouteTripList()) {
+			Driver driver = routeTrip.getDriver();
+			if(driver != null && driver.getMultiplicand() >= routeTrip.getRequiredMultiplicand())
+				displayString.append("  ").append(routeTrip.getLabel()).append(" -> ")
+				.append(driver == null ? null : driver.getLabel()).append("\n");
+		}
+		return displayString.toString();
+	}
+
+}

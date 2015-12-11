@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<solver>
+  <!--<environmentMode>FAST_ASSERT</environmentMode>-->
+
+  <!-- Domain model configuration -->
+  <scanAnnotatedClasses>
+    <packageInclude>org.optaplanner.examples.driverallot</packageInclude>
+  </scanAnnotatedClasses>
+
+  <!-- Score configuration -->
+  <scoreDirectorFactory>
+    <scoreDefinitionType>HARD_SOFT</scoreDefinitionType>
+    <!--<easyScoreCalculatorClass>org.optaplanner.examples.cloudbalancing.solver.score.CloudBalancingEasyScoreCalculator</easyScoreCalculatorClass>-->
+    <!--<easyScoreCalculatorClass>org.optaplanner.examples.cloudbalancing.solver.score.CloudBalancingMapBasedEasyScoreCalculator</easyScoreCalculatorClass>-->
+    <!--<incrementalScoreCalculatorClass>org.optaplanner.examples.cloudbalancing.solver.score.CloudBalancingIncrementalScoreCalculator</incrementalScoreCalculatorClass>-->
+    <scoreDrl>org/optaplanner/examples/driverallot/solver/driverAllotScoreRules.drl</scoreDrl>
+    <initializingScoreTrend>ONLY_DOWN</initializingScoreTrend>
+    <!--<assertionScoreDirectorFactory>-->
+      <!--<easyScoreCalculatorClass>org.optaplanner.examples.cloudbalancing.solver.score.CloudBalancingMapBasedEasyScoreCalculator</easyScoreCalculatorClass>-->
+    <!--</assertionScoreDirectorFactory>-->
+  </scoreDirectorFactory>
+
+  <!-- Optimization algorithms configuration -->
+  <termination>
+    <terminationCompositionStyle>OR</terminationCompositionStyle>
+  	<!-- <bestScoreFeasible>true</bestScoreFeasible> -->
+  	<!-- <bestScoreLimit>0hard/-4999soft</bestScoreLimit> -->
+    <secondsSpentLimit>1</secondsSpentLimit>
+  </termination>
+  <!-- Power tweaked optimization algorithms configuration -->
+  <!-- <constructionHeuristic>
+    <constructionHeuristicType>ALLOCATE_ENTITY_FROM_QUEUE</constructionHeuristicType>
+    <entitySorterManner>DECREASING_DIFFICULTY_IF_AVAILABLE</entitySorterManner>
+    <valueSorterManner>INCREASING_STRENGTH_IF_AVAILABLE</valueSorterManner>
+  </constructionHeuristic> -->
+  <!--<localSearch>-->
+    <!--<unionMoveSelector>-->
+      <!--<changeMoveSelector/>-->
+      <!--<swapMoveSelector/>-->
+      <!--<pillarChangeMoveSelector/>-->
+      <!--<pillarSwapMoveSelector/>-->
+    <!--</unionMoveSelector>-->
+    <!--<acceptor>-->
+      <!--<entityTabuSize>7</entityTabuSize>-->
+    <!--</acceptor>-->
+    <!--<forager>-->
+      <!--<acceptedCountLimit>1000</acceptedCountLimit>-->
+    <!--</forager>-->
+  <!--</localSearch>-->
+</solver>

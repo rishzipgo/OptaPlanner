@@ -1,0 +1,141 @@
+<org.optaplanner.examples.driverallot.domain.DriverAllot id="1">
+  <id>0</id>
+  <driverList id="2">
+    <org.optaplanner.examples.driverallot.domain.Driver id="3">
+      <id>0</id>
+      <cpuPower>10</cpuPower>
+      <memory>30</memory>
+      <networkBandwidth>10</networkBandwidth>
+      <cost>48</cost>
+      <timeIn>0</timeIn>
+      <TimeOut>0</TimeOut>
+    </org.optaplanner.examples.driverallot.domain.Driver>
+    <org.optaplanner.examples.driverallot.domain.Driver id="4">
+      <id>1</id>
+      <cpuPower>10</cpuPower>
+      <memory>30</memory>
+      <networkBandwidth>10</networkBandwidth>
+      <cost>48</cost>
+      <timeIn>0</timeIn>
+      <TimeOut>0</TimeOut>
+    </org.optaplanner.examples.driverallot.domain.Driver>
+    <org.optaplanner.examples.driverallot.domain.Driver id="5">
+      <id>2</id>
+      <cpuPower>10</cpuPower>
+      <memory>30</memory>
+      <networkBandwidth>10</networkBandwidth>
+      <cost>48</cost>
+      <timeIn>0</timeIn>
+      <TimeOut>0</TimeOut>
+    </org.optaplanner.examples.driverallot.domain.Driver>
+    <org.optaplanner.examples.driverallot.domain.Driver id="6">
+      <id>3</id>
+      <cpuPower>10</cpuPower>
+      <memory>30</memory>
+      <networkBandwidth>10</networkBandwidth>
+      <cost>48</cost>
+      <timeIn>0</timeIn>
+      <TimeOut>0</TimeOut>
+    </org.optaplanner.examples.driverallot.domain.Driver>
+    <null/>
+    <null/>
+  </driverList>
+  <routeTripList id="7">
+    <org.optaplanner.examples.driverallot.domain.RouteTrip id="8">
+      <id>0</id>
+      <requiredCpuPower>1</requiredCpuPower>
+      <requiredMemory>1</requiredMemory>
+      <requiredNetworkBandwidth>1</requiredNetworkBandwidth>
+      <timeStart>0</timeStart>
+      <timeEnd>0</timeEnd>
+    </org.optaplanner.examples.driverallot.domain.RouteTrip>
+    <org.optaplanner.examples.driverallot.domain.RouteTrip id="9">
+      <id>1</id>
+      <requiredCpuPower>1</requiredCpuPower>
+      <requiredMemory>1</requiredMemory>
+      <requiredNetworkBandwidth>2</requiredNetworkBandwidth>
+      <timeStart>0</timeStart>
+      <timeEnd>0</timeEnd>
+    </org.optaplanner.examples.driverallot.domain.RouteTrip>
+    <org.optaplanner.examples.driverallot.domain.RouteTrip id="10">
+      <id>2</id>
+      <requiredCpuPower>1</requiredCpuPower>
+      <requiredMemory>5</requiredMemory>
+      <requiredNetworkBandwidth>2</requiredNetworkBandwidth>
+      <timeStart>0</timeStart>
+      <timeEnd>0</timeEnd>
+    </org.optaplanner.examples.driverallot.domain.RouteTrip>
+    <org.optaplanner.examples.driverallot.domain.RouteTrip id="11">
+      <id>3</id>
+      <requiredCpuPower>1</requiredCpuPower>
+      <requiredMemory>1</requiredMemory>
+      <requiredNetworkBandwidth>1</requiredNetworkBandwidth>
+      <timeStart>0</timeStart>
+      <timeEnd>0</timeEnd>
+    </org.optaplanner.examples.driverallot.domain.RouteTrip>
+    <org.optaplanner.examples.driverallot.domain.RouteTrip id="12">
+      <id>4</id>
+      <requiredCpuPower>1</requiredCpuPower>
+      <requiredMemory>7</requiredMemory>
+      <requiredNetworkBandwidth>1</requiredNetworkBandwidth>
+      <timeStart>0</timeStart>
+      <timeEnd>0</timeEnd>
+    </org.optaplanner.examples.driverallot.domain.RouteTrip>
+    <org.optaplanner.examples.driverallot.domain.RouteTrip id="13">
+      <id>5</id>
+      <requiredCpuPower>9</requiredCpuPower>
+      <requiredMemory>1</requiredMemory>
+      <requiredNetworkBandwidth>1</requiredNetworkBandwidth>
+      <timeStart>0</timeStart>
+      <timeEnd>0</timeEnd>
+    </org.optaplanner.examples.driverallot.domain.RouteTrip>
+    <org.optaplanner.examples.driverallot.domain.RouteTrip id="14">
+      <id>6</id>
+      <requiredCpuPower>1</requiredCpuPower>
+      <requiredMemory>2</requiredMemory>
+      <requiredNetworkBandwidth>5</requiredNetworkBandwidth>
+      <timeStart>0</timeStart>
+      <timeEnd>0</timeEnd>
+    </org.optaplanner.examples.driverallot.domain.RouteTrip>
+    <org.optaplanner.examples.driverallot.domain.RouteTrip id="15">
+      <id>7</id>
+      <requiredCpuPower>1</requiredCpuPower>
+      <requiredMemory>1</requiredMemory>
+      <requiredNetworkBandwidth>6</requiredNetworkBandwidth>
+      <timeStart>0</timeStart>
+      <timeEnd>0</timeEnd>
+    </org.optaplanner.examples.driverallot.domain.RouteTrip>
+    <org.optaplanner.examples.driverallot.domain.RouteTrip id="16">
+      <id>8</id>
+      <requiredCpuPower>1</requiredCpuPower>
+      <requiredMemory>13</requiredMemory>
+      <requiredNetworkBandwidth>12</requiredNetworkBandwidth>
+      <timeStart>0</timeStart>
+      <timeEnd>0</timeEnd>
+    </org.optaplanner.examples.driverallot.domain.RouteTrip>
+    <org.optaplanner.examples.driverallot.domain.RouteTrip id="17">
+      <id>9</id>
+      <requiredCpuPower>1</requiredCpuPower>
+      <requiredMemory>2</requiredMemory>
+      <requiredNetworkBandwidth>1</requiredNetworkBandwidth>
+      <timeStart>0</timeStart>
+      <timeEnd>0</timeEnd>
+    </org.optaplanner.examples.driverallot.domain.RouteTrip>
+    <org.optaplanner.examples.driverallot.domain.RouteTrip id="18">
+      <id>10</id>
+      <requiredCpuPower>9</requiredCpuPower>
+      <requiredMemory>27</requiredMemory>
+      <requiredNetworkBandwidth>1</requiredNetworkBandwidth>
+      <timeStart>0</timeStart>
+      <timeEnd>0</timeEnd>
+    </org.optaplanner.examples.driverallot.domain.RouteTrip>
+    <org.optaplanner.examples.driverallot.domain.RouteTrip id="19">
+      <id>11</id>
+      <requiredCpuPower>1</requiredCpuPower>
+      <requiredMemory>21</requiredMemory>
+      <requiredNetworkBandwidth>1</requiredNetworkBandwidth>
+      <timeStart>0</timeStart>
+      <timeEnd>0</timeEnd>
+    </org.optaplanner.examples.driverallot.domain.RouteTrip>
+  </routeTripList>
+</org.optaplanner.examples.driverallot.domain.DriverAllot>

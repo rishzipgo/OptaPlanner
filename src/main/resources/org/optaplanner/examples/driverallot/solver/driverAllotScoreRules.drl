@@ -1,0 +1,133 @@
+/*
+ * Copyright 2010 JBoss Inc
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.optaplanner.examples.driverallot.solver;
+    dialect "java"
+
+import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScoreHolder;
+
+import org.optaplanner.examples.driverallot.domain.DriverAllot;
+import org.optaplanner.examples.driverallot.domain.Driver;
+import org.optaplanner.examples.driverallot.domain.RouteTrip;
+import org.optaplanner.examples.driverallot.domain.solver.RouteTripConflict;
+
+global HardSoftScoreHolder scoreHolder;
+
+// ############################################################################
+// Hard constraints
+// ############################################################################
+
+rule "driverTimeMatches"
+	when
+		$driver : Driver($timeIn : timeIn, $timeOut : timeOut)
+		RouteTrip(
+			driver == $driver,
+			(timeStart < $timeIn), //TODO: Learn how to put OR
+			$timeStart : timeStart,
+			$timeEnd : timeEnd
+		)
+	then
+		scoreHolder.addHardConstraintMatch(kcontext, -5);
+end
+
+rule "oneTripAtATime"
+	when
+		$routeTripConflict : RouteTripConflict(
+			$leftRouteTripId : leftRouteTrip.id,
+			$rightRouteTripId : rightRouteTrip.id
+			//$leftRouteTripDriver : leftRouteTrip.driver,
+			//$rightRouteTripDriver : rightRouteTrip.driver
+		)
+		$leftRouteTrip : RouteTrip(
+			id == $leftRouteTripId,
+			driver != null,
+			$leftRouteTripDriver : driver
+		)
+		$rightRouteTrip : RouteTrip(
+			id == $rightRouteTripId,
+			driver != null,
+			driver == $leftRouteTripDriver,
+			driver.id != 0
+		)
+	then
+		scoreHolder.addHardConstraintMatch(kcontext, -5);
+end
+
+/*rule "requiredCpuPowerTotal"
+    when
+        $driver : Driver($cpuPower : cpuPower)
+        $requiredCpuPowerTotal : Number(intValue > $cpuPower) from accumulate(
+            RouteTrip(
+                driver == $driver,
+                $requiredCpuPower : requiredCpuPower),
+            sum($requiredCpuPower)
+        )
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, $cpuPower - $requiredCpuPowerTotal.intValue());
+end
+
+rule "requiredMemoryTotal"
+    when
+        $driver : Driver($memory : memory)
+        $requiredMemoryTotal : Number(intValue > $memory) from accumulate(
+            RouteTrip(
+                driver == $driver,
+                $requiredMemory : requiredMemory),
+            sum($requiredMemory)
+        )
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, $memory - $requiredMemoryTotal.intValue());
+end
+
+rule "requiredNetworkBandwidthTotal"
+    when
+        $driver : Driver($networkBandwidth : networkBandwidth)
+        $requiredNetworkBandwidthTotal : Number(intValue > $networkBandwidth) from accumulate(
+            RouteTrip(
+                driver == $driver,
+                $requiredNetworkBandwidth : requiredNetworkBandwidth),
+            sum($requiredNetworkBandwidth)
+        )
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, $networkBandwidth - $requiredNetworkBandwidthTotal.intValue());
+end*/
+
+// ############################################################################
+// Soft constraints
+// ############################################################################
+
+rule "driverRankHigh"
+	when
+		$driver : Driver($rank : rank)
+        RouteTrip($driver == driver)
+		//exists RouteTrip(driver == $driver)
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, - $rank);
+end
+
+rule "routeRankHigh"
+	when
+		$driver : Driver(
+			id != 0,
+			$driverRank : rank
+		)
+        $routeTrip : RouteTrip(
+			driver == $driver,
+			$routeRank : rank
+		)
+	then
+		scoreHolder.addSoftConstraintMatch(kcontext, - ($routeRank * $driverRank));
+end
