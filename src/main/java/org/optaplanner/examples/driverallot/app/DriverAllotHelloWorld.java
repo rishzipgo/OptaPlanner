@@ -100,18 +100,21 @@ public class DriverAllotHelloWorld {
 				wrong &= wrongTestCaseResult;
 			}
 			if(wrong) {
-				System.out.println("\nTest Case #" + i + "\nSolved DriverAllot with " + solvedDriverAllot.getDriverList().size() + " drivers and " + solvedDriverAllot.getRouteTripList().size() + " routeTrips:\n"
+				System.out.println("\nTest Case #" + (i+1) + "\nSolved DriverAllot with " + solvedDriverAllot.getDriverList().size() + " drivers and " + solvedDriverAllot.getRouteTripList().size() + " routeTrips:\n"
 						+ toDisplayString(solvedDriverAllot));
 				
-				/*for(RouteTrip routeTrip : solvedDriverAllot.getRouteTripList()) {
-					System.out.println(routeTrip.tostring());
-					//System.out.println(routeTrip.getLabel() + "\t" + routeTrip.getTimeStart() + "\t" + routeTrip.getTimeEnd());
-				}
-				System.out.println();
 				for(Driver driver : solvedDriverAllot.getDriverList()) {
 					System.out.println(driver.tostring());
+					System.out.println(driver.getDriverTripList());
+					System.out.println(driver.getRouteTripList());
 					//System.out.println(driver.getLabel() + "\t" + driver.getTimeIn() + "\t" + driver.getTimeOut());
-				}*/
+				}
+				System.out.println();
+				for(RouteTrip routeTrip : solvedDriverAllot.getRouteTripList()) {
+					System.out.println(routeTrip.tostring());
+					System.out.println(routeTrip.getPreviousTrip());
+					//System.out.println(routeTrip.getLabel() + "\t" + routeTrip.getTimeStart() + "\t" + routeTrip.getTimeEnd());
+				}
 			}
 			else
 				countCorrect ++;

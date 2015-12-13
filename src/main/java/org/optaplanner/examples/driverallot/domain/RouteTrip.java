@@ -30,9 +30,15 @@ public class RouteTrip extends AbstractPersistable {
     private int requiredCpuPower; // in gigahertz
     private int requiredMemory; // in gigabyte RAM
     private int requiredNetworkBandwidth; // in gigabyte per hour
+    private RouteTrip previousTrip;
+    private RouteTrip nextTrip;
     private int timeStart;
     private int timeEnd;
     private int rank;
+    private double startLatitude;
+    private double startLongitude;
+    private double endLatitude;
+    private double endLongitude;
 
 	public RouteTrip(int timeStart, int timeEnd, int rank) {
 		super();
@@ -50,6 +56,15 @@ public class RouteTrip extends AbstractPersistable {
 		this.timeEnd = timeEnd;
 	}
 
+	public RouteTrip(int timeStart, int timeEnd, int rank, double startLatitude, double startLongitude) {
+		super();
+		this.timeStart = timeStart;
+		this.timeEnd = timeEnd;
+		this.rank = rank;
+		this.startLatitude = startLatitude;
+		this.startLongitude = startLongitude;
+	}
+
 	public RouteTrip(int requiredCpuPower, int requiredMemory, int requiredNetworkBandwidth, int timeStart, int timeEnd) {
 		super();
 		this.requiredCpuPower = requiredCpuPower;
@@ -59,10 +74,54 @@ public class RouteTrip extends AbstractPersistable {
 		this.timeEnd = timeEnd;
 	}
     
-    public RouteTrip() {
+    public RouteTrip(int timeStart, int timeEnd, int rank, double startLatitude, double startLongitude,
+			double endLatitude, double endLongitude) {
+		super();
+		this.timeStart = timeStart;
+		this.timeEnd = timeEnd;
+		this.rank = rank;
+		this.startLatitude = startLatitude;
+		this.startLongitude = startLongitude;
+		this.endLatitude = endLatitude;
+		this.endLongitude = endLongitude;
+	}
+
+	public RouteTrip() {
     	super();
     }
 
+
+	public double getStartLatitude() {
+		return startLatitude;
+	}
+
+	public void setStartLatitude(double latitude) {
+		this.startLatitude = latitude;
+	}
+
+	public double getStartLongitude() {
+		return startLongitude;
+	}
+
+	public void setStartLongitude(double longitude) {
+		this.startLongitude = longitude;
+	}
+
+	public double getEndLatitude() {
+		return endLatitude;
+	}
+
+	public void setEndLatitude(double endLatitude) {
+		this.endLatitude = endLatitude;
+	}
+
+	public double getEndLongitude() {
+		return endLongitude;
+	}
+
+	public void setEndLongitude(double endLongitude) {
+		this.endLongitude = endLongitude;
+	}
 
 	public int getTimeEnd() {
 		return timeEnd;
@@ -124,12 +183,28 @@ public class RouteTrip extends AbstractPersistable {
     public void setDriver(Driver driver) {
         this.driver = driver;
     }
+    
+    public RouteTrip getPreviousTrip() {
+		return previousTrip;
+	}
+
+	public void setPreviousTrip(RouteTrip previousTrip) {
+		this.previousTrip = previousTrip;
+	}
 
     // ************************************************************************
     // Complex methods
     // ************************************************************************
 
-    public int getRequiredMultiplicand() {
+	public RouteTrip getNextTrip() {
+		return nextTrip;
+	}
+
+	public void setNextTrip(RouteTrip nextTrip) {
+		this.nextTrip = nextTrip;
+	}
+
+	public int getRequiredMultiplicand() {
         return requiredCpuPower * requiredMemory * requiredNetworkBandwidth;
     }
 
@@ -138,7 +213,7 @@ public class RouteTrip extends AbstractPersistable {
     }
     
     public String tostring() {
-    	return this.getLabel() + "\t" + this.getTimeStart() + "\t" + this.getTimeEnd() + "\t" + this.getRank();
+    	return this.getLabel() + "\t" + this.getTimeStart() + "\t" + this.getTimeEnd() + "\t" + this.getRank() + "\t" + this.getStartLatitude() + ", " + this.startLongitude + "\t" + this.endLatitude + "\t" + this.endLongitude;
     }
 
 }

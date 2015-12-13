@@ -58,6 +58,7 @@ public class DriverAllot extends AbstractPersistable implements Solution<HardSof
     }
 
     @PlanningEntityCollectionProperty
+    @ValueRangeProvider(id = "routeTripRange")
     public List<RouteTrip> getRouteTripList() {
         return routeTripList;
     }

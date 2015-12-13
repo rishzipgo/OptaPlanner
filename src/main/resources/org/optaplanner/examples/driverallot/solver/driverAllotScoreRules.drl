@@ -34,10 +34,13 @@ rule "driverTimeMatches"
 	when
 		$driver : Driver($timeIn : timeIn, $timeOut : timeOut)
 		RouteTrip(
-			driver == $driver,
-			(timeStart < $timeIn), //TODO: Learn how to put OR
-			$timeStart : timeStart,
-			$timeEnd : timeEnd
+			driver == $driver && 
+			$timeStart : timeStart &&
+			$timeEnd : timeEnd &&
+			(
+				timeStart < $timeIn || 
+				timeEnd > $timeOut
+			)
 		)
 	then
 		scoreHolder.addHardConstraintMatch(kcontext, -5);
@@ -109,6 +112,7 @@ end*/
 // Soft constraints
 // ############################################################################
 
+
 rule "driverRankHigh"
 	when
 		$driver : Driver($rank : rank)
@@ -130,4 +134,53 @@ rule "routeRankHigh"
 		)
 	then
 		scoreHolder.addSoftConstraintMatch(kcontext, - ($routeRank * $driverRank));
+end
+
+rule "firstTripDriverProximity"
+	when
+		$driver : Driver(
+			$driverLatitude : latitude,
+			$driverLongitude : longitude
+		)
+		$routeTrip : RouteTrip(
+			driver == $driver,
+			previousTrip == null,
+			$routeTripStartLatitude : startLatitude,
+			$routeTripStartLongitude : startLongitude
+		)
+	then
+		scoreHolder.addSoftConstraintMatch(kcontext, -((int)(($driverLatitude - $routeTripStartLatitude) * ($driverLatitude - $routeTripStartLatitude)
+		 + ($driverLongitude - $routeTripStartLongitude) * ($driverLongitude - $routeTripStartLongitude))));
+end
+
+rule "twoTripsStartEndProximity"
+	when
+		$routeTrip : RouteTrip(
+			previousTrip != null,
+			$previousTrip : previousTrip,
+			$routeTripStartLatitude : startLatitude,
+			$routeTripStartLongitude : startLongitude,
+			$previousRouteTripEndLatitude : previousTrip.endLatitude,
+			$previousRouteTripEndLongitude : previousTrip.endLongitude
+		)
+	then
+		scoreHolder.addSoftConstraintMatch(kcontext, -((int)(($previousRouteTripEndLatitude - $routeTripStartLatitude) * ($previousRouteTripEndLatitude - $routeTripStartLatitude)
+		 + ($previousRouteTripEndLongitude - $routeTripStartLongitude) * ($previousRouteTripEndLongitude - $routeTripStartLongitude))));
+end
+
+rule "lastTripDriverProximity"
+	when
+		$driver : Driver(
+			$driverLatitude : latitude,
+			$driverLongitude : longitude
+		)
+		$routeTrip : RouteTrip(
+			driver == $driver,
+			nextTrip == null,
+			$routeTripEndLatitude : endLatitude,
+			$routeTripEndLongitude : endLongitude
+		)
+	then
+		scoreHolder.addSoftConstraintMatch(kcontext, -((int)(($driverLatitude - $routeTripEndLatitude) * ($driverLatitude - $routeTripEndLatitude)
+		 + ($driverLongitude - $routeTripEndLongitude) * ($driverLongitude - $routeTripEndLongitude))));
 end
