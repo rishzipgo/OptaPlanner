@@ -1,2 +1,2 @@
-# OptaPlannerZipgo
+# OptaPlanner
 Scheduling feature using OptaPlanner
