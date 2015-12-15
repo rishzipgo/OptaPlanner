@@ -26,10 +26,10 @@ import java.util.Random;
 import org.optaplanner.examples.common.app.LoggingMain;
 import org.optaplanner.examples.common.persistence.AbstractSolutionImporter;
 import org.optaplanner.examples.common.persistence.SolutionDao;
-import org.optaplanner.examples.driverallot.DriverTestCase;
 import org.optaplanner.examples.driverallot.domain.Driver;
 import org.optaplanner.examples.driverallot.domain.DriverAllot;
 import org.optaplanner.examples.driverallot.domain.RouteTrip;
+import org.optaplanner.examples.driverallot.test.DriverTestCase;
 
 public class DriverAllotGenerator extends LoggingMain {
 

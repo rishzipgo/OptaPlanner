@@ -28,11 +28,11 @@ import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.api.solver.event.BestSolutionChangedEvent;
 import org.optaplanner.core.api.solver.event.SolverEventListener;
 import org.optaplanner.examples.curriculumcourse.app.CurriculumCourseApp;
-import org.optaplanner.examples.driverallot.DriverTestCase;
 import org.optaplanner.examples.driverallot.domain.Driver;
 import org.optaplanner.examples.driverallot.domain.DriverAllot;
 import org.optaplanner.examples.driverallot.domain.RouteTrip;
 import org.optaplanner.examples.driverallot.persistence.DriverAllotGenerator;
+import org.optaplanner.examples.driverallot.test.DriverTestCase;
 
 import javafx.util.Pair;
 
@@ -54,7 +54,7 @@ public class DriverAllotHelloWorld {
 		Solver solver = solverFactory.buildSolver();
 
 		// Load a problem with 400 computers and 1200 processes
-		for(int i = 0; i < DriverTestCase.GLOBALDRIVERLIST.length; i++) {
+		for(int i = 13; i < 14/*DriverTestCase.GLOBALDRIVERLIST.length*/; i++) {
 			DriverAllot unsolvedDriverAllot = new DriverAllotGenerator().createDriverAllot(i);
 
 			// Solve the problem
@@ -78,6 +78,8 @@ public class DriverAllotHelloWorld {
 			DriverAllot solvedDriverAllot = (DriverAllot) solver.getBestSolution();
 
 			DriverAllotResults.add(solvedDriverAllot);
+			
+			//printResults(i, solvedDriverAllot);
 		}
 		for(int i = 0; i < DriverAllotResults.size(); i++) {
 			DriverAllot solvedDriverAllot = DriverAllotResults.get(i);
@@ -100,26 +102,30 @@ public class DriverAllotHelloWorld {
 				wrong &= wrongTestCaseResult;
 			}
 			if(wrong) {
-				System.out.println("\nTest Case #" + (i+1) + "\nSolved DriverAllot with " + solvedDriverAllot.getDriverList().size() + " drivers and " + solvedDriverAllot.getRouteTripList().size() + " routeTrips:\n"
-						+ toDisplayString(solvedDriverAllot));
-				
-				for(Driver driver : solvedDriverAllot.getDriverList()) {
-					System.out.println(driver.tostring());
-					System.out.println(driver.getDriverTripList());
-					System.out.println(driver.getRouteTripList());
-					//System.out.println(driver.getLabel() + "\t" + driver.getTimeIn() + "\t" + driver.getTimeOut());
-				}
-				System.out.println();
-				for(RouteTrip routeTrip : solvedDriverAllot.getRouteTripList()) {
-					System.out.println(routeTrip.tostring());
-					System.out.println(routeTrip.getPreviousTrip());
-					//System.out.println(routeTrip.getLabel() + "\t" + routeTrip.getTimeStart() + "\t" + routeTrip.getTimeEnd());
-				}
+				printResults(i, solvedDriverAllot);
 			}
 			else
 				countCorrect ++;
 		}
 		System.out.println("\n" + countCorrect + " test cases out of " + DriverTestCase.GLOBALDRIVERLIST.length + " were correct");
+	}
+
+	private static void printResults(int i, DriverAllot solvedDriverAllot) {
+		System.out.println("\nTest Case #" + (i+1) + "\nSolved DriverAllot with " + solvedDriverAllot.getDriverList().size() + " drivers and " + solvedDriverAllot.getRouteTripList().size() + " routeTrips:\n"
+				+ toDisplayString(solvedDriverAllot));
+		
+		for(Driver driver : solvedDriverAllot.getDriverList()) {
+			System.out.println(driver.tostring());
+			System.out.println(driver.getDriverTripList());
+			//System.out.println(driver.getRouteTripList());
+			//System.out.println(driver.getLabel() + "\t" + driver.getTimeIn() + "\t" + driver.getTimeOut());
+		}
+		System.out.println();
+		for(RouteTrip routeTrip : solvedDriverAllot.getRouteTripList()) {
+			System.out.println(routeTrip.tostring());
+			System.out.println(routeTrip.getPreviousTrip());
+			//System.out.println(routeTrip.getLabel() + "\t" + routeTrip.getTimeStart() + "\t" + routeTrip.getTimeEnd());
+		}
 	}
 
 	public static String toDisplayString(DriverAllot solvedDriverAllot) {

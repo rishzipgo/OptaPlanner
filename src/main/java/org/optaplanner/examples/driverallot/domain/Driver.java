@@ -160,9 +160,9 @@ public class Driver extends AbstractPersistable implements Labeled {
     
     
     private void sort(ArrayList<RouteTrip> driverTripList) {
-    	driverTripList.clear();
+    	//driverTripList.clear();
     	
-		/*for(int i = 0; i < driverTripList.size()-1; i++)
+		for(int i = 0; i < driverTripList.size()-1; i++)
 			for(int j = i+1; j < driverTripList.size(); j++)
 				if(driverTripList.get(j).getTimeStart() < driverTripList.get(i).getTimeStart()) {
 					RouteTrip tempi = driverTripList.get(i);
@@ -171,11 +171,12 @@ public class Driver extends AbstractPersistable implements Labeled {
 					driverTripList.remove(i);
 					driverTripList.add(i, tempj);
 					driverTripList.add(j, tempi);
-				}*/
+				}
 	}
 
 	@InverseRelationShadowVariable(sourceVariableName = "driver")
     public ArrayList<RouteTrip> getDriverTripList() {
+		sort(driverTripList);
 		if(driverTripList.size() > 0) {
 			driverTripList.get(0).setPreviousTrip(null);
 			driverTripList.get(driverTripList.size()-1).setNextTrip(null);

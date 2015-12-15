@@ -18,6 +18,7 @@ package org.optaplanner.examples.driverallot.persistence;
 
 import org.optaplanner.examples.cloudbalancing.domain.CloudBalance;
 import org.optaplanner.examples.common.persistence.XStreamSolutionDao;
+import org.optaplanner.examples.driverallot.domain.DriverAllot;
 
 public class DriverAllotDao extends XStreamSolutionDao {
 

@@ -31,7 +31,9 @@ import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 import org.optaplanner.core.impl.score.buildin.hardsoft.HardSoftScoreDefinition;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
+import org.optaplanner.examples.driverallot.domain.solver.DriverRouteTripDistance;
 import org.optaplanner.examples.driverallot.domain.solver.RouteTripConflict;
+import org.optaplanner.examples.driverallot.domain.solver.RouteTripDistance;
 import org.optaplanner.examples.examination.domain.Student;
 import org.optaplanner.examples.examination.domain.Topic;
 import org.optaplanner.examples.examination.domain.solver.TopicConflict;
@@ -41,78 +43,112 @@ import org.optaplanner.persistence.xstream.impl.score.XStreamScoreConverter;
 @XStreamAlias("DriverAllot")
 public class DriverAllot extends AbstractPersistable implements Solution<HardSoftScore> {
 
-    private List<Driver> driverList;
+	private List<Driver> driverList;
 
-    private List<RouteTrip> routeTripList;
+	private List<RouteTrip> routeTripList;
 
-    @XStreamConverter(value = XStreamScoreConverter.class, types = {HardSoftScoreDefinition.class})
-    private HardSoftScore score;
+	@XStreamConverter(value = XStreamScoreConverter.class, types = {HardSoftScoreDefinition.class})
+	private HardSoftScore score;
 
-    @ValueRangeProvider(id = "driverRange")
-    public List<Driver> getDriverList() {
-    	return driverList;
-    }
+	@ValueRangeProvider(id = "driverRange")
+	public List<Driver> getDriverList() {
+		return driverList;
+	}
 
-    public void setDriverList(List<Driver> driverList) {
-        this.driverList = driverList;
-    }
+	public void setDriverList(List<Driver> driverList) {
+		this.driverList = driverList;
+	}
 
-    @PlanningEntityCollectionProperty
-    @ValueRangeProvider(id = "routeTripRange")
-    public List<RouteTrip> getRouteTripList() {
-        return routeTripList;
-    }
+	@PlanningEntityCollectionProperty
+	@ValueRangeProvider(id = "routeTripRange")
+	public List<RouteTrip> getRouteTripList() {
+		return routeTripList;
+	}
 
-    public void setRouteTripList(List<RouteTrip> routeTripList) {
-        this.routeTripList = routeTripList;
-    }
+	public void setRouteTripList(List<RouteTrip> routeTripList) {
+		this.routeTripList = routeTripList;
+	}
 
-    public HardSoftScore getScore() {
-        return score;
-    }
+	public HardSoftScore getScore() {
+		return score;
+	}
 
-    public void setScore(HardSoftScore score) {
-        this.score = score;
-    }
+	public void setScore(HardSoftScore score) {
+		this.score = score;
+	}
 
-    // ************************************************************************
-    // Complex methods
-    // ************************************************************************
+	// ************************************************************************
+	// Complex methods
+	// ************************************************************************
 
-    public Collection<? extends Object> getProblemFacts() {
-        List<Object> facts = new ArrayList<Object>();
-        facts.addAll(driverList);
-        facts.addAll(precalculateRouteTripConflictList());
-        // Do not add the planning entity's (routeTripList) because that will be done automatically
-        return facts;
-    }
-    
-    private List<RouteTripConflict> precalculateRouteTripConflictList() {
-        List<RouteTripConflict> routeTripConflictList = new ArrayList<RouteTripConflict>();
-        for (RouteTrip leftRouteTrip : routeTripList) {
-            for (RouteTrip rightRouteTrip : routeTripList) {
-                if (leftRouteTrip.getId() < rightRouteTrip.getId()) {
-                    /*if(leftRouteTrip.getDriver() != null &&
+	public Collection<? extends Object> getProblemFacts() {
+		List<Object> facts = new ArrayList<Object>();
+		facts.addAll(driverList);
+		facts.addAll(precalculateRouteTripConflictList());
+		facts.addAll(precalculateRouteTripDistanceList());
+		facts.addAll(precalculateDriverRouteTripDistance());
+		// Do not add the planning entity's (routeTripList) because that will be done automatically
+		return facts;
+	}
+	
+	private List<DriverRouteTripDistance> precalculateDriverRouteTripDistance() {
+		List<DriverRouteTripDistance> driverRouteTripDistanceList = new ArrayList<DriverRouteTripDistance>();
+		for (Driver driver : driverList)
+			for (RouteTrip routeTrip : routeTripList)
+					driverRouteTripDistanceList.add(new DriverRouteTripDistance(driver, routeTrip));
+		return driverRouteTripDistanceList;
+	}
+
+	private List<RouteTripDistance> precalculateRouteTripDistanceList() {
+		List<RouteTripDistance> routeTripDistanceList = new ArrayList<RouteTripDistance>();
+		for (RouteTrip leftRouteTrip : routeTripList) {
+			for (RouteTrip rightRouteTrip : routeTripList) {
+				{
+					int leftStartTime = leftRouteTrip.getTimeStart();
+					int leftEndTime = leftRouteTrip.getTimeEnd();
+					int rightStartTime = rightRouteTrip.getTimeStart();
+					int rightEndTime = rightRouteTrip.getTimeEnd();
+					Interval leftInterval = new Interval(leftStartTime, leftEndTime);
+					Interval rightInterval = new Interval(rightStartTime, rightEndTime);
+					if(!intersects(leftInterval, rightInterval)) {
+						if(leftEndTime <= rightStartTime)
+							routeTripDistanceList.add(new RouteTripDistance(leftRouteTrip, rightRouteTrip));
+						else
+							routeTripDistanceList.add(new RouteTripDistance(rightRouteTrip, leftRouteTrip));
+						System.out.println(leftInterval + " " + rightInterval + " " + routeTripDistanceList.get(routeTripDistanceList.size()-1).getDistance());
+					}
+				}
+			}
+		}
+		return routeTripDistanceList;
+	}
+
+	private List<RouteTripConflict> precalculateRouteTripConflictList() {
+		List<RouteTripConflict> routeTripConflictList = new ArrayList<RouteTripConflict>();
+		for (RouteTrip leftRouteTrip : routeTripList) {
+			for (RouteTrip rightRouteTrip : routeTripList) {
+				if (leftRouteTrip.getId() < rightRouteTrip.getId()) {
+					/*if(leftRouteTrip.getDriver() != null &&
                     		rightRouteTrip.getDriver() != null && 
                     		leftRouteTrip.getDriver().getId() == rightRouteTrip.getDriver().getId())*/ {
-                    	int leftStartTime = leftRouteTrip.getTimeStart();
-                    	int leftEndTime = leftRouteTrip.getTimeEnd();
-                    	int rightStartTime = rightRouteTrip.getTimeStart();
-                    	int rightEndTime = rightRouteTrip.getTimeEnd();
-                    	Interval leftInterval = new Interval(leftStartTime, leftEndTime);
-                    	Interval rightInterval = new Interval(rightStartTime, rightEndTime);
-                    	if(intersects(leftInterval, rightInterval))
-                    		routeTripConflictList.add(new RouteTripConflict(leftRouteTrip, rightRouteTrip));
-                    }
-                }
-            }
-        }
-        return routeTripConflictList;
-    }
+                    			int leftStartTime = leftRouteTrip.getTimeStart();
+                    			int leftEndTime = leftRouteTrip.getTimeEnd();
+                    			int rightStartTime = rightRouteTrip.getTimeStart();
+                    			int rightEndTime = rightRouteTrip.getTimeEnd();
+                    			Interval leftInterval = new Interval(leftStartTime, leftEndTime);
+                    			Interval rightInterval = new Interval(rightStartTime, rightEndTime);
+                    			if(intersects(leftInterval, rightInterval))
+                    				routeTripConflictList.add(new RouteTripConflict(leftRouteTrip, rightRouteTrip));
+                    		}
+				}
+			}
+		}
+		return routeTripConflictList;
+	}
 
 	private boolean intersects(Interval leftInterval, Interval rightInterval) {
-		System.out.println(leftInterval.getLowerBound() + "-" + leftInterval.getUpperBound() + "\t" + 
-		rightInterval.getLowerBound() + "-" + rightInterval.getUpperBound());
+		/*System.out.println(leftInterval.getLowerBound() + "-" + leftInterval.getUpperBound() + "\t" + 
+				rightInterval.getLowerBound() + "-" + rightInterval.getUpperBound());*/
 		if(leftInterval.getLowerBound() < rightInterval.getLowerBound()) {
 			if(leftInterval.getUpperBound() > rightInterval.getLowerBound())
 				return true;

@@ -23,6 +23,8 @@ import org.optaplanner.examples.driverallot.domain.DriverAllot;
 import org.optaplanner.examples.driverallot.domain.Driver;
 import org.optaplanner.examples.driverallot.domain.RouteTrip;
 import org.optaplanner.examples.driverallot.domain.solver.RouteTripConflict;
+import org.optaplanner.examples.driverallot.domain.solver.RouteTripDistance;
+import org.optaplanner.examples.driverallot.domain.solver.DriverRouteTripDistance;
 
 global HardSoftScoreHolder scoreHolder;
 
@@ -69,44 +71,20 @@ rule "oneTripAtATime"
 		scoreHolder.addHardConstraintMatch(kcontext, -5);
 end
 
-/*rule "requiredCpuPowerTotal"
-    when
-        $driver : Driver($cpuPower : cpuPower)
-        $requiredCpuPowerTotal : Number(intValue > $cpuPower) from accumulate(
-            RouteTrip(
-                driver == $driver,
-                $requiredCpuPower : requiredCpuPower),
-            sum($requiredCpuPower)
-        )
-    then
-        scoreHolder.addHardConstraintMatch(kcontext, $cpuPower - $requiredCpuPowerTotal.intValue());
+rule "enoughTimeBetweenTrips"
+	when
+		$routeTrip : RouteTrip(
+			previousTrip != null,
+			$previousTrip : previousTrip
+		)
+		$routeTripDistance : RouteTripDistance (
+			leftRouteTrip == $previousTrip,
+			rightRouteTrip == $routeTrip,
+			possibleToAttendBoth == false
+		)
+	then
+		scoreHolder.addHardConstraintMatch(kcontext, -5);
 end
-
-rule "requiredMemoryTotal"
-    when
-        $driver : Driver($memory : memory)
-        $requiredMemoryTotal : Number(intValue > $memory) from accumulate(
-            RouteTrip(
-                driver == $driver,
-                $requiredMemory : requiredMemory),
-            sum($requiredMemory)
-        )
-    then
-        scoreHolder.addHardConstraintMatch(kcontext, $memory - $requiredMemoryTotal.intValue());
-end
-
-rule "requiredNetworkBandwidthTotal"
-    when
-        $driver : Driver($networkBandwidth : networkBandwidth)
-        $requiredNetworkBandwidthTotal : Number(intValue > $networkBandwidth) from accumulate(
-            RouteTrip(
-                driver == $driver,
-                $requiredNetworkBandwidth : requiredNetworkBandwidth),
-            sum($requiredNetworkBandwidth)
-        )
-    then
-        scoreHolder.addHardConstraintMatch(kcontext, $networkBandwidth - $requiredNetworkBandwidthTotal.intValue());
-end*/
 
 // ############################################################################
 // Soft constraints
@@ -138,49 +116,61 @@ end
 
 rule "firstTripDriverProximity"
 	when
-		$driver : Driver(
-			$driverLatitude : latitude,
-			$driverLongitude : longitude
-		)
 		$routeTrip : RouteTrip(
+			$driver : driver,
+			previousTrip == null
+		)
+		$driverRouteTripDistance : DriverRouteTripDistance (
 			driver == $driver,
-			previousTrip == null,
-			$routeTripStartLatitude : startLatitude,
-			$routeTripStartLongitude : startLongitude
+			routeTrip == $routeTrip,
+			$distanceToStartInMeters : distanceToStart//InMeters
 		)
 	then
-		scoreHolder.addSoftConstraintMatch(kcontext, -((int)(($driverLatitude - $routeTripStartLatitude) * ($driverLatitude - $routeTripStartLatitude)
-		 + ($driverLongitude - $routeTripStartLongitude) * ($driverLongitude - $routeTripStartLongitude))));
+		scoreHolder.addSoftConstraintMatch(kcontext, -(int)$distanceToStartInMeters);
 end
 
 rule "twoTripsStartEndProximity"
 	when
 		$routeTrip : RouteTrip(
 			previousTrip != null,
-			$previousTrip : previousTrip,
+			$previousTrip : previousTrip/*,
 			$routeTripStartLatitude : startLatitude,
 			$routeTripStartLongitude : startLongitude,
 			$previousRouteTripEndLatitude : previousTrip.endLatitude,
-			$previousRouteTripEndLongitude : previousTrip.endLongitude
+			$previousRouteTripEndLongitude : previousTrip.endLongitude*/
+		)
+		$routeTripDistance : RouteTripDistance (
+			leftRouteTrip == $previousTrip,
+			rightRouteTrip == $routeTrip,
+			$distanceInMeters : distance//InMeters
 		)
 	then
-		scoreHolder.addSoftConstraintMatch(kcontext, -((int)(($previousRouteTripEndLatitude - $routeTripStartLatitude) * ($previousRouteTripEndLatitude - $routeTripStartLatitude)
-		 + ($previousRouteTripEndLongitude - $routeTripStartLongitude) * ($previousRouteTripEndLongitude - $routeTripStartLongitude))));
+		scoreHolder.addSoftConstraintMatch(kcontext, -(int)$distanceInMeters);
 end
 
 rule "lastTripDriverProximity"
 	when
-		$driver : Driver(
-			$driverLatitude : latitude,
-			$driverLongitude : longitude
-		)
 		$routeTrip : RouteTrip(
+			$driver : driver,
+			nextTrip == null
+		)
+		$driverRouteTripDistance : DriverRouteTripDistance (
 			driver == $driver,
-			nextTrip == null,
-			$routeTripEndLatitude : endLatitude,
-			$routeTripEndLongitude : endLongitude
+			routeTrip == $routeTrip,
+			$distanceToEndInMeters : distanceToEnd//InMeters
 		)
 	then
-		scoreHolder.addSoftConstraintMatch(kcontext, -((int)(($driverLatitude - $routeTripEndLatitude) * ($driverLatitude - $routeTripEndLatitude)
-		 + ($driverLongitude - $routeTripEndLongitude) * ($driverLongitude - $routeTripEndLongitude))));
+		scoreHolder.addSoftConstraintMatch(kcontext, -(int)$distanceToEndInMeters);
+end
+
+rule "twoTripsStartEndTimeProximity"
+	when
+		$routeTrip : RouteTrip(
+			previousTrip != null,
+			$previousTrip : previousTrip,
+			$routeTripStartTime : timeStart,
+			$previousRouteTripEndTime : previousTrip.timeEnd
+		)
+	then
+		scoreHolder.addSoftConstraintMatch(kcontext, -($routeTripStartTime - $previousRouteTripEndTime)/(60*10));
 end
