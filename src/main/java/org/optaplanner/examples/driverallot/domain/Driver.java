@@ -160,9 +160,7 @@ public class Driver extends AbstractPersistable implements Labeled {
     
     
     private void sort(ArrayList<RouteTrip> driverTripList) {
-    	//driverTripList.clear();
-    	
-		for(int i = 0; i < driverTripList.size()-1; i++)
+    	for(int i = 0; i < driverTripList.size()-1; i++)
 			for(int j = i+1; j < driverTripList.size(); j++)
 				if(driverTripList.get(j).getTimeStart() < driverTripList.get(i).getTimeStart()) {
 					RouteTrip tempi = driverTripList.get(i);
@@ -176,7 +174,8 @@ public class Driver extends AbstractPersistable implements Labeled {
 
 	@InverseRelationShadowVariable(sourceVariableName = "driver")
     public ArrayList<RouteTrip> getDriverTripList() {
-		sort(driverTripList);
+		/*sort(driverTripList);
+		System.out.println(this.toString() + driverTripList);
 		if(driverTripList.size() > 0) {
 			driverTripList.get(0).setPreviousTrip(null);
 			driverTripList.get(driverTripList.size()-1).setNextTrip(null);
@@ -187,6 +186,11 @@ public class Driver extends AbstractPersistable implements Labeled {
 		for(int i = 0; i < driverTripList.size()-1; i++) {
 			driverTripList.get(i).setNextTrip(driverTripList.get(i+1));
 		}
+		
+		
+
+		for(RouteTrip routeTrip : driverTripList)
+			System.out.println(routeTrip.getPreviousTrip() + " " + routeTrip + " " + routeTrip.getNextTrip());*/
 		
         return driverTripList;
     }
@@ -200,6 +204,10 @@ public class Driver extends AbstractPersistable implements Labeled {
     // Complex methods
     // ************************************************************************
 
+	public void setRouteTripList(ArrayList<RouteTrip> routeTripList) {
+		this.routeTripList = routeTripList;
+	}
+
 	public int getMultiplicand() {
         return cpuPower * memory * networkBandwidth;
     }
@@ -211,5 +219,26 @@ public class Driver extends AbstractPersistable implements Labeled {
     public String tostring() {
     	return this.getLabel() + "\t" + this.getTimeIn() + "\t" + this.getTimeOut() + "\t" + this.getRank() + "\t" + this.latitude + "," + this.longitude;
     }
+
+	public void addRouteTrip(RouteTrip routeTrip) {
+		routeTripList.add(routeTrip);
+		sort(routeTripList);
+		System.out.println(this.toString() + routeTripList);
+		if(routeTripList.size() > 0) {
+			routeTripList.get(0).setPreviousTrip(null);
+			routeTripList.get(routeTripList.size()-1).setNextTrip(null);
+		}
+		for(int i = 1; i < routeTripList.size(); i++) {
+			routeTripList.get(i).setPreviousTrip(routeTripList.get(i-1));
+		}
+		for(int i = 0; i < routeTripList.size()-1; i++) {
+			routeTripList.get(i).setNextTrip(routeTripList.get(i+1));
+		}
+		
+		
+
+		for(RouteTrip routeTripPrint : routeTripList)
+			System.out.println(routeTripPrint.getPreviousTrip() + " " + routeTripPrint + " " + routeTripPrint.getNextTrip());
+	}
 
 }

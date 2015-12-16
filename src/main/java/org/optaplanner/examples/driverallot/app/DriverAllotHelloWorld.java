@@ -27,6 +27,7 @@ import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.api.solver.event.BestSolutionChangedEvent;
 import org.optaplanner.core.api.solver.event.SolverEventListener;
+import org.optaplanner.core.impl.score.director.ScoreDirector;
 import org.optaplanner.examples.curriculumcourse.app.CurriculumCourseApp;
 import org.optaplanner.examples.driverallot.domain.Driver;
 import org.optaplanner.examples.driverallot.domain.DriverAllot;
@@ -54,12 +55,12 @@ public class DriverAllotHelloWorld {
 		Solver solver = solverFactory.buildSolver();
 
 		// Load a problem with 400 computers and 1200 processes
-		for(int i = 13; i < 14/*DriverTestCase.GLOBALDRIVERLIST.length*/; i++) {
+		for(int i = 0; i < 14/*DriverTestCase.GLOBALDRIVERLIST.length*/; i++) {
 			DriverAllot unsolvedDriverAllot = new DriverAllotGenerator().createDriverAllot(i);
 
 			// Solve the problem
 			solver.solve(unsolvedDriverAllot);
-
+			
 
 			/*solver.addEventListener(new SolverEventListener<DriverAllot>() {
 
@@ -79,7 +80,7 @@ public class DriverAllotHelloWorld {
 
 			DriverAllotResults.add(solvedDriverAllot);
 			
-			//printResults(i, solvedDriverAllot);
+			printResults(i, solvedDriverAllot);
 		}
 		for(int i = 0; i < DriverAllotResults.size(); i++) {
 			DriverAllot solvedDriverAllot = DriverAllotResults.get(i);

@@ -94,8 +94,10 @@ public class DriverAllot extends AbstractPersistable implements Solution<HardSof
 	private List<DriverRouteTripDistance> precalculateDriverRouteTripDistance() {
 		List<DriverRouteTripDistance> driverRouteTripDistanceList = new ArrayList<DriverRouteTripDistance>();
 		for (Driver driver : driverList)
-			for (RouteTrip routeTrip : routeTripList)
+			for (RouteTrip routeTrip : routeTripList) {
 					driverRouteTripDistanceList.add(new DriverRouteTripDistance(driver, routeTrip));
+					System.out.println(driver + " " + routeTrip + " " + driverRouteTripDistanceList.get(driverRouteTripDistanceList.size()-1).getDistanceToStart() + " " + driverRouteTripDistanceList.get(driverRouteTripDistanceList.size()-1).getDistanceToEnd());
+			}
 		return driverRouteTripDistanceList;
 	}
 
@@ -103,7 +105,7 @@ public class DriverAllot extends AbstractPersistable implements Solution<HardSof
 		List<RouteTripDistance> routeTripDistanceList = new ArrayList<RouteTripDistance>();
 		for (RouteTrip leftRouteTrip : routeTripList) {
 			for (RouteTrip rightRouteTrip : routeTripList) {
-				{
+				if (leftRouteTrip.getId() < rightRouteTrip.getId()) {
 					int leftStartTime = leftRouteTrip.getTimeStart();
 					int leftEndTime = leftRouteTrip.getTimeEnd();
 					int rightStartTime = rightRouteTrip.getTimeStart();
@@ -111,11 +113,15 @@ public class DriverAllot extends AbstractPersistable implements Solution<HardSof
 					Interval leftInterval = new Interval(leftStartTime, leftEndTime);
 					Interval rightInterval = new Interval(rightStartTime, rightEndTime);
 					if(!intersects(leftInterval, rightInterval)) {
-						if(leftEndTime <= rightStartTime)
+						if(leftEndTime <= rightStartTime) {
 							routeTripDistanceList.add(new RouteTripDistance(leftRouteTrip, rightRouteTrip));
-						else
+							System.out.print(leftRouteTrip + " " + rightRouteTrip + " ");
+						}
+						else {
 							routeTripDistanceList.add(new RouteTripDistance(rightRouteTrip, leftRouteTrip));
-						System.out.println(leftInterval + " " + rightInterval + " " + routeTripDistanceList.get(routeTripDistanceList.size()-1).getDistance());
+							System.out.print(rightRouteTrip + " " + leftRouteTrip + " ");
+						}
+						System.out.println(routeTripDistanceList.get(routeTripDistanceList.size()-1).getDistance());
 					}
 				}
 			}

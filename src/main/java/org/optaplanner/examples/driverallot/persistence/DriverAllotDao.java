@@ -23,7 +23,7 @@ import org.optaplanner.examples.driverallot.domain.DriverAllot;
 public class DriverAllotDao extends XStreamSolutionDao {
 
     public DriverAllotDao() {
-        super("cloudbalancing", CloudBalance.class);
+        super("driverAllot", DriverAllot.class);
     }
 
 }

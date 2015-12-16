@@ -29,32 +29,42 @@ import org.optaplanner.examples.examination.domain.Topic;
  * Calculated during initialization, not modified during score calculation.
  */
 public class DriverRouteTripDistance implements Serializable, Comparable<DriverRouteTripDistance> {
-	
+
 	private static final double AVG_SPEED_DRIVER = 25;
-	
-    private Driver driver;
-    private RouteTrip routeTrip;
-    private double distanceToStart;
-    private double distanceToEnd;
-    private double timeToStart;
-    private double timeToEnd;
-    private double distanceToStartInMeters;
-    private double distanceToEndInMeters;
 
-    
+	private Driver driver;
+	private RouteTrip routeTrip;
+	private double distanceToStart;
+	private double distanceToEnd;
+	private double timeToStart;
+	private double timeToEnd;
+	private double distanceToStartInMeters;
+	private double distanceToEndInMeters;
 
-    public DriverRouteTripDistance(Driver driver, RouteTrip routeTrip) {
+
+
+	public DriverRouteTripDistance(Driver driver, RouteTrip routeTrip) {
 		super();
 		this.driver = driver;
 		this.routeTrip = routeTrip;
-		this.distanceToStart = GeoUtils.distance(driver.getLatitude(), driver.getLongitude(),
-				routeTrip.getStartLatitude(), routeTrip.getStartLongitude());
-		this.distanceToStartInMeters = distanceToStart*1000;
-		this.distanceToEnd = GeoUtils.distance(driver.getLatitude(), driver.getLongitude(),
-				routeTrip.getEndLatitude(), routeTrip.getEndLongitude());
-		this.distanceToEndInMeters = distanceToEnd*1000;
-		this.timeToStart = distanceToStart/AVG_SPEED_DRIVER;
-		this.timeToEnd = distanceToEnd/AVG_SPEED_DRIVER;
+		if(driver.getId() != 0) {
+			this.distanceToStart = GeoUtils.distance(driver.getLatitude(), driver.getLongitude(),
+					routeTrip.getStartLatitude(), routeTrip.getStartLongitude());
+			this.distanceToStartInMeters = distanceToStart*1000;
+			this.distanceToEnd = GeoUtils.distance(driver.getLatitude(), driver.getLongitude(),
+					routeTrip.getEndLatitude(), routeTrip.getEndLongitude());
+			this.distanceToEndInMeters = distanceToEnd*1000;
+			this.timeToStart = distanceToStart/AVG_SPEED_DRIVER;
+			this.timeToEnd = distanceToEnd/AVG_SPEED_DRIVER;
+		}
+		else{
+			this.distanceToStart = 0;
+			this.distanceToStartInMeters = 0;
+			this.distanceToEnd = 0;
+			this.distanceToEndInMeters = 0;
+			this.timeToStart = 0;
+			this.timeToEnd = 0;
+		}
 	}
 
 
@@ -132,36 +142,36 @@ public class DriverRouteTripDistance implements Serializable, Comparable<DriverR
 
 
 	public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        } else if (o instanceof DriverRouteTripDistance) {
-            DriverRouteTripDistance other = (DriverRouteTripDistance) o;
-            return new EqualsBuilder()
-                    .append(driver, other.driver)
-                    .append(routeTrip, other.routeTrip)
-                    .isEquals();
-        } else {
-            return false;
-        }
-    }
+		if (this == o) {
+			return true;
+		} else if (o instanceof DriverRouteTripDistance) {
+			DriverRouteTripDistance other = (DriverRouteTripDistance) o;
+			return new EqualsBuilder()
+					.append(driver, other.driver)
+					.append(routeTrip, other.routeTrip)
+					.isEquals();
+		} else {
+			return false;
+		}
+	}
 
-    public int hashCode() {
-        return new HashCodeBuilder()
-                .append(driver)
-                .append(routeTrip)
-                .toHashCode();
-    }
+	public int hashCode() {
+		return new HashCodeBuilder()
+				.append(driver)
+				.append(routeTrip)
+				.toHashCode();
+	}
 
-    public int compareTo(DriverRouteTripDistance other) {
-        return new CompareToBuilder()
-                .append(driver, other.driver)
-                .append(routeTrip, other.routeTrip)
-                .toComparison();
-    }
+	public int compareTo(DriverRouteTripDistance other) {
+		return new CompareToBuilder()
+				.append(driver, other.driver)
+				.append(routeTrip, other.routeTrip)
+				.toComparison();
+	}
 
-    @Override
-    public String toString() {
-        return driver + " & " + routeTrip;
-    }
+	@Override
+	public String toString() {
+		return driver + " & " + routeTrip;
+	}
 
 }

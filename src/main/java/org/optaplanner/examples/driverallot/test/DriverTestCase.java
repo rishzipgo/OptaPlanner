@@ -78,10 +78,10 @@ public class DriverTestCase {
 
 	public static final RouteTrip[][] GLOBALROUTETRIPLIST = {
 			{
-				new RouteTrip(950, 1100),
-				new RouteTrip(730, 830),
-				new RouteTrip(1100, 1200),
-				new RouteTrip(815, 1200),
+				new RouteTrip(950, 1100, 1),
+				new RouteTrip(730, 830, 1),
+				new RouteTrip(1100, 1200, 1),
+				new RouteTrip(815, 1200, 1)
 			},
 			{
 				new RouteTrip(950, 1100),
@@ -156,7 +156,7 @@ public class DriverTestCase {
 			{
 				new RouteTrip(700, 800, 1, 14.0, 15.0, 12.0, 14.0),
 				new RouteTrip(810, 910, 1, 12.0, 14.0, 14.0, 15.0),
-				new RouteTrip(900, 1000, 1, 12.0, 14.0, 17.0, 18.0),
+				new RouteTrip(900, 1000, 1, 12.0, 14.0, 17.0, 18.5),
 				new RouteTrip(1030, 1400, 1, 17.0, 18.0, 14.0, 15.0)
 			}
 	};
