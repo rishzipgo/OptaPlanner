@@ -27,24 +27,59 @@
   	<!-- <bestScoreLimit>0hard/-4999soft</bestScoreLimit> -->
     <secondsSpentLimit>1</secondsSpentLimit>
   </termination>
+  
+  
   <!-- Power tweaked optimization algorithms configuration -->
-  <!-- <constructionHeuristic>
-    <constructionHeuristicType>ALLOCATE_ENTITY_FROM_QUEUE</constructionHeuristicType>
+  <constructionHeuristic>
+  	<constructionHeuristicType>ALLOCATE_ENTITY_FROM_QUEUE</constructionHeuristicType>
     <entitySorterManner>DECREASING_DIFFICULTY_IF_AVAILABLE</entitySorterManner>
-    <valueSorterManner>INCREASING_STRENGTH_IF_AVAILABLE</valueSorterManner>
+    <valueSorterManner>DECREASING_STRENGTH_IF_AVAILABLE</valueSorterManner>
+  </constructionHeuristic>
+  
+  <localSearch>
+    <termination>
+    	<stepCountLimit>1</stepCountLimit>
+  	</termination>
+  </localSearch>
+  
+  
+  <!-- <constructionHeuristic>
+    <queuedEntityPlacer>
+      <entitySelector id="placerEntitySelector">
+        <cacheType>PHASE</cacheType>
+        <selectionOrder>SORTED</selectionOrder>
+        <sorterManner>DECREASING_DIFFICULTY</sorterManner>
+      </entitySelector>
+      <changeMoveSelector>
+        <entitySelector mimicSelectorRef="placerEntitySelector"/>
+        <valueSelector>
+          <cacheType>PHASE</cacheType>
+          <selectionOrder>SORTED</selectionOrder>
+          <sorterManner>INCREASING_STRENGTH</sorterManner>
+        </valueSelector>
+      </changeMoveSelector>
+    </queuedEntityPlacer>
   </constructionHeuristic> -->
-  <!--<localSearch>-->
-    <!--<unionMoveSelector>-->
-      <!--<changeMoveSelector/>-->
-      <!--<swapMoveSelector/>-->
-      <!--<pillarChangeMoveSelector/>-->
-      <!--<pillarSwapMoveSelector/>-->
-    <!--</unionMoveSelector>-->
-    <!--<acceptor>-->
-      <!--<entityTabuSize>7</entityTabuSize>-->
-    <!--</acceptor>-->
-    <!--<forager>-->
-      <!--<acceptedCountLimit>1000</acceptedCountLimit>-->
-    <!--</forager>-->
-  <!--</localSearch>-->
+  
+  <!-- <localSearch>
+  	
+    <forager>
+      <acceptedCountLimit>1000</acceptedCountLimit>
+    </forager>
+  </localSearch> -->
+  
+  <localSearch>
+    <unionMoveSelector>
+      <changeMoveSelector/>
+      <swapMoveSelector/>
+      <!-- <pillarChangeMoveSelector/>
+      <pillarSwapMoveSelector/> -->
+    </unionMoveSelector>
+    <!-- <acceptor>
+      <entityTabuSize>7</entityTabuSize>
+    </acceptor>
+    <forager>
+      <acceptedCountLimit>1000</acceptedCountLimit>
+    </forager> -->
+  </localSearch>
 </solver>

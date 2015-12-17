@@ -89,7 +89,7 @@ public class DriverAllotGenerator extends LoggingMain {
     private static final Driver[] DRIVER_LIST = {
     		new Driver(1, 700, 1500),
     		new Driver(2, 900, 1300),
-    		new Driver(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, 5000, 0, 2400)
+    		//new Driver(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, 5000, 0, 2400)
     };
     
     private static final RouteTrip[] ROUTETRIP_LIST = {
@@ -247,9 +247,6 @@ public class DriverAllotGenerator extends LoggingMain {
         int networkBandwidthTotal = 0;
         for (Driver driver : driverList) {
         	if(driver != null) {
-            cpuPowerTotal += driver.getCpuPower();
-            memoryTotal += driver.getMemory();
-            networkBandwidthTotal += driver.getNetworkBandwidth();
         	}
         	else {
         		cpuPowerTotal += 0;
@@ -261,29 +258,23 @@ public class DriverAllotGenerator extends LoggingMain {
         int requiredMemoryTotal = 0;
         int requiredNetworkBandwidthTotal = 0;
         for (RouteTrip routeTrip : driverAllot.getRouteTripList()) {
-            requiredCpuPowerTotal += routeTrip.getRequiredCpuPower();
-            requiredMemoryTotal += routeTrip.getRequiredMemory();
-            requiredNetworkBandwidthTotal += routeTrip.getRequiredNetworkBandwidth();
         }
         int cpuPowerLacking = requiredCpuPowerTotal - cpuPowerTotal;
         while (cpuPowerLacking > 0) {
             Driver driver = driverList.get(random.nextInt(driverList.size()));
             int upgrade = determineUpgrade(cpuPowerLacking);
-            driver.setCpuPower(driver.getCpuPower() + upgrade);
             cpuPowerLacking -= upgrade;
         }
         int memoryLacking = requiredMemoryTotal - memoryTotal;
         while (memoryLacking > 0) {
             Driver driver = driverList.get(random.nextInt(driverList.size()));
             int upgrade = determineUpgrade(memoryLacking);
-            driver.setMemory(driver.getMemory() + upgrade);
             memoryLacking -= upgrade;
         }
         int networkBandwidthLacking = requiredNetworkBandwidthTotal - networkBandwidthTotal;
         while (networkBandwidthLacking > 0) {
             Driver driver = driverList.get(random.nextInt(driverList.size()));
             int upgrade = determineUpgrade(networkBandwidthLacking);
-            driver.setNetworkBandwidth(driver.getNetworkBandwidth() + upgrade);
             networkBandwidthLacking -= upgrade;
         }
     }

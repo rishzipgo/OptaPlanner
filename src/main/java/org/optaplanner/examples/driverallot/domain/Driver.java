@@ -32,10 +32,7 @@ import org.optaplanner.examples.driverallot.domain.solver.RouteTripDifficultyCom
 @XStreamAlias("Driver")
 public class Driver extends AbstractPersistable implements Labeled {
 
-    private int cpuPower; // in gigahertz
-    private int memory; // in gigabyte RAM
-    private int networkBandwidth; // in gigabyte per hour
-    private int rank; // in euro per month
+    private int rank;
     private int timeIn;
     private int timeOut;
     private double latitude;
@@ -60,7 +57,7 @@ public class Driver extends AbstractPersistable implements Labeled {
 		this.longitude = longitude;
 	}
 
-	public Driver(int cpuPower, int memory, int networkBandwidth, int cost, int timeIn, int timeOut) {
+	/*public Driver(int cpuPower, int memory, int networkBandwidth, int cost, int timeIn, int timeOut) {
 		super();
 		this.cpuPower = cpuPower;
 		this.memory = memory;
@@ -68,7 +65,7 @@ public class Driver extends AbstractPersistable implements Labeled {
 		this.rank = cost;
 		this.timeIn = timeIn;
 		this.timeOut = timeOut;
-	}
+	}*/
     
     public Driver() {
     	super();
@@ -105,38 +102,6 @@ public class Driver extends AbstractPersistable implements Labeled {
 	public void setTimeOut(int timeOut) {
 		this.timeOut = timeOut;
 	}
-
-	public int getCpuPower() {
-        return cpuPower;
-    }
-
-    public void setCpuPower(int cpuPower) {
-        this.cpuPower = cpuPower;
-    }
-
-    public int getMemory() {
-        return memory;
-    }
-
-    public void setMemory(int memory) {
-        this.memory = memory;
-    }
-
-    public int getNetworkBandwidth() {
-        return networkBandwidth;
-    }
-
-    public void setNetworkBandwidth(int networkBandwidth) {
-        this.networkBandwidth = networkBandwidth;
-    }
-
-    public int getCost() {
-        return rank;
-    }
-
-    public void setCost(int cost) {
-        this.rank = cost;
-    }
     
     public int getRank() {
         return rank;
@@ -207,10 +172,6 @@ public class Driver extends AbstractPersistable implements Labeled {
 	public void setRouteTripList(ArrayList<RouteTrip> routeTripList) {
 		this.routeTripList = routeTripList;
 	}
-
-	public int getMultiplicand() {
-        return cpuPower * memory * networkBandwidth;
-    }
 
     public String getLabel() {
         return "Driver " + id;

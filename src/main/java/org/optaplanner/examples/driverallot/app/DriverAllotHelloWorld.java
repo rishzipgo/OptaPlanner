@@ -54,8 +54,7 @@ public class DriverAllotHelloWorld {
 				"org/optaplanner/examples/driverallot/solver/driverAllotSolverConfig.xml");
 		Solver solver = solverFactory.buildSolver();
 
-		// Load a problem with 400 computers and 1200 processes
-		for(int i = 0; i < 14/*DriverTestCase.GLOBALDRIVERLIST.length*/; i++) {
+		for(int i = 0; i < 15/*DriverTestCase.GLOBALDRIVERLIST.length*/; i++) {
 			DriverAllot unsolvedDriverAllot = new DriverAllotGenerator().createDriverAllot(i);
 
 			// Solve the problem
@@ -133,7 +132,7 @@ public class DriverAllotHelloWorld {
 		StringBuilder displayString = new StringBuilder();
 		for (RouteTrip routeTrip : solvedDriverAllot.getRouteTripList()) {
 			Driver driver = routeTrip.getDriver();
-			if(driver != null && driver.getMultiplicand() >= routeTrip.getRequiredMultiplicand())
+			if(driver != null)
 				displayString.append("  ").append(routeTrip.getLabel()).append(" -> ")
 				.append(driver == null ? null : driver.getLabel()).append("\n");
 		}

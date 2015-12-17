@@ -73,15 +73,19 @@ public class DriverTestCase {
 			{
 				new Driver(500000, 0, 2400),
 				new Driver(1, 630, 1500, 14.0, 15.0)
+			},
+			{
+				new Driver(500000, 0, 2400),
+				new Driver(1, 630, 1100, 12.0, 13.0)
 			}
 	};
 
 	public static final RouteTrip[][] GLOBALROUTETRIPLIST = {
 			{
-				new RouteTrip(950, 1100, 1),
-				new RouteTrip(730, 830, 1),
-				new RouteTrip(1100, 1200, 1),
-				new RouteTrip(815, 1200, 1)
+				new RouteTrip(950, 1100),
+				new RouteTrip(730, 830),
+				new RouteTrip(1100, 1200),
+				new RouteTrip(815, 1200)
 			},
 			{
 				new RouteTrip(950, 1100),
@@ -95,10 +99,10 @@ public class DriverTestCase {
 				new RouteTrip(1200, 1500)
 			},
 			{
-				new RouteTrip(950, 1100),
-				new RouteTrip(730, 830),
-				new RouteTrip(1100, 1200),
-				new RouteTrip(1130, 1500)
+				new RouteTrip(950, 1100, 1),
+				new RouteTrip(730, 830, 1),
+				new RouteTrip(1100, 1200, 1),
+				new RouteTrip(1130, 1500, 1)
 			},
 			{
 				new RouteTrip(950, 1100, 2),
@@ -156,8 +160,15 @@ public class DriverTestCase {
 			{
 				new RouteTrip(700, 800, 1, 14.0, 15.0, 12.0, 14.0),
 				new RouteTrip(810, 910, 1, 12.0, 14.0, 14.0, 15.0),
-				new RouteTrip(900, 1000, 1, 12.0, 14.0, 17.0, 18.5),
+				new RouteTrip(900, 1000, 1, 12.0, 14.0, 17.0, 18.0),
 				new RouteTrip(1030, 1400, 1, 17.0, 18.0, 14.0, 15.0)
+			},
+			{
+				new RouteTrip(745, 945, 1, 13.0, 14.0, 15.0, 14.0),
+				new RouteTrip(645, 745, 2, 12.0, 13.0, 13.0, 14.0),
+				new RouteTrip(745, 845, 2, 13.0, 14.0, 14.0, 15.0),
+				new RouteTrip(845, 945, 2, 14.0, 15.0, 15.0, 14.0),
+				new RouteTrip(945, 1045, 2, 15.0, 14.0, 12.0, 13.0)
 			}
 	};
 
@@ -186,12 +197,12 @@ public class DriverTestCase {
 				}
 			},
 			{
-				{
+				/*{
 					new Pair(0, 1),
 					new Pair(1, 1),
 					new Pair(2, 1),
 					new Pair(3, 2)
-				},
+				},*/
 				{
 					new Pair(0, 1),
 					new Pair(1, 1),
@@ -281,6 +292,15 @@ public class DriverTestCase {
 					new Pair(1, 0),
 					new Pair(2, 1),
 					new Pair(3, 1)
+				}
+			},
+			{
+				{
+					new Pair(0, 1),
+					new Pair(1, 1),
+					new Pair(2, 0),
+					new Pair(3, 0),
+					new Pair(4, 1)
 				}
 			}
 	};

@@ -27,9 +27,6 @@ import org.optaplanner.examples.driverallot.domain.solver.RouteTripDifficultyCom
 @XStreamAlias("RouteTrip")
 public class RouteTrip extends AbstractPersistable {
 
-    private int requiredCpuPower; // in gigahertz
-    private int requiredMemory; // in gigabyte RAM
-    private int requiredNetworkBandwidth; // in gigabyte per hour
     private RouteTrip previousTrip;
     private RouteTrip nextTrip;
     private int timeStart;
@@ -65,14 +62,14 @@ public class RouteTrip extends AbstractPersistable {
 		this.startLongitude = startLongitude;
 	}
 
-	public RouteTrip(int requiredCpuPower, int requiredMemory, int requiredNetworkBandwidth, int timeStart, int timeEnd) {
+	/*public RouteTrip(int requiredCpuPower, int requiredMemory, int requiredNetworkBandwidth, int timeStart, int timeEnd) {
 		super();
 		this.requiredCpuPower = requiredCpuPower;
 		this.requiredMemory = requiredMemory;
 		this.requiredNetworkBandwidth = requiredNetworkBandwidth;
 		this.timeStart = timeStart;
 		this.timeEnd = timeEnd;
-	}
+	}*/
     
     public RouteTrip(int timeStart, int timeEnd, int rank, double startLatitude, double startLongitude,
 			double endLatitude, double endLongitude) {
@@ -150,29 +147,6 @@ public class RouteTrip extends AbstractPersistable {
 		this.rank = rank;
 	}
 
-	public int getRequiredCpuPower() {
-        return requiredCpuPower;
-    }
-
-    public void setRequiredCpuPower(int requiredCpuPower) {
-        this.requiredCpuPower = requiredCpuPower;
-    }
-
-    public int getRequiredMemory() {
-        return requiredMemory;
-    }
-
-    public void setRequiredMemory(int requiredMemory) {
-        this.requiredMemory = requiredMemory;
-    }
-
-    public int getRequiredNetworkBandwidth() {
-        return requiredNetworkBandwidth;
-    }
-
-    public void setRequiredNetworkBandwidth(int requiredNetworkBandwidth) {
-        this.requiredNetworkBandwidth = requiredNetworkBandwidth;
-    }
 
     @PlanningVariable(valueRangeProviderRefs = {"driverRange"},
             strengthComparatorClass = DriverStrengthComparator.class)
@@ -206,10 +180,6 @@ public class RouteTrip extends AbstractPersistable {
 	public void setNextTrip(RouteTrip nextTrip) {
 		this.nextTrip = nextTrip;
 	}
-
-	public int getRequiredMultiplicand() {
-        return requiredCpuPower * requiredMemory * requiredNetworkBandwidth;
-    }
 
     public String getLabel() {
         return "RouteTrip " + id;

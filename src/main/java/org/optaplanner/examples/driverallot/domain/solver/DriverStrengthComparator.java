@@ -27,9 +27,7 @@ public class DriverStrengthComparator implements Comparator<Driver>, Serializabl
 
     public int compare(Driver a, Driver b) {
     	return new CompareToBuilder()
-                .append(a.getMultiplicand(), b.getMultiplicand())
-                .append(b.getCost(), a.getCost()) // Descending (but this is debatable)
-                .append(a.getId(), b.getId())
+                .append(b.getRank(), a.getRank()) // Descending
                 .toComparison();
     }
 

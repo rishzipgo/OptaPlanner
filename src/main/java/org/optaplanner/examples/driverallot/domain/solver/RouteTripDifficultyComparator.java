@@ -27,8 +27,7 @@ public class RouteTripDifficultyComparator implements Comparator<RouteTrip>, Ser
 
     public int compare(RouteTrip a, RouteTrip b) {
         return new CompareToBuilder()
-                .append(a.getRequiredMultiplicand(), b.getRequiredMultiplicand())
-                .append(a.getId(), b.getId())
+                .append(b.getRank(), a.getRank())
                 .toComparison();
     }
 

@@ -90,13 +90,13 @@ public class DriverAllot extends AbstractPersistable implements Solution<HardSof
 		// Do not add the planning entity's (routeTripList) because that will be done automatically
 		return facts;
 	}
-	
+
 	private List<DriverRouteTripDistance> precalculateDriverRouteTripDistance() {
 		List<DriverRouteTripDistance> driverRouteTripDistanceList = new ArrayList<DriverRouteTripDistance>();
 		for (Driver driver : driverList)
 			for (RouteTrip routeTrip : routeTripList) {
-					driverRouteTripDistanceList.add(new DriverRouteTripDistance(driver, routeTrip));
-					System.out.println(driver + " " + routeTrip + " " + driverRouteTripDistanceList.get(driverRouteTripDistanceList.size()-1).getDistanceToStart() + " " + driverRouteTripDistanceList.get(driverRouteTripDistanceList.size()-1).getDistanceToEnd());
+				driverRouteTripDistanceList.add(new DriverRouteTripDistance(driver, routeTrip));
+				System.out.println(driver + " " + routeTrip + " " + driverRouteTripDistanceList.get(driverRouteTripDistanceList.size()-1).getDistanceToStart() + " " + driverRouteTripDistanceList.get(driverRouteTripDistanceList.size()-1).getDistanceToEnd());
 			}
 		return driverRouteTripDistanceList;
 	}
@@ -134,18 +134,17 @@ public class DriverAllot extends AbstractPersistable implements Solution<HardSof
 		for (RouteTrip leftRouteTrip : routeTripList) {
 			for (RouteTrip rightRouteTrip : routeTripList) {
 				if (leftRouteTrip.getId() < rightRouteTrip.getId()) {
-					/*if(leftRouteTrip.getDriver() != null &&
-                    		rightRouteTrip.getDriver() != null && 
-                    		leftRouteTrip.getDriver().getId() == rightRouteTrip.getDriver().getId())*/ {
-                    			int leftStartTime = leftRouteTrip.getTimeStart();
-                    			int leftEndTime = leftRouteTrip.getTimeEnd();
-                    			int rightStartTime = rightRouteTrip.getTimeStart();
-                    			int rightEndTime = rightRouteTrip.getTimeEnd();
-                    			Interval leftInterval = new Interval(leftStartTime, leftEndTime);
-                    			Interval rightInterval = new Interval(rightStartTime, rightEndTime);
-                    			if(intersects(leftInterval, rightInterval))
-                    				routeTripConflictList.add(new RouteTripConflict(leftRouteTrip, rightRouteTrip));
-                    		}
+					int leftStartTime = leftRouteTrip.getTimeStart();
+					int leftEndTime = leftRouteTrip.getTimeEnd();
+					int rightStartTime = rightRouteTrip.getTimeStart();
+					int rightEndTime = rightRouteTrip.getTimeEnd();
+					Interval leftInterval = new Interval(leftStartTime, leftEndTime);
+					Interval rightInterval = new Interval(rightStartTime, rightEndTime);
+					if(intersects(leftInterval, rightInterval)) {
+						routeTripConflictList.add(new RouteTripConflict(leftRouteTrip, rightRouteTrip));
+						System.out.println(leftInterval.getLowerBound() + "-" + leftInterval.getUpperBound() + "\t" + 
+								rightInterval.getLowerBound() + "-" + rightInterval.getUpperBound());
+					}
 				}
 			}
 		}
@@ -153,8 +152,6 @@ public class DriverAllot extends AbstractPersistable implements Solution<HardSof
 	}
 
 	private boolean intersects(Interval leftInterval, Interval rightInterval) {
-		/*System.out.println(leftInterval.getLowerBound() + "-" + leftInterval.getUpperBound() + "\t" + 
-				rightInterval.getLowerBound() + "-" + rightInterval.getUpperBound());*/
 		if(leftInterval.getLowerBound() < rightInterval.getLowerBound()) {
 			if(leftInterval.getUpperBound() > rightInterval.getLowerBound())
 				return true;

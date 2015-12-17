@@ -1,0 +1,214 @@
+<plannerBenchmarkResult xStreamId="1">
+  <name>2015-12-17_140528</name>
+  <aggregation>false</aggregation>
+  <availableProcessors>4</availableProcessors>
+  <loggingLevel>trace</loggingLevel>
+  <maxMemory>3817865216</maxMemory>
+  <optaPlannerVersion>6.3.0.Final</optaPlannerVersion>
+  <javaVersion>Java 1.8.0_60 (Oracle Corporation)</javaVersion>
+  <javaVM>Java Java HotSpot(TM) 64-Bit Server VM 25.60-b23 (Oracle Corporation)</javaVM>
+  <operatingSystem>Mac OS X x86_64 10.11.2</operatingSystem>
+  <parallelBenchmarkCount>2</parallelBenchmarkCount>
+  <warmUpTimeMillisSpentLimit>30000</warmUpTimeMillisSpentLimit>
+  <solverBenchmarkResult xStreamId="2">
+    <name>First Fit</name>
+    <solverConfig xStreamId="3">
+      <solutionClass>org.optaplanner.examples.nqueens.domain.NQueens</solutionClass>
+      <entityClass>org.optaplanner.examples.nqueens.domain.Queen</entityClass>
+      <scoreDirectorFactory xStreamId="4">
+        <scoreDefinitionType>SIMPLE</scoreDefinitionType>
+        <scoreDrl>org/optaplanner/examples/nqueens/solver/nQueensScoreRules.drl</scoreDrl>
+        <initializingScoreTrend>ONLY_DOWN</initializingScoreTrend>
+      </scoreDirectorFactory>
+      <termination xStreamId="5">
+        <terminationCompositionStyle>OR</terminationCompositionStyle>
+        <secondsSpentLimit>20</secondsSpentLimit>
+        <bestScoreLimit>0</bestScoreLimit>
+      </termination>
+      <constructionHeuristic xStreamId="6">
+        <constructionHeuristicType>FIRST_FIT</constructionHeuristicType>
+      </constructionHeuristic>
+    </solverConfig>
+    <singleBenchmarkResult xStreamId="7">
+      <succeeded>true</succeeded>
+      <initialized>true</initialized>
+      <score class="org.optaplanner.core.api.score.buildin.simple.SimpleScore" xStreamId="8">
+        <score>-7</score>
+      </score>
+      <timeMillisSpent>63</timeMillisSpent>
+      <calculateCount>570</calculateCount>
+    </singleBenchmarkResult>
+    <singleBenchmarkResult xStreamId="9">
+      <succeeded>true</succeeded>
+      <initialized>true</initialized>
+      <score class="org.optaplanner.core.api.score.buildin.simple.SimpleScore" xStreamId="10">
+        <score>-15</score>
+      </score>
+      <timeMillisSpent>369</timeMillisSpent>
+      <calculateCount>2257</calculateCount>
+    </singleBenchmarkResult>
+  </solverBenchmarkResult>
+  <solverBenchmarkResult xStreamId="11">
+    <name>First Fit Decreasing</name>
+    <solverConfig xStreamId="12">
+      <solutionClass>org.optaplanner.examples.nqueens.domain.NQueens</solutionClass>
+      <entityClass>org.optaplanner.examples.nqueens.domain.Queen</entityClass>
+      <scoreDirectorFactory xStreamRef="4"/>
+      <termination xStreamRef="5"/>
+      <constructionHeuristic xStreamId="13">
+        <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
+      </constructionHeuristic>
+    </solverConfig>
+    <singleBenchmarkResult xStreamId="14">
+      <succeeded>true</succeeded>
+      <initialized>true</initialized>
+      <score class="org.optaplanner.core.api.score.buildin.simple.SimpleScore" xStreamId="15">
+        <score>-5</score>
+      </score>
+      <timeMillisSpent>96</timeMillisSpent>
+      <calculateCount>572</calculateCount>
+    </singleBenchmarkResult>
+    <singleBenchmarkResult xStreamId="16">
+      <succeeded>true</succeeded>
+      <initialized>true</initialized>
+      <score class="org.optaplanner.core.api.score.buildin.simple.SimpleScore" xStreamId="17">
+        <score>-8</score>
+      </score>
+      <timeMillisSpent>786</timeMillisSpent>
+      <calculateCount>2206</calculateCount>
+    </singleBenchmarkResult>
+  </solverBenchmarkResult>
+  <solverBenchmarkResult xStreamId="18">
+    <name>Weakest Fit</name>
+    <solverConfig xStreamId="19">
+      <solutionClass>org.optaplanner.examples.nqueens.domain.NQueens</solutionClass>
+      <entityClass>org.optaplanner.examples.nqueens.domain.Queen</entityClass>
+      <scoreDirectorFactory xStreamRef="4"/>
+      <termination xStreamRef="5"/>
+      <constructionHeuristic xStreamId="20">
+        <constructionHeuristicType>WEAKEST_FIT</constructionHeuristicType>
+      </constructionHeuristic>
+    </solverConfig>
+    <singleBenchmarkResult xStreamId="21">
+      <succeeded>true</succeeded>
+      <initialized>true</initialized>
+      <score class="org.optaplanner.core.api.score.buildin.simple.SimpleScore" xStreamId="22">
+        <score>-6</score>
+      </score>
+      <timeMillisSpent>134</timeMillisSpent>
+      <calculateCount>546</calculateCount>
+    </singleBenchmarkResult>
+    <singleBenchmarkResult xStreamId="23">
+      <succeeded>true</succeeded>
+      <initialized>true</initialized>
+      <score class="org.optaplanner.core.api.score.buildin.simple.SimpleScore" xStreamId="24">
+        <score>-9</score>
+      </score>
+      <timeMillisSpent>1609</timeMillisSpent>
+      <calculateCount>2126</calculateCount>
+    </singleBenchmarkResult>
+  </solverBenchmarkResult>
+  <solverBenchmarkResult xStreamId="25">
+    <name>Weakest Fit Decreasing</name>
+    <solverConfig xStreamId="26">
+      <solutionClass>org.optaplanner.examples.nqueens.domain.NQueens</solutionClass>
+      <entityClass>org.optaplanner.examples.nqueens.domain.Queen</entityClass>
+      <scoreDirectorFactory xStreamRef="4"/>
+      <termination xStreamRef="5"/>
+      <constructionHeuristic xStreamId="27">
+        <constructionHeuristicType>WEAKEST_FIT_DECREASING</constructionHeuristicType>
+      </constructionHeuristic>
+    </solverConfig>
+    <singleBenchmarkResult xStreamId="28">
+      <succeeded>true</succeeded>
+      <initialized>true</initialized>
+      <score class="org.optaplanner.core.api.score.buildin.simple.SimpleScore" xStreamId="29">
+        <score>-7</score>
+      </score>
+      <timeMillisSpent>64</timeMillisSpent>
+      <calculateCount>567</calculateCount>
+    </singleBenchmarkResult>
+    <singleBenchmarkResult xStreamId="30">
+      <succeeded>true</succeeded>
+      <initialized>true</initialized>
+      <score class="org.optaplanner.core.api.score.buildin.simple.SimpleScore" xStreamId="31">
+        <score>-16</score>
+      </score>
+      <timeMillisSpent>451</timeMillisSpent>
+      <calculateCount>2319</calculateCount>
+    </singleBenchmarkResult>
+  </solverBenchmarkResult>
+  <solverBenchmarkResult xStreamId="32">
+    <name>Entity Tabu Search</name>
+    <solverConfig xStreamId="33">
+      <solutionClass>org.optaplanner.examples.nqueens.domain.NQueens</solutionClass>
+      <entityClass>org.optaplanner.examples.nqueens.domain.Queen</entityClass>
+      <scoreDirectorFactory xStreamRef="4"/>
+      <termination xStreamRef="5"/>
+      <constructionHeuristic xStreamId="34">
+        <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
+      </constructionHeuristic>
+      <localSearch xStreamId="35">
+        <changeMoveSelector xStreamId="36">
+          <selectionOrder>ORIGINAL</selectionOrder>
+        </changeMoveSelector>
+        <acceptor xStreamId="37">
+          <entityTabuSize>5</entityTabuSize>
+        </acceptor>
+        <forager xStreamId="38"/>
+      </localSearch>
+    </solverConfig>
+    <singleBenchmarkResult xStreamId="39">
+      <succeeded>true</succeeded>
+      <initialized>true</initialized>
+      <score class="org.optaplanner.core.api.score.buildin.simple.SimpleScore" xStreamId="40">
+        <score>0</score>
+      </score>
+      <timeMillisSpent>3566</timeMillisSpent>
+      <calculateCount>20413</calculateCount>
+    </singleBenchmarkResult>
+    <singleBenchmarkResult xStreamId="41">
+      <succeeded>true</succeeded>
+      <initialized>true</initialized>
+      <score class="org.optaplanner.core.api.score.buildin.simple.SimpleScore" xStreamId="42">
+        <score>0</score>
+      </score>
+      <timeMillisSpent>14502</timeMillisSpent>
+      <calculateCount>187679</calculateCount>
+    </singleBenchmarkResult>
+  </solverBenchmarkResult>
+  <unifiedProblemBenchmarkResult xStreamId="43">
+    <name>32queens</name>
+    <writeOutputSolutionEnabled>true</writeOutputSolutionEnabled>
+    <inputSolutionFile>data/nqueens/unsolved/32queens.xml</inputSolutionFile>
+    <bestScoreProblemStatistic xStreamId="44">
+      <problemStatisticType>BEST_SCORE</problemStatisticType>
+    </bestScoreProblemStatistic>
+    <singleBenchmarkResult xStreamRef="7"/>
+    <singleBenchmarkResult xStreamRef="14"/>
+    <singleBenchmarkResult xStreamRef="21"/>
+    <singleBenchmarkResult xStreamRef="28"/>
+    <singleBenchmarkResult xStreamRef="39"/>
+    <entityCount>32</entityCount>
+    <variableCount>32</variableCount>
+    <problemScale>1024</problemScale>
+  </unifiedProblemBenchmarkResult>
+  <unifiedProblemBenchmarkResult xStreamId="45">
+    <name>64queens</name>
+    <writeOutputSolutionEnabled>true</writeOutputSolutionEnabled>
+    <inputSolutionFile>data/nqueens/unsolved/64queens.xml</inputSolutionFile>
+    <bestScoreProblemStatistic xStreamId="46">
+      <problemStatisticType>BEST_SCORE</problemStatisticType>
+    </bestScoreProblemStatistic>
+    <singleBenchmarkResult xStreamRef="9"/>
+    <singleBenchmarkResult xStreamRef="16"/>
+    <singleBenchmarkResult xStreamRef="23"/>
+    <singleBenchmarkResult xStreamRef="30"/>
+    <singleBenchmarkResult xStreamRef="41"/>
+    <entityCount>64</entityCount>
+    <variableCount>64</variableCount>
+    <problemScale>4096</problemScale>
+  </unifiedProblemBenchmarkResult>
+  <startingTimestamp xStreamId="47">2015-12-17 08:35:28.535 UTC</startingTimestamp>
+  <benchmarkTimeMillisSpent>48866</benchmarkTimeMillisSpent>
+</plannerBenchmarkResult>
