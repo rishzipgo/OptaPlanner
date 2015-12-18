@@ -247,9 +247,6 @@ public class DriverAllotGenerator extends LoggingMain {
         int networkBandwidthTotal = 0;
         for (Driver driver : driverList) {
         	if(driver != null) {
-            cpuPowerTotal += driver.getCpuPower();
-            memoryTotal += driver.getMemory();
-            networkBandwidthTotal += driver.getNetworkBandwidth();
         	}
         	else {
         		cpuPowerTotal += 0;
@@ -260,30 +257,23 @@ public class DriverAllotGenerator extends LoggingMain {
         int requiredCpuPowerTotal = 0;
         int requiredMemoryTotal = 0;
         int requiredNetworkBandwidthTotal = 0;
-        for (RouteTrip routeTrip : driverAllot.getRouteTripList()) {
-            requiredCpuPowerTotal += routeTrip.getRequiredCpuPower();
-            requiredMemoryTotal += routeTrip.getRequiredMemory();
-            requiredNetworkBandwidthTotal += routeTrip.getRequiredNetworkBandwidth();
-        }
+      
         int cpuPowerLacking = requiredCpuPowerTotal - cpuPowerTotal;
         while (cpuPowerLacking > 0) {
             Driver driver = driverList.get(random.nextInt(driverList.size()));
             int upgrade = determineUpgrade(cpuPowerLacking);
-            driver.setCpuPower(driver.getCpuPower() + upgrade);
             cpuPowerLacking -= upgrade;
         }
         int memoryLacking = requiredMemoryTotal - memoryTotal;
         while (memoryLacking > 0) {
             Driver driver = driverList.get(random.nextInt(driverList.size()));
             int upgrade = determineUpgrade(memoryLacking);
-            driver.setMemory(driver.getMemory() + upgrade);
             memoryLacking -= upgrade;
         }
         int networkBandwidthLacking = requiredNetworkBandwidthTotal - networkBandwidthTotal;
         while (networkBandwidthLacking > 0) {
             Driver driver = driverList.get(random.nextInt(driverList.size()));
             int upgrade = determineUpgrade(networkBandwidthLacking);
-            driver.setNetworkBandwidth(driver.getNetworkBandwidth() + upgrade);
             networkBandwidthLacking -= upgrade;
         }
     }
@@ -300,6 +290,7 @@ public class DriverAllotGenerator extends LoggingMain {
 	public DriverAllot createDriverAllot(int i) {
 		DriverAllot driverAllot = new DriverAllot();
         driverAllot.setId((long)i);
+        
         createRouteTripListGlobal(driverAllot, DriverTestCase.GLOBALROUTETRIPLIST[i]);
         createDriverListGlobal(driverAllot, DriverTestCase.GLOBALDRIVERLIST[i]);
         /*BigInteger possibleSolutionSize = BigInteger.valueOf(driverAllot.getDriverList().size()).pow(

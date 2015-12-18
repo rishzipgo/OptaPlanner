@@ -2,20 +2,26 @@ package org.optaplanner.examples.driverallot.test;
 
 import org.optaplanner.examples.driverallot.domain.Driver;
 import org.optaplanner.examples.driverallot.domain.RouteTrip;
+import org.optaplanner.examples.driverallot.domain.Solution;
+
+import com.google.gson.annotations.SerializedName;
+import com.sun.xml.internal.ws.developer.Serialization;
 
 import javafx.util.Pair;
 
 public class TestCase {
+    @SerializedName("tag")
+	public String tag;
+    
+    @SerializedName("driverList")
 	public Driver[] driverList;
+    
+    @SerializedName("routeTripList")
 	public RouteTrip[] routeTripList;
-	public Pair[][] resultList;
+    
+    @SerializedName("solutions")
+	public Solution[] resultList;
 	
-	public TestCase(Driver[] driverList, RouteTrip[] routeTripList, Pair[][] resultList) {
-		super();
-		this.driverList = driverList;
-		this.routeTripList = routeTripList;
-		this.resultList = resultList;
-	}
 
 	public Driver[] getDriverList() {
 		return driverList;
@@ -31,14 +37,6 @@ public class TestCase {
 
 	public void setRouteTripList(RouteTrip[] routeTripList) {
 		this.routeTripList = routeTripList;
-	}
-
-	public Pair[][] getResultList() {
-		return resultList;
-	}
-
-	public void setResultList(Pair[][] resultList) {
-		this.resultList = resultList;
 	}
 
 }

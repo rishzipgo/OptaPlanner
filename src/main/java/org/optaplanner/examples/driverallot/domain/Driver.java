@@ -16,30 +16,34 @@
 
 package org.optaplanner.examples.driverallot.domain;
 
+import com.google.gson.annotations.SerializedName;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.variable.InverseRelationShadowVariable;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 import org.optaplanner.examples.common.swingui.components.Labeled;
-import org.optaplanner.examples.driverallot.domain.solver.DriverStrengthComparator;
-import org.optaplanner.examples.driverallot.domain.solver.RouteTripDifficultyComparator;
 
 @PlanningEntity
 @XStreamAlias("Driver")
 public class Driver extends AbstractPersistable implements Labeled {
-
-    private int cpuPower; // in gigahertz
-    private int memory; // in gigabyte RAM
-    private int networkBandwidth; // in gigabyte per hour
-    private int rank; // in euro per month
+	@SerializedName("rank")
+    private int rank; 
+	
+	@SerializedName("timeIn")
     private int timeIn;
+	
+	@SerializedName("timeOut")
     private int timeOut;
+	
+	@SerializedName("latitude")
     private double latitude;
+
+	@SerializedName("longitude")
     private double longitude;
+	
 	private ArrayList<RouteTrip> driverTripList = new ArrayList<>();
 	private ArrayList<RouteTrip> routeTripList = new ArrayList<>();
 	
@@ -62,9 +66,6 @@ public class Driver extends AbstractPersistable implements Labeled {
 
 	public Driver(int cpuPower, int memory, int networkBandwidth, int cost, int timeIn, int timeOut) {
 		super();
-		this.cpuPower = cpuPower;
-		this.memory = memory;
-		this.networkBandwidth = networkBandwidth;
 		this.rank = cost;
 		this.timeIn = timeIn;
 		this.timeOut = timeOut;
@@ -106,29 +107,6 @@ public class Driver extends AbstractPersistable implements Labeled {
 		this.timeOut = timeOut;
 	}
 
-	public int getCpuPower() {
-        return cpuPower;
-    }
-
-    public void setCpuPower(int cpuPower) {
-        this.cpuPower = cpuPower;
-    }
-
-    public int getMemory() {
-        return memory;
-    }
-
-    public void setMemory(int memory) {
-        this.memory = memory;
-    }
-
-    public int getNetworkBandwidth() {
-        return networkBandwidth;
-    }
-
-    public void setNetworkBandwidth(int networkBandwidth) {
-        this.networkBandwidth = networkBandwidth;
-    }
 
     public int getCost() {
         return rank;
@@ -207,10 +185,6 @@ public class Driver extends AbstractPersistable implements Labeled {
 	public void setRouteTripList(ArrayList<RouteTrip> routeTripList) {
 		this.routeTripList = routeTripList;
 	}
-
-	public int getMultiplicand() {
-        return cpuPower * memory * networkBandwidth;
-    }
 
     public String getLabel() {
         return "Driver " + id;

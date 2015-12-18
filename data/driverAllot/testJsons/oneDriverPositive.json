@@ -1,0 +1,33 @@
+{
+  "tag": "oneDriverPositive",
+  "driverList": [
+    {
+      "rank": "0",
+      "timeIn": "600",
+      "timeOut": "1100",
+      "latitude": "14.0",
+      "longitude": "15.0"
+    }
+  ],
+  "routeTripList": [
+    {
+      "rank": "0",
+      "timeStart": "900",
+      "timeEnd": "1000",
+      "startLatitude": "14.0",
+      "startLongitude": "15.0",
+      "endLatitude": "17.0",
+      "endLongitude": "18.0"
+    }
+  ],
+  "solutions": [
+    {
+      "driverTripMap": [
+        {
+          "driver": "0",
+          "trip": "0"
+        }
+      ]
+    }
+  ]
+}

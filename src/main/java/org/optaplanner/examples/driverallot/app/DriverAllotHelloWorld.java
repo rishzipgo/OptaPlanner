@@ -46,7 +46,6 @@ public class DriverAllotHelloWorld {
 	public static void main(String[] args) throws FileNotFoundException {
 		
 		//System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream("sysoutfile"))));
-
 		ArrayList<DriverAllot> DriverAllotResults = new ArrayList<>();
 		int countCorrect = 0;
 		// Build the Solver
@@ -133,7 +132,7 @@ public class DriverAllotHelloWorld {
 		StringBuilder displayString = new StringBuilder();
 		for (RouteTrip routeTrip : solvedDriverAllot.getRouteTripList()) {
 			Driver driver = routeTrip.getDriver();
-			if(driver != null && driver.getMultiplicand() >= routeTrip.getRequiredMultiplicand())
+			if(driver != null)
 				displayString.append("  ").append(routeTrip.getLabel()).append(" -> ")
 				.append(driver == null ? null : driver.getLabel()).append("\n");
 		}

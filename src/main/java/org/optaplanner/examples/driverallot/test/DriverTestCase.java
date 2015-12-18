@@ -7,6 +7,10 @@ import javafx.util.Pair;
 
 public class DriverTestCase {
 
+	public static final String[] GLOBALTESTS = {
+			"jhjh"
+	};
+	
 	public static final Driver[][] GLOBALDRIVERLIST = {
 			{
 				new Driver(500000, 0, 2400),
