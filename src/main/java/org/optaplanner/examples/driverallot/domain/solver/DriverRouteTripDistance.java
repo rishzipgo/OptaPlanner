@@ -38,6 +38,8 @@ public class DriverRouteTripDistance implements Serializable, Comparable<DriverR
 	private double distanceToEnd;
 	private double timeToStart;
 	private double timeToEnd;
+	private double timeToStartInMinutes;
+	private double timeToEndInMinutes;
 	private double distanceToStartInMeters;
 	private double distanceToEndInMeters;
 
@@ -55,7 +57,9 @@ public class DriverRouteTripDistance implements Serializable, Comparable<DriverR
 					routeTrip.getEndLatitude(), routeTrip.getEndLongitude());
 			this.distanceToEndInMeters = distanceToEnd*1000;
 			this.timeToStart = distanceToStart/AVG_SPEED_DRIVER;
+			this.timeToStartInMinutes = timeToStart/60;
 			this.timeToEnd = distanceToEnd/AVG_SPEED_DRIVER;
+			this.timeToEndInMinutes = timeToEnd/60;
 		}
 		else{
 			this.distanceToStart = 0;
@@ -137,6 +141,54 @@ public class DriverRouteTripDistance implements Serializable, Comparable<DriverR
 
 	public void setDistanceToEndInMeters(double distanceToEndInMeters) {
 		this.distanceToEndInMeters = distanceToEndInMeters;
+	}
+
+
+
+	public double getTimeToStart() {
+		return timeToStart;
+	}
+
+
+
+	public void setTimeToStart(double timeToStart) {
+		this.timeToStart = timeToStart;
+	}
+
+
+
+	public double getTimeToEnd() {
+		return timeToEnd;
+	}
+
+
+
+	public void setTimeToEnd(double timeToEnd) {
+		this.timeToEnd = timeToEnd;
+	}
+
+
+
+	public double getTimeToStartInMinutes() {
+		return timeToStartInMinutes;
+	}
+
+
+
+	public void setTimeToStartInMinutes(double timeToStartInMinutes) {
+		this.timeToStartInMinutes = timeToStartInMinutes;
+	}
+
+
+
+	public double getTimeToEndInMinutes() {
+		return timeToEndInMinutes;
+	}
+
+
+
+	public void setTimeToEndInMinutes(double timeToEndInMinutes) {
+		this.timeToEndInMinutes = timeToEndInMinutes;
 	}
 
 

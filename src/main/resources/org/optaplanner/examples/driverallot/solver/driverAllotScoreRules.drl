@@ -40,13 +40,13 @@ rule "driverTimeMatches"
 			$timeStart : timeStart &&
 			$timeEnd : timeEnd &&
 			(
-				timeStart <= $timeIn || 
-				timeEnd >= $timeOut
+				timeStart < $timeIn || 
+				timeEnd > $timeOut
 			)
 		)
 	then
 		scoreHolder.addHardConstraintMatch(kcontext, -5);
-		//System.out.println("driverTimeMatches " + $driver);
+		System.out.println("driverTimeMatches " + $driver);
 end
 
 rule "oneTripAtATime"
@@ -72,7 +72,7 @@ rule "oneTripAtATime"
 		)
 	then
 		scoreHolder.addHardConstraintMatch(kcontext, -5);
-		//System.out.println("oneTripAtATime " + $leftRouteTripDriver + " " + $leftRouteTrip + " " + $leftRouteTriptimeStart + "-" + $leftRouteTriptimeEnd + "   " + $rightRouteTriptimeStart + "-" + $rightRouteTriptimeEnd + " " + $rightRouteTrip);
+		System.out.println("oneTripAtATime " + $leftRouteTripDriver + " " + $leftRouteTrip + " " + $leftRouteTriptimeStart + "-" + $leftRouteTriptimeEnd + "   " + $rightRouteTriptimeStart + "-" + $rightRouteTriptimeEnd + " " + $rightRouteTrip);
 end
 
 rule "enoughTimeBetweenTrips"
@@ -102,7 +102,7 @@ rule "enoughTimeBetweenTrips"
 		)
 	then
 		scoreHolder.addHardConstraintMatch(kcontext, -5);
-		//System.out.println("enoughTimeBetweenTrips " + $previousRouteTrip + " " + $routeTrip);
+		System.out.println("enoughTimeBetweenTrips " + $previousRouteTrip + " " + $routeTrip);
 end
 
 // ############################################################################
@@ -162,7 +162,7 @@ rule "firstTripDriverProximity"
 		$driverRouteTripDistance : DriverRouteTripDistance (
 			driver == $driver,
 			routeTrip == $routeTrip,
-			$distanceToStartInMeters : distanceToStart//InMeters
+			$distanceToStartInMeters : timeToStartInMinutes//InMeters
 		)
 	then
 		scoreHolder.addSoftConstraintMatch(kcontext, -(int)$distanceToStartInMeters);
@@ -192,7 +192,7 @@ rule "twoTripsStartEndProximity"
 		$routeTripDistance : RouteTripDistance (
 			leftRouteTrip == $previousRouteTrip,
 			rightRouteTrip == $routeTrip,
-			$distanceInMeters : distance//InMeters
+			$distanceInMeters : timeInMinutes//InMeters
 		)
 	then
 		scoreHolder.addSoftConstraintMatch(kcontext, -(int)$distanceInMeters);
@@ -217,7 +217,7 @@ rule "lastTripDriverProximity"
 		$driverRouteTripDistance : DriverRouteTripDistance (
 			driver == $driver,
 			routeTrip == $routeTrip,
-			$distanceToEndInMeters : distanceToEnd//InMeters
+			$distanceToEndInMeters : timeToEndInMinutes//InMeters
 		)
 	then
 		scoreHolder.addSoftConstraintMatch(kcontext, -(int)$distanceToEndInMeters);

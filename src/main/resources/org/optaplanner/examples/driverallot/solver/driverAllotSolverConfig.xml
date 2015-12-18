@@ -37,9 +37,7 @@
   </constructionHeuristic>
   
   <localSearch>
-    <termination>
-    	<stepCountLimit>1</stepCountLimit>
-  	</termination>
+    <localSearchType>TABU_SEARCH</localSearchType>
   </localSearch>
   
   

@@ -36,6 +36,7 @@ public class RouteTrip extends AbstractPersistable {
     private double startLongitude;
     private double endLatitude;
     private double endLongitude;
+    private String tripName;
 
 	public RouteTrip(int timeStart, int timeEnd, int rank) {
 		super();
@@ -61,15 +62,6 @@ public class RouteTrip extends AbstractPersistable {
 		this.startLatitude = startLatitude;
 		this.startLongitude = startLongitude;
 	}
-
-	/*public RouteTrip(int requiredCpuPower, int requiredMemory, int requiredNetworkBandwidth, int timeStart, int timeEnd) {
-		super();
-		this.requiredCpuPower = requiredCpuPower;
-		this.requiredMemory = requiredMemory;
-		this.requiredNetworkBandwidth = requiredNetworkBandwidth;
-		this.timeStart = timeStart;
-		this.timeEnd = timeEnd;
-	}*/
     
     public RouteTrip(int timeStart, int timeEnd, int rank, double startLatitude, double startLongitude,
 			double endLatitude, double endLongitude) {
@@ -81,6 +73,19 @@ public class RouteTrip extends AbstractPersistable {
 		this.startLongitude = startLongitude;
 		this.endLatitude = endLatitude;
 		this.endLongitude = endLongitude;
+	}
+
+	public RouteTrip(int timeStart, int timeEnd, int rank, double startLatitude, double startLongitude,
+			double endLatitude, double endLongitude, String tripName) {
+		super();
+		this.timeStart = timeStart;
+		this.timeEnd = timeEnd;
+		this.rank = rank;
+		this.startLatitude = startLatitude;
+		this.startLongitude = startLongitude;
+		this.endLatitude = endLatitude;
+		this.endLongitude = endLongitude;
+		this.tripName = tripName;
 	}
 
 	public RouteTrip() {
@@ -181,7 +186,15 @@ public class RouteTrip extends AbstractPersistable {
 		this.nextTrip = nextTrip;
 	}
 
-    public String getLabel() {
+    public String getTripName() {
+		return tripName;
+	}
+
+	public void setTripName(String tripName) {
+		this.tripName = tripName;
+	}
+
+	public String getLabel() {
         return "RouteTrip " + id;
     }
     

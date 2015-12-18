@@ -54,7 +54,7 @@ public class DriverAllotHelloWorld {
 				"org/optaplanner/examples/driverallot/solver/driverAllotSolverConfig.xml");
 		Solver solver = solverFactory.buildSolver();
 
-		for(int i = 0; i < 15/*DriverTestCase.GLOBALDRIVERLIST.length*/; i++) {
+		for(int i = 3; i < 4/*DriverTestCase.GLOBALDRIVERLIST.length*/; i++) {
 			DriverAllot unsolvedDriverAllot = new DriverAllotGenerator().createDriverAllot(i);
 
 			// Solve the problem

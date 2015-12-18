@@ -37,6 +37,7 @@ public class Driver extends AbstractPersistable implements Labeled {
     private int timeOut;
     private double latitude;
     private double longitude;
+    private String driverName;
 	private ArrayList<RouteTrip> driverTripList = new ArrayList<>();
 	private ArrayList<RouteTrip> routeTripList = new ArrayList<>();
 	
@@ -55,6 +56,16 @@ public class Driver extends AbstractPersistable implements Labeled {
 		this.timeOut = timeOut;
 		this.latitude = latitude;
 		this.longitude = longitude;
+	}
+
+	public Driver(int rank, int timeIn, int timeOut, double latitude, double longitude, String driverName) {
+		super();
+		this.rank = rank;
+		this.timeIn = timeIn;
+		this.timeOut = timeOut;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.driverName = driverName;
 	}
 
 	/*public Driver(int cpuPower, int memory, int networkBandwidth, int cost, int timeIn, int timeOut) {
@@ -173,7 +184,15 @@ public class Driver extends AbstractPersistable implements Labeled {
 		this.routeTripList = routeTripList;
 	}
 
-    public String getLabel() {
+    public String getDriverName() {
+		return driverName;
+	}
+
+	public void setDriverName(String driverName) {
+		this.driverName = driverName;
+	}
+
+	public String getLabel() {
         return "Driver " + id;
     }
     
