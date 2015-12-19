@@ -45,7 +45,7 @@ public class DriverAllotHelloWorld {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		
-		//System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream("sysoutfile"))));
+		System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream("sysoutfile"))));
 
 		ArrayList<DriverAllot> DriverAllotResults = new ArrayList<>();
 		int countCorrect = 0;
@@ -54,7 +54,7 @@ public class DriverAllotHelloWorld {
 				"org/optaplanner/examples/driverallot/solver/driverAllotSolverConfig.xml");
 		Solver solver = solverFactory.buildSolver();
 
-		for(int i = 3; i < 4/*DriverTestCase.GLOBALDRIVERLIST.length*/; i++) {
+		for(int i =15; i < 16/*DriverTestCase.GLOBALDRIVERLIST.length*/; i++) {
 			DriverAllot unsolvedDriverAllot = new DriverAllotGenerator().createDriverAllot(i);
 
 			// Solve the problem

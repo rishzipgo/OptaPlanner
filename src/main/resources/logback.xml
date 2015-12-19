@@ -23,7 +23,7 @@
     <!--</encoder>-->
   <!--</appender>-->
 
-  <logger name="org.optaplanner" level="trace"/>
+  <logger name="org.optaplanner" level="debug"/>
 
   <root level="warn">
     <appender-ref ref="consoleAppender" />

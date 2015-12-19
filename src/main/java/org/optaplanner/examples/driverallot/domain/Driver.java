@@ -32,12 +32,16 @@ import org.optaplanner.examples.driverallot.domain.solver.RouteTripDifficultyCom
 @XStreamAlias("Driver")
 public class Driver extends AbstractPersistable implements Labeled {
 
+	public final static int UNIVERSAL_DRIVER = 0;
+	public final static int NON_FIXED_DRIVER = 1;
+	
     private int rank;
     private int timeIn;
     private int timeOut;
     private double latitude;
     private double longitude;
     private String driverName;
+    private int type;
 	private ArrayList<RouteTrip> driverTripList = new ArrayList<>();
 	private ArrayList<RouteTrip> routeTripList = new ArrayList<>();
 	
@@ -48,6 +52,14 @@ public class Driver extends AbstractPersistable implements Labeled {
 		this.timeIn = timeIn;
 		this.timeOut = timeOut;
 	}
+    
+    public Driver(int rank, int timeIn, int timeOut, int type) {
+		super();
+		this.rank = rank;
+		this.timeIn = timeIn;
+		this.timeOut = timeOut;
+		this.type = type;
+	}
 
 	public Driver(int rank, int timeIn, int timeOut, double latitude, double longitude) {
 		super();
@@ -56,6 +68,16 @@ public class Driver extends AbstractPersistable implements Labeled {
 		this.timeOut = timeOut;
 		this.latitude = latitude;
 		this.longitude = longitude;
+	}
+	
+	public Driver(int rank, int timeIn, int timeOut, double latitude, double longitude, int type) {
+		super();
+		this.rank = rank;
+		this.timeIn = timeIn;
+		this.timeOut = timeOut;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.type = type;
 	}
 
 	public Driver(int rank, int timeIn, int timeOut, double latitude, double longitude, String driverName) {
@@ -67,17 +89,18 @@ public class Driver extends AbstractPersistable implements Labeled {
 		this.longitude = longitude;
 		this.driverName = driverName;
 	}
-
-	/*public Driver(int cpuPower, int memory, int networkBandwidth, int cost, int timeIn, int timeOut) {
+	
+	public Driver(int rank, int timeIn, int timeOut, double latitude, double longitude, String driverName, int type) {
 		super();
-		this.cpuPower = cpuPower;
-		this.memory = memory;
-		this.networkBandwidth = networkBandwidth;
-		this.rank = cost;
+		this.rank = rank;
 		this.timeIn = timeIn;
 		this.timeOut = timeOut;
-	}*/
-    
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.driverName = driverName;
+		this.type = type;
+	}
+
     public Driver() {
     	super();
     }
@@ -190,6 +213,14 @@ public class Driver extends AbstractPersistable implements Labeled {
 
 	public void setDriverName(String driverName) {
 		this.driverName = driverName;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
 	}
 
 	public String getLabel() {

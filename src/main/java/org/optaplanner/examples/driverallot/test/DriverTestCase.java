@@ -9,83 +9,83 @@ public class DriverTestCase {
 
 	public static final Driver[][] GLOBALDRIVERLIST = {
 			{
-				new Driver(500000, 0, 2400),
-				new Driver(1, 700, 1500),
-				new Driver(2, 900, 1300)
+				new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+				new Driver(1, 700, 1500, Driver.NON_FIXED_DRIVER),
+				new Driver(2, 900, 1300, Driver.NON_FIXED_DRIVER)
 			},
 			{
-				new Driver(500000, 0, 2400),
-				new Driver(1, 700, 1500),
-				new Driver(2, 900, 1300)
+				new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+				new Driver(1, 700, 1500, Driver.NON_FIXED_DRIVER),
+				new Driver(2, 900, 1300, Driver.NON_FIXED_DRIVER)
 			},
 			{
-				new Driver(500000, 0, 2400),
-				new Driver(1, 700, 1500),
-				new Driver(2, 900, 1300)
+				new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+				new Driver(1, 700, 1500, Driver.NON_FIXED_DRIVER),
+				new Driver(2, 900, 1300, Driver.NON_FIXED_DRIVER)
 			},
 			{
-				new Driver(500000, 0, 2400),
-				new Driver(1, 700, 1500),
-				new Driver(2, 900, 1300)
+				//new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+				new Driver(1, 700, 1500, Driver.NON_FIXED_DRIVER),
+				new Driver(2, 900, 1300, Driver.NON_FIXED_DRIVER)
 			},
 			{
-				new Driver(500000, 0, 2400),
-				new Driver(1, 700, 1500),
-				new Driver(2, 900, 1300)
+				new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+				new Driver(1, 700, 1500, Driver.NON_FIXED_DRIVER),
+				new Driver(2, 900, 1300, Driver.NON_FIXED_DRIVER)
 			},
 			{
-				new Driver(500000, 0, 2400),
-				new Driver(1, 700, 1500),
-				new Driver(2, 900, 1300)
+				new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+				new Driver(1, 700, 1500, Driver.NON_FIXED_DRIVER),
+				new Driver(2, 900, 1300, Driver.NON_FIXED_DRIVER)
 			},
 			{
-				new Driver(500000, 0, 2400),
-				new Driver(1, 700, 1500, 12, 13),
-				new Driver(2, 900, 1300, 13, 14)
+				new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+				new Driver(1, 700, 1500, 12, 13, Driver.NON_FIXED_DRIVER),
+				new Driver(2, 900, 1300, 13, 14, Driver.NON_FIXED_DRIVER)
 			},
 			{
-				new Driver(500000, 0, 2400),
-				new Driver(1, 700, 1500, 12, 13),
-				new Driver(2, 900, 1300, 13, 14)
+				new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+				new Driver(1, 700, 1500, 12, 13, Driver.NON_FIXED_DRIVER),
+				new Driver(2, 900, 1300, 13, 14, Driver.NON_FIXED_DRIVER)
 			},
 			{
-				new Driver(500000, 0, 2400),
-				new Driver(1, 700, 1500, 12, 13),
-				new Driver(2, 810, 1300, 13, 14)
+				new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+				new Driver(1, 700, 1500, 12, 13, Driver.NON_FIXED_DRIVER),
+				new Driver(2, 810, 1300, 13, 14, Driver.NON_FIXED_DRIVER)
 			},
 			{
-				new Driver(500000, 0, 2400),
-				new Driver(1, 700, 1500, 14, 15)
+				new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+				new Driver(1, 700, 1500, 14, 15, Driver.NON_FIXED_DRIVER)
 			},
 			{
-				new Driver(500000, 0, 2400),
-				new Driver(1, 630, 1500, 14.0, 15.0)
+				new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+				new Driver(1, 630, 1500, 14.0, 15.0, Driver.NON_FIXED_DRIVER)
 			},
 			{
-				new Driver(500000, 0, 2400),
-				new Driver(1, 630, 1500, 14.0, 15.0),
-				new Driver(1, 630, 1500, 8.0, 9.0)
+				new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+				new Driver(1, 630, 1500, 14.0, 15.0, Driver.NON_FIXED_DRIVER),
+				new Driver(1, 630, 1500, 8.0, 9.0, Driver.NON_FIXED_DRIVER)
 			},
 			{
-				new Driver(500000, 0, 2400),
-				new Driver(1, 630, 1000, 14.0, 15.0)
+				new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+				new Driver(1, 630, 1000, 14.0, 15.0, Driver.NON_FIXED_DRIVER)
 			},
 			{
-				new Driver(500000, 0, 2400),
-				new Driver(1, 630, 1500, 14.0, 15.0)
+				new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+				new Driver(1, 630, 1500, 14.0, 15.0, Driver.NON_FIXED_DRIVER)
 			},
 			{
-				new Driver(500000, 0, 2400),
-				new Driver(1, 630, 1100, 12.0, 13.0)
+				new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+				new Driver(1, 630, 1100, 12.0, 13.0, Driver.NON_FIXED_DRIVER)
 			},
 			{
-				new Driver(500000, 0, 2400),
-				new Driver(1, 800, 2020, 12.914015, 77.63813)
+				new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+				new Driver(1, 800, 2020, 12.914015, 77.63813, Driver.NON_FIXED_DRIVER)
 			},
 			{
-				new Driver(500000, 0, 2400, 0.0, 0.0, "0000GLOBAL"),
-				new Driver(1, 800, 2020, 12.914015, 77.63813, "1322Siddesh"),
-				new Driver(1, 910, 2320, 12.917676, 77.573803, "2291ShivaS")
+				new Driver(500000, 0, 2400, 0.0, 0.0, "0000GLOBAL", Driver.UNIVERSAL_DRIVER),
+				new Driver(1, 800, 2020, 12.914015, 77.63813, "1322Siddesh", Driver.NON_FIXED_DRIVER),
+				new Driver(1, 910, 2320, 12.917676, 77.573803, "2291ShivaS", Driver.NON_FIXED_DRIVER)
 			}
 	};
 
@@ -181,7 +181,7 @@ public class DriverTestCase {
 			},
 			{
 				new RouteTrip(800, 950, 1, 12.914015, 77.63813, 12.980984, 77.657103),
-				new RouteTrip(950, 1130, 1, 12.980984, 77.657103, 12.86, 77.786),
+				new RouteTrip(950, 1125, 1, 12.980984, 77.657103, 12.86, 77.786),
 				new RouteTrip(1130, 1330, 1, 12.86, 77.786, 12.980984, 77.657103),
 				new RouteTrip(1330, 1530, 1, 12.980984, 77.657103, 12.916729, 77.608959),
 				new RouteTrip(1530, 1830, 1, 12.916729, 77.608959, 12.980984, 77.657103),

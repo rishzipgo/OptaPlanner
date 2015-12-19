@@ -46,7 +46,6 @@ rule "driverTimeMatches"
 		)
 	then
 		scoreHolder.addHardConstraintMatch(kcontext, -5);
-		System.out.println("driverTimeMatches " + $driver);
 end
 
 rule "oneTripAtATime"
@@ -66,13 +65,14 @@ rule "oneTripAtATime"
 			id == $rightRouteTripId,
 			driver != null,
 			driver == $leftRouteTripDriver,
-			driver.id != 0,
+			//driver.id != 0,
+			driver.type != Driver.UNIVERSAL_DRIVER,
 			$rightRouteTriptimeStart : timeStart,
 			$rightRouteTriptimeEnd : timeEnd
 		)
 	then
 		scoreHolder.addHardConstraintMatch(kcontext, -5);
-		System.out.println("oneTripAtATime " + $leftRouteTripDriver + " " + $leftRouteTrip + " " + $leftRouteTriptimeStart + "-" + $leftRouteTriptimeEnd + "   " + $rightRouteTriptimeStart + "-" + $rightRouteTriptimeEnd + " " + $rightRouteTrip);
+		//System.out.println("oneTripAtATime " + $leftRouteTripDriver + " " + $leftRouteTrip + " " + $leftRouteTriptimeStart + "-" + $leftRouteTriptimeEnd + "   " + $rightRouteTriptimeStart + "-" + $rightRouteTriptimeEnd + " " + $rightRouteTrip);
 end
 
 rule "enoughTimeBetweenTrips"
@@ -102,7 +102,7 @@ rule "enoughTimeBetweenTrips"
 		)
 	then
 		scoreHolder.addHardConstraintMatch(kcontext, -5);
-		System.out.println("enoughTimeBetweenTrips " + $previousRouteTrip + " " + $routeTrip);
+		//System.out.println("enoughTimeBetweenTrips " + $previousRouteTrip + " " + $routeTrip);
 end
 
 // ############################################################################
@@ -122,7 +122,8 @@ end
 rule "routeRankHigh"
 	when
 		$driver : Driver(
-			id != 0,
+			//id != 0,
+			type != Driver.UNIVERSAL_DRIVER,
 			$driverRank : rank
 		)
         $routeTrip : RouteTrip(
