@@ -1,65 +1,54 @@
-RouteTrip-0 RouteTrip-1 0.0
-RouteTrip-0 RouteTrip-2 19.394186710649574
-RouteTrip-0 RouteTrip-3 0.0
-RouteTrip-0 RouteTrip-4 8.846940087714145
-RouteTrip-0 RouteTrip-5 0.0
-RouteTrip-1 RouteTrip-2 0.0
-RouteTrip-1 RouteTrip-3 19.394186710649574
-RouteTrip-1 RouteTrip-4 20.200287298388538
-RouteTrip-1 RouteTrip-5 19.394186710649574
-RouteTrip-2 RouteTrip-3 0.0
-RouteTrip-2 RouteTrip-4 8.846940087714145
-RouteTrip-2 RouteTrip-5 0.0
-RouteTrip-3 RouteTrip-4 0.0
-RouteTrip-3 RouteTrip-5 8.846940087714145
-RouteTrip-4 RouteTrip-5 0.0
+745-945	745-845
+745-945	845-945
+RouteTrip-1 RouteTrip-0 0.0 0.0
+RouteTrip-0 RouteTrip-4 0.0 0.0
+RouteTrip-1 RouteTrip-2 0.0 0.0
+RouteTrip-1 RouteTrip-3 372.22840188133495 60.0
+RouteTrip-1 RouteTrip-4 533.7363851209578 120.0
+RouteTrip-2 RouteTrip-3 0.0 0.0
+RouteTrip-2 RouteTrip-4 371.44369306152083 60.0
+RouteTrip-3 RouteTrip-4 0.0 0.0
 Driver-0 RouteTrip-0 0.0 0.0
 Driver-0 RouteTrip-1 0.0 0.0
 Driver-0 RouteTrip-2 0.0 0.0
 Driver-0 RouteTrip-3 0.0 0.0
 Driver-0 RouteTrip-4 0.0 0.0
-Driver-0 RouteTrip-5 0.0 0.0
-Driver-1 RouteTrip-0 0.0 7.725257833281623
-Driver-1 RouteTrip-1 7.725257833281623 17.11664699418091
-Driver-1 RouteTrip-2 17.11664699418091 7.725257833281623
-Driver-1 RouteTrip-3 7.725257833281623 3.175981209805599
-Driver-1 RouteTrip-4 3.175981209805599 7.725257833281623
-Driver-1 RouteTrip-5 7.725257833281623 0.0
-2015-12-19 16:46:57,292 [main] INFO  Solving started: time spent (122), best score (uninitialized/0hard/0soft), environment mode (REPRODUCIBLE), random (JDK with seed 0).
-2015-12-19 16:46:57,345 [main] DEBUG     CH step (0), time spent (177), score (0hard/-2soft), selected move count (2), picked move (RouteTrip-0 {null -> Driver-1}).
-2015-12-19 16:46:57,373 [main] DEBUG     CH step (1), time spent (204), score (0hard/-4soft), selected move count (2), picked move (RouteTrip-1 {null -> Driver-1}).
-2015-12-19 16:46:57,382 [main] DEBUG     CH step (2), time spent (214), score (0hard/-11soft), selected move count (2), picked move (RouteTrip-2 {null -> Driver-1}).
-2015-12-19 16:46:57,397 [main] DEBUG     CH step (3), time spent (229), score (0hard/-13soft), selected move count (2), picked move (RouteTrip-3 {null -> Driver-1}).
-2015-12-19 16:46:57,404 [main] DEBUG     CH step (4), time spent (236), score (0hard/-15soft), selected move count (2), picked move (RouteTrip-4 {null -> Driver-1}).
-2015-12-19 16:46:57,409 [main] DEBUG     CH step (5), time spent (241), score (0hard/-17soft), selected move count (2), picked move (RouteTrip-5 {null -> Driver-1}).
-2015-12-19 16:46:57,410 [main] INFO  Construction Heuristic phase (0) ended: step total (6), time spent (242), best score (0hard/-17soft).
-RouteTrip-0 RouteTrip-1 0.0
-RouteTrip-0 RouteTrip-2 19.394186710649574
-RouteTrip-0 RouteTrip-3 0.0
-RouteTrip-0 RouteTrip-4 8.846940087714145
-RouteTrip-0 RouteTrip-5 0.0
-RouteTrip-1 RouteTrip-2 0.0
-RouteTrip-1 RouteTrip-3 19.394186710649574
-RouteTrip-1 RouteTrip-4 20.200287298388538
-RouteTrip-1 RouteTrip-5 19.394186710649574
-RouteTrip-2 RouteTrip-3 0.0
-RouteTrip-2 RouteTrip-4 8.846940087714145
-RouteTrip-2 RouteTrip-5 0.0
-RouteTrip-3 RouteTrip-4 0.0
-RouteTrip-3 RouteTrip-5 8.846940087714145
-RouteTrip-4 RouteTrip-5 0.0
+Driver-1 RouteTrip-0 372.95963691350846 841.5978850085615
+Driver-1 RouteTrip-1 0.0 372.95963691350846
+Driver-1 RouteTrip-2 372.95963691350846 745.1847511924036
+Driver-1 RouteTrip-3 745.1847511924036 841.5978850085615
+Driver-1 RouteTrip-4 841.5978850085615 0.0
+2015-12-22 14:19:42,402 [main] INFO  Solving started: time spent (170), best score (uninitialized/0hard/0soft), environment mode (REPRODUCIBLE), random (JDK with seed 0).
+2015-12-22 14:19:42,467 [main] DEBUG     CH step (0), time spent (237), score (0hard/-1335soft), selected move count (2), picked move (RouteTrip-0 {null -> Driver-1}).
+2015-12-22 14:19:42,492 [main] DEBUG     CH step (1), time spent (262), score (0hard/-966soft), selected move count (2), picked move (RouteTrip-1 {null -> Driver-1}).
+2015-12-22 14:19:42,507 [main] DEBUG     CH step (2), time spent (277), score (0hard/-500966soft), selected move count (2), picked move (RouteTrip-2 {null -> Driver-0}).
+2015-12-22 14:19:42,522 [main] DEBUG     CH step (3), time spent (292), score (0hard/-1000966soft), selected move count (2), picked move (RouteTrip-3 {null -> Driver-0}).
+2015-12-22 14:19:42,535 [main] DEBUG     CH step (4), time spent (305), score (0hard/-1000128soft), selected move count (2), picked move (RouteTrip-4 {null -> Driver-1}).
+2015-12-22 14:19:42,536 [main] INFO  Construction Heuristic phase (0) ended: step total (5), time spent (306), best score (0hard/-1000128soft).
+745-945	745-845
+745-945	845-945
+RouteTrip-1 RouteTrip-0 0.0 0.0
+RouteTrip-0 RouteTrip-4 0.0 0.0
+RouteTrip-1 RouteTrip-2 0.0 0.0
+RouteTrip-1 RouteTrip-3 372.22840188133495 60.0
+RouteTrip-1 RouteTrip-4 533.7363851209578 120.0
+RouteTrip-2 RouteTrip-3 0.0 0.0
+RouteTrip-2 RouteTrip-4 371.44369306152083 60.0
+RouteTrip-3 RouteTrip-4 0.0 0.0
 Driver-0 RouteTrip-0 0.0 0.0
 Driver-0 RouteTrip-1 0.0 0.0
 Driver-0 RouteTrip-2 0.0 0.0
 Driver-0 RouteTrip-3 0.0 0.0
 Driver-0 RouteTrip-4 0.0 0.0
-Driver-0 RouteTrip-5 0.0 0.0
-Driver-1 RouteTrip-0 0.0 7.725257833281623
-Driver-1 RouteTrip-1 7.725257833281623 17.11664699418091
-Driver-1 RouteTrip-2 17.11664699418091 7.725257833281623
-Driver-1 RouteTrip-3 7.725257833281623 3.175981209805599
-Driver-1 RouteTrip-4 3.175981209805599 7.725257833281623
-Driver-1 RouteTrip-5 7.725257833281623 0.0
-2015-12-19 16:46:58,168 [main] DEBUG     LS step (0), time spent (1000), score (0hard/-500015soft),     best score (0hard/-17soft), accepted/selected move count (0/2562), picked move (RouteTrip-5 {Driver-1 -> Driver-0}).
-2015-12-19 16:46:58,168 [main] INFO  Local Search phase (1) ended: step total (1), time spent (1000), best score (0hard/-17soft).
-2015-12-19 16:46:58,169 [main] INFO  Solving ended: time spent (1001), best score (0hard/-17soft), average calculate count per second (2574), environment mode (REPRODUCIBLE).
+Driver-1 RouteTrip-0 372.95963691350846 841.5978850085615
+Driver-1 RouteTrip-1 0.0 372.95963691350846
+Driver-1 RouteTrip-2 372.95963691350846 745.1847511924036
+Driver-1 RouteTrip-3 745.1847511924036 841.5978850085615
+Driver-1 RouteTrip-4 841.5978850085615 0.0
+2015-12-22 14:19:42,962 [main] DEBUG     LS step (0), time spent (732), score (0hard/-1500497soft),     best score (0hard/-1000128soft), accepted/selected move count (300/300), picked move (RouteTrip-1 {Driver-1 -> Driver-0}).
+2015-12-22 14:19:43,162 [main] DEBUG     LS step (1), time spent (932), score (0hard/-1500871soft),     best score (0hard/-1000128soft), accepted/selected move count (300/401), picked move (RouteTrip-3 {Driver-0} <-> RouteTrip-0 {Driver-1}).
+2015-12-22 14:19:43,515 [main] DEBUG     LS step (2), time spent (1285), score (0hard/-1000501soft),     best score (0hard/-1000128soft), accepted/selected move count (300/1049), picked move (RouteTrip-2 {Driver-0 -> Driver-1}).
+2015-12-22 14:19:43,974 [main] DEBUG     LS step (3), time spent (1744), score (0hard/-500132soft), new best score (0hard/-500132soft), accepted/selected move count (300/1388), picked move (RouteTrip-1 {Driver-0 -> Driver-1}).
+2015-12-22 14:19:44,230 [main] DEBUG     LS step (4), time spent (2000), score (0hard/-1000970soft),     best score (0hard/-500132soft), accepted/selected move count (70/710), picked move (RouteTrip-4 {Driver-1 -> Driver-0}).
+2015-12-22 14:19:44,230 [main] INFO  Local Search phase (1) ended: step total (5), time spent (2000), best score (0hard/-500132soft).
+2015-12-22 14:19:44,230 [main] INFO  Solving ended: time spent (2000), best score (0hard/-500132soft), average calculate count per second (1930), environment mode (REPRODUCIBLE).

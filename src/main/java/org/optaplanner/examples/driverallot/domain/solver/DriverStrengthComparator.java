@@ -26,9 +26,16 @@ import org.optaplanner.examples.driverallot.domain.Driver;
 public class DriverStrengthComparator implements Comparator<Driver>, Serializable {
 
     public int compare(Driver a, Driver b) {
-    	return new CompareToBuilder()
+    	//if(a !=null && b!= null)
+    		return new CompareToBuilder()
                 .append(b.getRank(), a.getRank()) // Descending
                 .toComparison();
+    	/*else if(a != null)
+    		return -1;
+    	else if(b != null)
+    		return 1;
+    	else
+    		return 0;*/
     }
 
 }

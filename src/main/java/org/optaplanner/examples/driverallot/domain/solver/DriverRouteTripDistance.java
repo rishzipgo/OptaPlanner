@@ -58,9 +58,9 @@ public class DriverRouteTripDistance implements Serializable, Comparable<DriverR
 					routeTrip.getEndLatitude(), routeTrip.getEndLongitude());
 			this.distanceToEndInMeters = distanceToEnd*1000;
 			this.timeToStart = distanceToStart/AVG_SPEED_DRIVER;
-			this.timeToStartInMinutes = timeToStart/60;
+			this.timeToStartInMinutes = timeToStart*60;
 			this.timeToEnd = distanceToEnd/AVG_SPEED_DRIVER;
-			this.timeToEndInMinutes = timeToEnd/60;
+			this.timeToEndInMinutes = timeToEnd*60;
 		}
 		else{
 			this.distanceToStart = 0;

@@ -17,10 +17,16 @@
 package org.optaplanner.examples.driverallot.domain.solver;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.joda.time.DateTime;
+import org.joda.time.Hours;
+import org.joda.time.Minutes;
 import org.optaplanner.examples.driverallot.domain.RouteTrip;
 import org.optaplanner.examples.examination.domain.Topic;
 
@@ -39,10 +45,11 @@ public class RouteTripDistance implements Serializable, Comparable<RouteTripDist
     private double time;
     private double timeInMinutes;
     private boolean possibleToAttendBoth;
+    private double routeTripTimeDifferenceInMinutes;
 
     
 
-    public RouteTripDistance(RouteTrip leftRouteTrip, RouteTrip rightRouteTrip) {
+    public RouteTripDistance(RouteTrip leftRouteTrip, RouteTrip rightRouteTrip) throws ParseException {
 		super();
 		this.leftRouteTrip = leftRouteTrip;
 		this.rightRouteTrip = rightRouteTrip;
@@ -55,6 +62,37 @@ public class RouteTripDistance implements Serializable, Comparable<RouteTripDist
 			this.possibleToAttendBoth = true;
 		else
 			this.possibleToAttendBoth = false;
+		
+		
+		this.routeTripTimeDifferenceInMinutes = timeDifferenceMilitaryFormat(leftRouteTrip.getTimeEnd(), rightRouteTrip.getTimeStart());
+	}
+
+	private double timeDifferenceMilitaryFormat(int timeEnd, int timeStart) throws ParseException {
+		SimpleDateFormat format = new SimpleDateFormat("hhmm");
+		String timeEndString = String.valueOf(timeEnd);
+		if(timeEndString.length() < 4)
+			timeEndString = "0" + timeEndString;
+		Date startDate = format.parse(timeEndString);
+		String timeStartString = String.valueOf(timeStart);
+		if(timeStartString.length() < 4)
+			timeStartString = "0" + timeStartString;
+		Date endDate = format.parse(timeStartString);
+		DateTime jdStartDate = new DateTime(startDate);
+		DateTime jdEndDate = new DateTime(endDate);
+		int hours = Hours.hoursBetween(jdStartDate, jdEndDate).getHours();
+		if(hours < 0)
+			hours = Hours.hoursBetween(jdEndDate, jdStartDate).getHours();
+		//System.out.println(hours);
+		hours = hours%24;
+		int minutes = Minutes.minutesBetween(jdStartDate, jdEndDate).getMinutes();
+		if(minutes < 0)
+			minutes = Minutes.minutesBetween(jdEndDate, jdStartDate).getMinutes();
+		//System.out.println(minutes);
+		minutes = minutes % 60;
+		
+		//System.out.println(timeEndString + " " + timeStartString + " " + hours + " " + minutes);
+		
+		return hours*60 + minutes;
 	}
 
 	public RouteTrip getLeftRouteTrip() {
@@ -111,6 +149,14 @@ public class RouteTripDistance implements Serializable, Comparable<RouteTripDist
 
 	public void setPossibleToAttendBoth(boolean possibleToAttendBoth) {
 		this.possibleToAttendBoth = possibleToAttendBoth;
+	}
+
+	public double getRouteTripTimeDifferenceInMinutes() {
+		return routeTripTimeDifferenceInMinutes;
+	}
+
+	public void setRouteTripTimeDifferenceInMinutes(double routeTripTimeDifferenceInMinutes) {
+		this.routeTripTimeDifferenceInMinutes = routeTripTimeDifferenceInMinutes;
 	}
 
 	public boolean equals(Object o) {

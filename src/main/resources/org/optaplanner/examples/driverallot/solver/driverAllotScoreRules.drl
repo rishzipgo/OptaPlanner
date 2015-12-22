@@ -50,36 +50,45 @@ end
 
 rule "oneTripAtATime"
 	when
+		$driver : Driver(
+			type != Driver.UNIVERSAL_DRIVER
+		)
 		$routeTripConflict : RouteTripConflict(
 			$leftRouteTripId : leftRouteTrip.id,
 			$rightRouteTripId : rightRouteTrip.id
 		)
 		$leftRouteTrip : RouteTrip(
 			id == $leftRouteTripId,
-			driver != null,
-			$leftRouteTripDriver : driver,
+			$driver == driver,
+			//driver != null,
+			//$leftRouteTripDriver : driver,
 			$leftRouteTriptimeStart : timeStart,
 			$leftRouteTriptimeEnd : timeEnd
 		)
 		$rightRouteTrip : RouteTrip(
 			id == $rightRouteTripId,
-			driver != null,
-			driver == $leftRouteTripDriver,
+			$driver == driver,
+			//driver != null,
+			//driver == $leftRouteTripDriver,
 			//driver.id != 0,
-			driver.type != Driver.UNIVERSAL_DRIVER,
+			//driver.type != Driver.UNIVERSAL_DRIVER,
 			$rightRouteTriptimeStart : timeStart,
 			$rightRouteTriptimeEnd : timeEnd
 		)
 	then
 		scoreHolder.addHardConstraintMatch(kcontext, -5);
-		//System.out.println("oneTripAtATime " + $leftRouteTripDriver + " " + $leftRouteTrip + " " + $leftRouteTriptimeStart + "-" + $leftRouteTriptimeEnd + "   " + $rightRouteTriptimeStart + "-" + $rightRouteTriptimeEnd + " " + $rightRouteTrip);
+		//System.out.println("oneTripAtATime " + $driver + " " + $leftRouteTrip + " " + $leftRouteTriptimeStart + "-" + $leftRouteTriptimeEnd + "   " + $rightRouteTriptimeStart + "-" + $rightRouteTriptimeEnd + " " + $rightRouteTrip + " " + -5 + "hard");
 end
 
 rule "enoughTimeBetweenTrips"
 	when
+		$driver : Driver(
+			type != Driver.UNIVERSAL_DRIVER
+		)
 		$previousRouteTrip : RouteTrip(
-			$driver : driver,
-			driver != null,
+			$driver == driver,
+			//driver != null,
+			$id : driver.id,
 			$endTime : timeEnd
 		)
 		$routeTrip : RouteTrip(
@@ -88,8 +97,11 @@ rule "enoughTimeBetweenTrips"
 			id != $previousRouteTrip.id
 		)
 		$firstRouteTrip : Number(intValue == $startTime) from accumulate(
+            $thisDriver : Driver(
+				id == $id
+			) && 
             RouteTrip(
-                $driver == driver,
+                driver == $driver,
                 $timeStart : timeStart,
                 $timeStart >= $endTime
             ),
@@ -109,6 +121,17 @@ end
 // Soft constraints
 // ############################################################################
 
+rule "minimumDrivers"
+	when
+		$driver : Driver(
+			$rank : rank,
+			type != Driver.UNIVERSAL_DRIVER
+		)
+        exists RouteTrip(driver == $driver)
+	then
+		scoreHolder.addSoftConstraintMatch(kcontext, -120);
+        //System.out.println("minimumDrivers " + 120);
+end
 
 rule "driverRankHigh"
 	when
@@ -147,16 +170,53 @@ end
 		//System.out.println("noTripDriverPenalty " + $driver + " " + $driverRank);
 end*/
 
-rule "firstTripDriverProximity"
+/*rule "printFirstTripDriverProximity"
 	when
+		$driver : Driver(
+			type != Driver.UNIVERSAL_DRIVER
+		)
 		$routeTrip : RouteTrip(
-			$driver : driver,
-			driver != null,
+			$driver == driver,
+			//driver != null,
+			$id : id,
 			$firstTimeStart : timeStart
 		)
 		$firstRouteTrip : Number(intValue == $firstTimeStart) from accumulate(
+            $thisDriver : Driver(
+				id == $id
+			) && 
             RouteTrip(
-                $driver == driver,
+                driver == $driver,
+                $timeStart : timeStart),
+            min($timeStart)
+        )
+		$driverRouteTripDistance : DriverRouteTripDistance (
+			driver == $driver,
+			routeTrip == $routeTrip,
+			$distanceToStartInMeters : timeToStartInMinutes//InMeters
+		)
+	then
+		System.out.println("printFirstTripDriverProximity " + $driver + " " + $routeTrip + " " + $distanceToStartInMeters + " " + $firstRouteTrip.intValue());
+end*/
+
+
+rule "firstTripDriverProximity"
+	when
+		$driver : Driver(
+			type != Driver.UNIVERSAL_DRIVER
+		)
+		$routeTrip : RouteTrip(
+			$driver == driver,
+			//driver != null,
+			$id : driver.id,
+			$firstTimeStart : timeStart
+		)
+		$firstRouteTrip : Number(intValue == $firstTimeStart) from accumulate(
+            $thisDriver : Driver(
+				id == $id
+			) && 
+            RouteTrip(
+                driver == $driver,
                 $timeStart : timeStart),
             min($timeStart)
         )
@@ -170,11 +230,55 @@ rule "firstTripDriverProximity"
 		//System.out.println("firstTripDriverProximity " + $driver + " " + $routeTrip + " " + $distanceToStartInMeters);
 end
 
-rule "twoTripsStartEndProximity"
+/*rule "printAllRouteDriverPairs"
+	when
+		$driver : Driver(
+		)
+		$routeTrip : RouteTrip(
+			$driver == driver
+		)
+	then
+		System.out.println("printAllRouteDriverPairs " + $driver + " " + $routeTrip);
+end
+
+rule "printAllStartEndPairs"
 	when
 		$previousRouteTrip : RouteTrip(
 			$driver : driver,
 			driver != null,
+			$id : driver.id,
+			$endTime : timeEnd
+		)
+		$routeTrip : RouteTrip(
+			$driver == driver,
+			$startTime : timeStart,
+			id != $previousRouteTrip.id,
+			//timeStart > $endTime
+		)
+		$firstRouteTrip : Number(intValue == $startTime) from accumulate(
+			$thisDriver : Driver(
+				id == $id
+			) && 
+            RouteTrip(
+                driver == $thisDriver,
+                $timeStart : timeStart,
+                timeStart >= $endTime
+            ),
+            min($timeStart)
+        )
+	then
+		System.out.println("printAllStartEndPairs " + $driver + " " + $id + " " + $previousRouteTrip + " " + $routeTrip + " " + $firstRouteTrip.intValue() + " " + $startTime);
+end*/
+
+rule "twoTripsStartEndProximity"
+	when
+		$driver : Driver(
+			type != Driver.UNIVERSAL_DRIVER
+		)
+		$previousRouteTrip : RouteTrip(
+			$driver == driver,
+			//driver != null,
+			$id : driver.id,
 			$endTime : timeEnd
 		)
 		$routeTrip : RouteTrip(
@@ -183,8 +287,11 @@ rule "twoTripsStartEndProximity"
 			id != $previousRouteTrip.id
 		)
 		$firstRouteTrip : Number(intValue == $startTime) from accumulate(
+            $thisDriver : Driver(
+				id == $id
+			) && 
             RouteTrip(
-                $driver == driver,
+                driver == $driver,
                 $timeStart : timeStart,
                 $timeStart >= $endTime
             ),
@@ -193,26 +300,35 @@ rule "twoTripsStartEndProximity"
 		$routeTripDistance : RouteTripDistance (
 			leftRouteTrip == $previousRouteTrip,
 			rightRouteTrip == $routeTrip,
+			$routeTripTimeDifferenceInMinutes : routeTripTimeDifferenceInMinutes,
 			$distanceInMeters : timeInMinutes//InMeters
 		)
 	then
 		scoreHolder.addSoftConstraintMatch(kcontext, -(int)$distanceInMeters);
 		//System.out.println("twoTripsStartEndProximity " + $previousRouteTrip + " " + $routeTrip + " " + $distanceInMeters);
-		scoreHolder.addSoftConstraintMatch(kcontext, -($startTime - $endTime));
-		//System.out.println("twoTripsStartEndTimeProximity " + $previousRouteTrip + " " + $routeTrip + " " + ($startTime - $endTime));
+		scoreHolder.addSoftConstraintMatch(kcontext, -(int)$routeTripTimeDifferenceInMinutes);
+		//System.out.println("twoTripsStartEndTimeProximity " + $previousRouteTrip + " " + $routeTrip + " " + $startTime + " " + $endTime + " " + $routeTripTimeDifferenceInMinutes);
 end
 
 rule "lastTripDriverProximity"
 	when
+		$driver : Driver(
+			type != Driver.UNIVERSAL_DRIVER
+		)
 		$routeTrip : RouteTrip(
-			$driver : driver,
-			driver !=null,
+			$driver == driver,
+			//driver !=null,
+			$id : driver.id,
 			$lastTimeEnd : timeEnd
 		)
 		$lastRouteTrip : Number(intValue == $lastTimeEnd) from accumulate(
+            $thisDriver : Driver(
+				id == $id
+			) && 
             RouteTrip(
-                $driver == driver,
-                $timeEnd : timeEnd),
+                driver == $driver,
+                $timeEnd : timeEnd
+            ),
             max($timeEnd)
         )
 		$driverRouteTripDistance : DriverRouteTripDistance (

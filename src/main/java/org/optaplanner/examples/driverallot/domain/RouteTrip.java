@@ -154,7 +154,8 @@ public class RouteTrip extends AbstractPersistable {
 
 
     @PlanningVariable(valueRangeProviderRefs = {"driverRange"},
-            strengthComparatorClass = DriverStrengthComparator.class)
+            strengthComparatorClass = DriverStrengthComparator.class,
+            nullable = false)
     public Driver getDriver() {
     	//System.out.println(this.toString() + " " + driver);
     	/*if(driver != null)

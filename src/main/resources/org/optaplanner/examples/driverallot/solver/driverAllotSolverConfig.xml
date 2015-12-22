@@ -6,6 +6,8 @@
   <scanAnnotatedClasses>
     <packageInclude>org.optaplanner.examples.driverallot</packageInclude>
   </scanAnnotatedClasses>
+  
+  <!-- <planningEntityClass>org.optaplanner.examples.driverallot.domain.RouteTrip</planningEntityClass> -->
 
   <!-- Score configuration -->
   <scoreDirectorFactory>
@@ -25,16 +27,16 @@
     <terminationCompositionStyle>OR</terminationCompositionStyle>
   	<!-- <bestScoreFeasible>true</bestScoreFeasible> -->
   	<!-- <bestScoreLimit>0hard/-4999soft</bestScoreLimit> -->
-    <secondsSpentLimit>1</secondsSpentLimit>
+    <secondsSpentLimit>2</secondsSpentLimit>
   </termination>
   
   
   <!-- Power tweaked optimization algorithms configuration -->
-  <!-- <constructionHeuristic>
+  <constructionHeuristic>
   	<constructionHeuristicType>ALLOCATE_ENTITY_FROM_QUEUE</constructionHeuristicType>
     <entitySorterManner>DECREASING_DIFFICULTY_IF_AVAILABLE</entitySorterManner>
     <valueSorterManner>INCREASING_STRENGTH_IF_AVAILABLE</valueSorterManner>
-  </constructionHeuristic> -->
+  </constructionHeuristic>
   
   
   <!-- <constructionHeuristic>
@@ -55,10 +57,21 @@
     </queuedEntityPlacer>
   </constructionHeuristic> -->
   
-  <!-- <localSearch>
-  	
+  <localSearch>
+  	<acceptor>
+      <entityTabuSize>7</entityTabuSize>
+    </acceptor>
     <forager>
-      <acceptedCountLimit>1000</acceptedCountLimit>
+      <acceptedCountLimit>300</acceptedCountLimit>
+    </forager>
+  </localSearch>
+  
+  <!-- <localSearch>
+  	<acceptor>
+      <entityTabuSize>7</entityTabuSize>
+    </acceptor>
+    <forager>
+      <acceptedCountLimit>200</acceptedCountLimit>
     </forager>
   </localSearch> -->
   

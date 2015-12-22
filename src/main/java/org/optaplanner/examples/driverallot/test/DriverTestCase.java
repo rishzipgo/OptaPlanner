@@ -24,7 +24,7 @@ public class DriverTestCase {
 				new Driver(2, 900, 1300, Driver.NON_FIXED_DRIVER)
 			},
 			{
-				//new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+				new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
 				new Driver(1, 700, 1500, Driver.NON_FIXED_DRIVER),
 				new Driver(2, 900, 1300, Driver.NON_FIXED_DRIVER)
 			},
@@ -110,7 +110,7 @@ public class DriverTestCase {
 			{
 				new RouteTrip(950, 1100, 1),
 				new RouteTrip(730, 830, 1),
-				new RouteTrip(1100, 1200, 1),
+				new RouteTrip(1101, 1200, 1),
 				new RouteTrip(1130, 1500, 1)
 			},
 			{
@@ -157,7 +157,7 @@ public class DriverTestCase {
 			{
 				new RouteTrip(700, 1000, 1, 14.0, 15.0, 12.0, 14.0),
 				new RouteTrip(800, 1100, 1, 14.0, 15.0, 12.0, 14.0),
-				new RouteTrip(900, 1200, 1, 12.0, 14.0, 14.0, 15.0),
+				new RouteTrip(900, 1200, 1, 12.0, 13.0, 14.0, 15.0),
 				new RouteTrip(1030, 1400, 1, 12.0, 14.0, 14.0, 15.0)
 			},
 			{

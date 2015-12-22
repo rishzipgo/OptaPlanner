@@ -16,12 +16,10 @@
 
 package org.optaplanner.examples.driverallot.domain;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamConverter;
 
 import org.drools.core.time.Interval;
 import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty;
@@ -34,10 +32,10 @@ import org.optaplanner.examples.common.domain.AbstractPersistable;
 import org.optaplanner.examples.driverallot.domain.solver.DriverRouteTripDistance;
 import org.optaplanner.examples.driverallot.domain.solver.RouteTripConflict;
 import org.optaplanner.examples.driverallot.domain.solver.RouteTripDistance;
-import org.optaplanner.examples.examination.domain.Student;
-import org.optaplanner.examples.examination.domain.Topic;
-import org.optaplanner.examples.examination.domain.solver.TopicConflict;
 import org.optaplanner.persistence.xstream.impl.score.XStreamScoreConverter;
+
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamConverter;
 
 @PlanningSolution
 @XStreamAlias("DriverAllot")
@@ -85,7 +83,12 @@ public class DriverAllot extends AbstractPersistable implements Solution<HardSof
 		List<Object> facts = new ArrayList<Object>();
 		facts.addAll(driverList);
 		facts.addAll(precalculateRouteTripConflictList());
-		facts.addAll(precalculateRouteTripDistanceList());
+		try {
+			facts.addAll(precalculateRouteTripDistanceList());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		facts.addAll(precalculateDriverRouteTripDistance());
 		// Do not add the planning entity's (routeTripList) because that will be done automatically
 		return facts;
@@ -96,12 +99,12 @@ public class DriverAllot extends AbstractPersistable implements Solution<HardSof
 		for (Driver driver : driverList)
 			for (RouteTrip routeTrip : routeTripList) {
 				driverRouteTripDistanceList.add(new DriverRouteTripDistance(driver, routeTrip));
-				System.out.println(driver + " " + routeTrip + " " + driverRouteTripDistanceList.get(driverRouteTripDistanceList.size()-1).getDistanceToStart() + " " + driverRouteTripDistanceList.get(driverRouteTripDistanceList.size()-1).getDistanceToEnd());
+				System.out.println(driver + " " + routeTrip + " " + driverRouteTripDistanceList.get(driverRouteTripDistanceList.size()-1).getTimeToStartInMinutes() + " " + driverRouteTripDistanceList.get(driverRouteTripDistanceList.size()-1).getTimeToEndInMinutes());
 			}
 		return driverRouteTripDistanceList;
 	}
 
-	private List<RouteTripDistance> precalculateRouteTripDistanceList() {
+	private List<RouteTripDistance> precalculateRouteTripDistanceList() throws ParseException {
 		List<RouteTripDistance> routeTripDistanceList = new ArrayList<RouteTripDistance>();
 		for (RouteTrip leftRouteTrip : routeTripList) {
 			for (RouteTrip rightRouteTrip : routeTripList) {
@@ -121,7 +124,7 @@ public class DriverAllot extends AbstractPersistable implements Solution<HardSof
 							routeTripDistanceList.add(new RouteTripDistance(rightRouteTrip, leftRouteTrip));
 							System.out.print(rightRouteTrip + " " + leftRouteTrip + " ");
 						}
-						System.out.println(routeTripDistanceList.get(routeTripDistanceList.size()-1).getDistance());
+						System.out.println(routeTripDistanceList.get(routeTripDistanceList.size()-1).getTimeInMinutes() + " " + routeTripDistanceList.get(routeTripDistanceList.size()-1).getRouteTripTimeDifferenceInMinutes());
 					}
 				}
 			}
