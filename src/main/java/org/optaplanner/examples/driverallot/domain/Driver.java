@@ -58,6 +58,7 @@ public class Driver extends AbstractPersistable implements Labeled {
 		this.rank = rank;
 		this.timeIn = timeIn;
 		this.timeOut = timeOut;
+		this.cab = new Cab(Cab.TT);
 	}
     
     public Driver(int rank, int timeIn, int timeOut, int type) {
@@ -66,6 +67,7 @@ public class Driver extends AbstractPersistable implements Labeled {
 		this.timeIn = timeIn;
 		this.timeOut = timeOut;
 		this.type = type;
+		this.cab = new Cab(Cab.TT);
 	}
 
 	public Driver(int rank, int timeIn, int timeOut, double latitude, double longitude) {
@@ -75,6 +77,7 @@ public class Driver extends AbstractPersistable implements Labeled {
 		this.timeOut = timeOut;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.cab = new Cab(Cab.TT);
 	}
 	
 	public Driver(int rank, int timeIn, int timeOut, double latitude, double longitude, int type) {
@@ -85,6 +88,7 @@ public class Driver extends AbstractPersistable implements Labeled {
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.type = type;
+		this.cab = new Cab(Cab.TT);
 	}
 
 	public Driver(int rank, int timeIn, int timeOut, double latitude, double longitude, String driverName) {
@@ -95,6 +99,7 @@ public class Driver extends AbstractPersistable implements Labeled {
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.driverName = driverName;
+		this.cab = new Cab(Cab.TT);
 	}
 	
 	public Driver(int rank, int timeIn, int timeOut, double latitude, double longitude, String driverName, int type) {
@@ -106,6 +111,7 @@ public class Driver extends AbstractPersistable implements Labeled {
 		this.longitude = longitude;
 		this.driverName = driverName;
 		this.type = type;
+		this.cab = new Cab(Cab.TT);
 	}
 	
 

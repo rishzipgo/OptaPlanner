@@ -55,9 +55,10 @@ public class DriverAllotHelloWorld {
 				"org/optaplanner/examples/driverallot/solver/driverAllotSolverConfig.xml");
 		Solver solver = solverFactory.buildSolver();
 
-		//for(int i =0; i < 17/*DriverTestCase.GLOBALDRIVERLIST.length*/; i++) {
-		for(int i =0; i < DriverAllotTestCase.testCaseList.length; i++) {
-			DriverAllot unsolvedDriverAllot = new DriverAllotGenerator().createDriverAllot(i, DriverAllotTestCase.testCaseList[i]);
+		for(int i =0; i < DriverTestCase.GLOBALDRIVERLIST.length; i++) {
+		//for(int i =0; i < DriverAllotTestCase.testCaseList.length; i++) {
+			DriverAllot unsolvedDriverAllot = new DriverAllotGenerator().createDriverAllot(i);
+			//DriverAllot unsolvedDriverAllot = new DriverAllotGenerator().createDriverAllot(i, DriverAllotTestCase.testCaseList[i]);
 
 			// Solve the problem
 			solver.solve(unsolvedDriverAllot);
@@ -86,7 +87,8 @@ public class DriverAllotHelloWorld {
 		for(int i = 0; i < DriverAllotResults.size(); i++) {
 			DriverAllot solvedDriverAllot = DriverAllotResults.get(i);
 			boolean wrong = true;
-			Pair[][] resultList = DriverAllotTestCase.testCaseList[i].getResultList();
+			Pair[][] resultList = DriverTestCase.GLOBALRESULTLIST[i];
+			//Pair[][] resultList = DriverAllotTestCase.testCaseList[i].getResultList();
 			for(int k = 0; k < resultList.length; k++) {
 				Pair[] pairList = resultList[k];
 				boolean wrongTestCaseResult = false;
