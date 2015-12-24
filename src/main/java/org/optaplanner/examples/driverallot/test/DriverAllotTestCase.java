@@ -248,7 +248,7 @@ public class DriverAllotTestCase {
 				}
 			},
 			0,
-			-28328
+			-27968
 			);
 	
 	static TestCase testCase10 = new TestCase(
@@ -297,7 +297,7 @@ public class DriverAllotTestCase {
 				}
 			},
 			0,
-			-999727
+			-999367
 		);
 	
 	static TestCase testCase12 = new TestCase(
@@ -321,7 +321,146 @@ public class DriverAllotTestCase {
 				}
 			},
 			0,
-			-546347
+			-545627
+		);
+	
+	static TestCase testCase13 = new TestCase(
+			new Driver[]{
+					new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+					new Driver(1, 630, 1000, 14.0, 15.0, Driver.NON_FIXED_DRIVER)
+			},
+			new RouteTrip[]{
+					new RouteTrip(700, 800, 1, 14.0, 15.0, 12.0, 14.0),
+					new RouteTrip(810, 910, 1, 12.0, 14.0, 14.0, 15.0),
+					new RouteTrip(900, 1000, 1, 12.0, 14.0, 17.0, 18.0),
+					new RouteTrip(1030, 1400, 1, 17.0, 18.0, 14.0, 15.0)
+			},
+			new Pair[][]{
+				{
+					new Pair(0, 1),
+					new Pair(1, 1),
+					new Pair(2, 0),
+					new Pair(3, 0)
+				}
+			},
+			0,
+			-999116
+		);
+	
+	static TestCase testCase14 = new TestCase(
+			new Driver[]{
+					new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+					new Driver(1, 630, 1500, 14.0, 15.0, Driver.NON_FIXED_DRIVER)
+			},
+			new RouteTrip[]{
+					new RouteTrip(700, 800, 1, 14.0, 15.0, 12.0, 14.0),
+					new RouteTrip(810, 910, 1, 12.0, 14.0, 14.0, 15.0),
+					new RouteTrip(900, 1000, 1, 12.0, 14.0, 17.0, 18.0),
+					new RouteTrip(1030, 1400, 1, 17.0, 18.0, 14.0, 15.0)
+			},
+			new Pair[][]{
+				{
+					new Pair(0, 1),
+					new Pair(1, 0),
+					new Pair(2, 1),
+					new Pair(3, 1)
+				}
+			},
+			0,
+			-499613
+		);
+	
+	static TestCase testCase15 = new TestCase(
+			new Driver[]{
+					new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+					new Driver(1, 630, 1100, 12.0, 13.0, Driver.NON_FIXED_DRIVER)
+			},
+			new RouteTrip[]{
+					new RouteTrip(745, 945, 1, 13.0, 14.0, 15.0, 14.0),
+					new RouteTrip(645, 745, 2, 12.0, 13.0, 13.0, 14.0),
+					new RouteTrip(745, 845, 2, 13.0, 14.0, 14.0, 15.0),
+					new RouteTrip(845, 945, 2, 14.0, 15.0, 15.0, 14.0),
+					new RouteTrip(945, 1045, 2, 15.0, 14.0, 12.0, 13.0)
+			},
+			new Pair[][]{
+				{
+					new Pair(0, 0),
+					new Pair(1, 1),
+					new Pair(2, 1),
+					new Pair(3, 1),
+					new Pair(4, 1)
+				}
+			},
+			0,
+			-497984
+		);
+	
+	static TestCase testCase16 = new TestCase(
+			new Driver[]{
+					new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+					new Driver(1, 800, 2020, 12.914015, 77.63813, Driver.NON_FIXED_DRIVER)
+			},
+			new RouteTrip[]{
+					new RouteTrip(800, 950, 1, 12.914015, 77.63813, 12.980984, 77.657103),
+					new RouteTrip(950, 1125, 1, 12.980984, 77.657103, 12.86, 77.786),
+					new RouteTrip(1130, 1330, 1, 12.86, 77.786, 12.980984, 77.657103),
+					new RouteTrip(1330, 1530, 1, 12.980984, 77.657103, 12.916729, 77.608959),
+					new RouteTrip(1530, 1830, 1, 12.916729, 77.608959, 12.980984, 77.657103),
+					new RouteTrip(1830, 2020, 1, 12.980984, 77.657103, 12.914015, 77.63813)
+			},
+			new Pair[][]{
+				{
+					new Pair(0, 1),
+					new Pair(1, 1),
+					new Pair(2, 1),
+					new Pair(3, 1),
+					new Pair(4, 1),
+					new Pair(5, 1)
+				}
+			},
+			0,
+			2242
+		);
+	
+	static TestCase testCase17 = new TestCase(
+			new Driver[]{
+					new Driver(500000, 0, 2400, 0.0, 0.0, "0000GLOBAL", Driver.UNIVERSAL_DRIVER),
+					new Driver(1, 800, 2020, 12.914015, 77.63813, "1322Siddesh", Driver.NON_FIXED_DRIVER),
+					new Driver(1, 910, 2320, 12.917676, 77.573803, "2291ShivaS", Driver.NON_FIXED_DRIVER)
+			},
+			new RouteTrip[]{
+					new RouteTrip(800, 950, 1, 12.914015, 77.63813, 12.980984, 77.657103, "HSR To Bagmane Tech Park via Koramangala 80 ft Road, EGL, CMH Road"),
+					new RouteTrip(950, 1130, 1, 12.980984, 77.657103, 12.86, 77.786, "Bagmane To Sarjapur Via Cmh Road, Egl, Koramangala 80 Ft Road"),
+					new RouteTrip(1130, 1330, 1, 12.86, 77.786, 12.980984, 77.657103, "Sarjapur To Bagmane Tech Park via Koramangala 80 ft Road, EGL, CMH Road"),
+					new RouteTrip(1330, 1530, 1, 12.980984, 77.657103, 12.916729, 77.608959, "Short Bagmane To BTM Via Koramangala"),
+					new RouteTrip(1530, 1830, 1, 12.916729, 77.608959, 12.980984, 77.657103, "Short Btm To Bagmane Via Koramangala"),
+					new RouteTrip(1830, 2020, 1, 12.980984, 77.657103, 12.914015, 77.63813, "Bagmane To Hsr Via Cmh Road, Egl, Koramangala 80 Ft Road"),
+					
+					new RouteTrip(910, 1150, 1, 12.917676, 77.573803, 12.987573, 77.737239, "Banashankari To ITPL via Kumaraswamy Layout, Silk Board, Outer Ring Road, Kundalahalli"),
+					new RouteTrip(1150, 1320, 1, 12.987573, 77.737239, 12.957711, 77.641343, "Itpl To Domlur Via Whitefield"),
+					new RouteTrip(1320, 1540, 1, 12.957711, 77.641343, 12.987573, 77.737239, "Domlur To Itpl Via Whitefield"),
+					new RouteTrip(1540, 1810, 1, 12.987573, 77.737239, 12.917676, 77.573803, "Itpl To Banashankari Via Kundalahalli, Outer Ring Road, Silk Board, Kumaraswamy Layout"),
+					new RouteTrip(1810, 2040, 1, 12.917676, 77.573803, 12.987573, 77.737239, "Banashankari To ITPL via Kumaraswamy Layout, Silk Board, Outer Ring Road, Kundalahalli"),
+					new RouteTrip(2040, 2320, 1, 12.987573, 77.737239, 12.917676, 77.573803, "Itpl To Banashankari Via Kundalahalli, Outer Ring Road, Silk Board, Kumaraswamy Layout")
+			},
+			new Pair[][]{
+				{
+					new Pair(0, 1),
+					new Pair(1, 1),
+					new Pair(2, 1),
+					new Pair(3, 1),
+					new Pair(4, 1),
+					new Pair(5, 1),
+					new Pair(6, 2),
+					new Pair(7, 2),
+					new Pair(8, 2),
+					new Pair(9, 2),
+					new Pair(10, 2),
+					new Pair(11, 2)
+				}
+			},
+			0,
+			4608
 		);
 	
 	static TestCase testCase18 = new TestCase(
@@ -340,7 +479,7 @@ public class DriverAllotTestCase {
 				}
 			},
 			0,
-			-9965
+			-6465
 		);
 	
 	static TestCase testCase19 = new TestCase(
@@ -360,7 +499,7 @@ public class DriverAllotTestCase {
 				}
 			},
 			0,
-			-9965
+			-6465
 		);
 	
 	static TestCase testCase20 = new TestCase(
@@ -380,7 +519,7 @@ public class DriverAllotTestCase {
 				}
 			},
 			0,
-			-2965
+			-1765
 		);
 
 
@@ -397,6 +536,11 @@ public class DriverAllotTestCase {
 			testCase10,
 			testCase11,
 			testCase12,
+			testCase13,
+			testCase14,
+			testCase15,
+			testCase16,
+			testCase17,
 			testCase18,
 			testCase19,
 			testCase20
