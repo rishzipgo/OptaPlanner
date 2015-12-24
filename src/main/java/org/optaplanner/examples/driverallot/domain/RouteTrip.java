@@ -29,20 +29,23 @@ public class RouteTrip extends AbstractPersistable {
 
     private RouteTrip previousTrip;
     private RouteTrip nextTrip;
+    private int rank;
     private int timeStart;
     private int timeEnd;
-    private int rank;
     private double startLatitude;
     private double startLongitude;
     private double endLatitude;
     private double endLongitude;
     private String tripName;
+    private TimeSlot timeSlot;
+    private double distance;
 
 	public RouteTrip(int timeStart, int timeEnd, int rank) {
 		super();
 		this.timeStart = timeStart;
 		this.timeEnd = timeEnd;
 		this.rank = rank;
+		this.timeSlot = new TimeSlot(timeStart, timeEnd);
 	}
 
 	// Planning variables: changes during planning, between score calculations.
@@ -52,6 +55,7 @@ public class RouteTrip extends AbstractPersistable {
 		super();
 		this.timeStart = timeStart;
 		this.timeEnd = timeEnd;
+		this.timeSlot = new TimeSlot(timeStart, timeEnd);
 	}
 
 	public RouteTrip(int timeStart, int timeEnd, int rank, double startLatitude, double startLongitude) {
@@ -61,6 +65,7 @@ public class RouteTrip extends AbstractPersistable {
 		this.rank = rank;
 		this.startLatitude = startLatitude;
 		this.startLongitude = startLongitude;
+		this.timeSlot = new TimeSlot(timeStart, timeEnd);
 	}
     
     public RouteTrip(int timeStart, int timeEnd, int rank, double startLatitude, double startLongitude,
@@ -73,6 +78,7 @@ public class RouteTrip extends AbstractPersistable {
 		this.startLongitude = startLongitude;
 		this.endLatitude = endLatitude;
 		this.endLongitude = endLongitude;
+		this.timeSlot = new TimeSlot(timeStart, timeEnd);
 	}
 
 	public RouteTrip(int timeStart, int timeEnd, int rank, double startLatitude, double startLongitude,
@@ -86,6 +92,21 @@ public class RouteTrip extends AbstractPersistable {
 		this.endLatitude = endLatitude;
 		this.endLongitude = endLongitude;
 		this.tripName = tripName;
+		this.timeSlot = new TimeSlot(timeStart, timeEnd);
+	}
+
+	public RouteTrip(int timeStart, int timeEnd, double startLatitude, double startLongitude, double endLatitude,
+			double endLongitude, String tripName, double distance) {
+		super();
+		this.timeStart = timeStart;
+		this.timeEnd = timeEnd;
+		this.startLatitude = startLatitude;
+		this.startLongitude = startLongitude;
+		this.endLatitude = endLatitude;
+		this.endLongitude = endLongitude;
+		this.tripName = tripName;
+		this.timeSlot = new TimeSlot(timeStart, timeEnd);
+		this.distance = distance;
 	}
 
 	public RouteTrip() {
@@ -193,6 +214,22 @@ public class RouteTrip extends AbstractPersistable {
 
 	public void setTripName(String tripName) {
 		this.tripName = tripName;
+	}
+
+	public TimeSlot getTimeSlot() {
+		return timeSlot;
+	}
+
+	public void setTimeSlot(TimeSlot timeSlot) {
+		this.timeSlot = timeSlot;
+	}
+
+	public double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(double distance) {
+		this.distance = distance;
 	}
 
 	public String getLabel() {

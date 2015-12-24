@@ -23,14 +23,13 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.optaplanner.examples.driverallot.domain.Driver;
 import org.optaplanner.examples.driverallot.domain.RouteTrip;
-import org.optaplanner.examples.examination.domain.Topic;
+import org.optaplanner.examples.driverallot.domain.Constants;
 
 /**
  * Calculated during initialization, not modified during score calculation.
  */
 public class DriverRouteTripDistance implements Serializable, Comparable<DriverRouteTripDistance> {
 
-	private static final double AVG_SPEED_DRIVER = 25;
 
 	private Driver driver;
 	private RouteTrip routeTrip;
@@ -42,6 +41,9 @@ public class DriverRouteTripDistance implements Serializable, Comparable<DriverR
 	private double timeToEndInMinutes;
 	private double distanceToStartInMeters;
 	private double distanceToEndInMeters;
+	private double costToStart;
+	private double costToEnd;
+	private double revenue;
 
 
 
@@ -53,14 +55,14 @@ public class DriverRouteTripDistance implements Serializable, Comparable<DriverR
 		if(driver.getType() != Driver.UNIVERSAL_DRIVER) {
 			this.distanceToStart = GeoUtils.distance(driver.getLatitude(), driver.getLongitude(),
 					routeTrip.getStartLatitude(), routeTrip.getStartLongitude());
-			this.distanceToStartInMeters = distanceToStart*1000;
+			this.distanceToStartInMeters = distanceToStart*Constants.METERS_IN_KILOMETERS;
 			this.distanceToEnd = GeoUtils.distance(driver.getLatitude(), driver.getLongitude(),
 					routeTrip.getEndLatitude(), routeTrip.getEndLongitude());
-			this.distanceToEndInMeters = distanceToEnd*1000;
-			this.timeToStart = distanceToStart/AVG_SPEED_DRIVER;
-			this.timeToStartInMinutes = timeToStart*60;
-			this.timeToEnd = distanceToEnd/AVG_SPEED_DRIVER;
-			this.timeToEndInMinutes = timeToEnd*60;
+			this.distanceToEndInMeters = distanceToEnd*Constants.METERS_IN_KILOMETERS;
+			this.timeToStart = distanceToStart/Constants.AVG_SPEED_DRIVER;
+			this.timeToStartInMinutes = timeToStart*Constants.MINUTES_IN_HOUR;
+			this.timeToEnd = distanceToEnd/Constants.AVG_SPEED_DRIVER;
+			this.timeToEndInMinutes = timeToEnd*Constants.MINUTES_IN_HOUR;
 		}
 		else{
 			this.distanceToStart = 0;
@@ -70,6 +72,9 @@ public class DriverRouteTripDistance implements Serializable, Comparable<DriverR
 			this.timeToStart = 0;
 			this.timeToEnd = 0;
 		}
+		this.revenue = (routeTrip.getTimeSlot().getPercentOccupancy()*driver.getCab().getSeats()*Constants.AVG_SEAT_REVENUE)/100;
+		this.costToStart = this.distanceToStart*Constants.COST_PER_KM;
+		this.costToEnd = this.distanceToEnd*Constants.COST_PER_KM;
 	}
 
 
@@ -190,6 +195,42 @@ public class DriverRouteTripDistance implements Serializable, Comparable<DriverR
 
 	public void setTimeToEndInMinutes(double timeToEndInMinutes) {
 		this.timeToEndInMinutes = timeToEndInMinutes;
+	}
+
+
+
+	public double getCostToStart() {
+		return costToStart;
+	}
+
+
+
+	public void setCostToStart(double costToStart) {
+		this.costToStart = costToStart;
+	}
+
+
+
+	public double getCostToEnd() {
+		return costToEnd;
+	}
+
+
+
+	public void setCostToEnd(double costToEnd) {
+		this.costToEnd = costToEnd;
+	}
+
+
+
+	public double getRevenue() {
+		return revenue;
+	}
+
+
+
+	public void setRevenue(double revenue) {
+		this.revenue = revenue;
 	}
 
 

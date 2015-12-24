@@ -34,6 +34,7 @@ public class Driver extends AbstractPersistable implements Labeled {
 
 	public final static int UNIVERSAL_DRIVER = 0;
 	public final static int NON_FIXED_DRIVER = 1;
+	public final static int FIXED_DRIVER = 2;
 	
     private int rank;
     private int timeIn;
@@ -42,6 +43,12 @@ public class Driver extends AbstractPersistable implements Labeled {
     private double longitude;
     private String driverName;
     private int type;
+    private int minimumDistance;
+    private int costPerKm;
+    private int fixedCost;
+    private Cab cab;
+    
+    
 	private ArrayList<RouteTrip> driverTripList = new ArrayList<>();
 	private ArrayList<RouteTrip> routeTripList = new ArrayList<>();
 	
@@ -99,6 +106,22 @@ public class Driver extends AbstractPersistable implements Labeled {
 		this.longitude = longitude;
 		this.driverName = driverName;
 		this.type = type;
+	}
+	
+
+    public Driver(int timeIn, int timeOut, double latitude, double longitude, String driverName, int type,
+			int minimumDistance, int costPerKm, int fixedCost, int cabType) {
+		super();
+		this.timeIn = timeIn;
+		this.timeOut = timeOut;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.driverName = driverName;
+		this.type = type;
+		this.minimumDistance = minimumDistance;
+		this.costPerKm = costPerKm;
+		this.fixedCost = fixedCost;
+		this.cab = new Cab(cabType);
 	}
 
     public Driver() {
@@ -221,6 +244,38 @@ public class Driver extends AbstractPersistable implements Labeled {
 
 	public void setType(int type) {
 		this.type = type;
+	}
+
+	public int getMinimumDistance() {
+		return minimumDistance;
+	}
+
+	public void setMinimumDistance(int minimumDistance) {
+		this.minimumDistance = minimumDistance;
+	}
+
+	public int getCostPerKm() {
+		return costPerKm;
+	}
+
+	public void setCostPerKm(int costPerKm) {
+		this.costPerKm = costPerKm;
+	}
+
+	public int getFixedCost() {
+		return fixedCost;
+	}
+
+	public void setFixedCost(int fixedCost) {
+		this.fixedCost = fixedCost;
+	}
+
+	public Cab getCab() {
+		return cab;
+	}
+
+	public void setCab(Cab cab) {
+		this.cab = cab;
 	}
 
 	public String getLabel() {

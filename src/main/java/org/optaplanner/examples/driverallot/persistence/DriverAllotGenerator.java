@@ -30,6 +30,7 @@ import org.optaplanner.examples.driverallot.domain.Driver;
 import org.optaplanner.examples.driverallot.domain.DriverAllot;
 import org.optaplanner.examples.driverallot.domain.RouteTrip;
 import org.optaplanner.examples.driverallot.test.DriverTestCase;
+import org.optaplanner.examples.driverallot.test.TestCase;
 
 public class DriverAllotGenerator extends LoggingMain {
 
@@ -315,5 +316,13 @@ public class DriverAllotGenerator extends LoggingMain {
         }
         driverAllot.setDriverList(driverList);
     }
+
+	public DriverAllot createDriverAllot(int i, TestCase testCase) {
+		DriverAllot driverAllot = new DriverAllot();
+        driverAllot.setId((long)i);
+        createRouteTripListGlobal(driverAllot, testCase.getRouteTripList());
+        createDriverListGlobal(driverAllot, testCase.getDriverList());
+        return driverAllot;
+	}
 
 }

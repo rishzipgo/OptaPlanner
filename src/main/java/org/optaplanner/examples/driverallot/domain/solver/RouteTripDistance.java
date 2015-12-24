@@ -27,6 +27,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.joda.time.DateTime;
 import org.joda.time.Hours;
 import org.joda.time.Minutes;
+import org.optaplanner.examples.driverallot.domain.Constants;
 import org.optaplanner.examples.driverallot.domain.RouteTrip;
 import org.optaplanner.examples.examination.domain.Topic;
 
@@ -44,8 +45,10 @@ public class RouteTripDistance implements Serializable, Comparable<RouteTripDist
     private double distanceInMeters;
     private double time;
     private double timeInMinutes;
+    private double cost;
     private boolean possibleToAttendBoth;
     private double routeTripTimeDifferenceInMinutes;
+    private double routeTripCostDifference;
 
     
 
@@ -55,9 +58,10 @@ public class RouteTripDistance implements Serializable, Comparable<RouteTripDist
 		this.rightRouteTrip = rightRouteTrip;
 		this.distance = GeoUtils.distance(leftRouteTrip.getEndLatitude(), leftRouteTrip.getEndLongitude(),
 				rightRouteTrip.getStartLatitude(), rightRouteTrip.getStartLongitude());
-		this.distanceInMeters = distance*1000;
+		this.distanceInMeters = distance*Constants.METERS_IN_KILOMETERS;
 		this.time = distance/AVG_SPEED_DRIVER;
-		this.timeInMinutes = time*60;
+		this.timeInMinutes = time*Constants.MINUTES_IN_HOUR;
+		this.cost = this.distance*Constants.COST_PER_KM;
 		if(leftRouteTrip.getTimeEnd() + timeInMinutes <= rightRouteTrip.getTimeStart())
 			this.possibleToAttendBoth = true;
 		else
@@ -65,6 +69,7 @@ public class RouteTripDistance implements Serializable, Comparable<RouteTripDist
 		
 		
 		this.routeTripTimeDifferenceInMinutes = timeDifferenceMilitaryFormat(leftRouteTrip.getTimeEnd(), rightRouteTrip.getTimeStart());
+		this.routeTripCostDifference = (this.routeTripTimeDifferenceInMinutes/Constants.MINUTES_IN_HOUR)*Constants.AVG_SPEED_DRIVER*Constants.COST_PER_KM;
 	}
 
 	private double timeDifferenceMilitaryFormat(int timeEnd, int timeStart) throws ParseException {
@@ -83,16 +88,16 @@ public class RouteTripDistance implements Serializable, Comparable<RouteTripDist
 		if(hours < 0)
 			hours = Hours.hoursBetween(jdEndDate, jdStartDate).getHours();
 		//System.out.println(hours);
-		hours = hours%24;
+		hours = hours%Constants.HOURS_IN_DAY;
 		int minutes = Minutes.minutesBetween(jdStartDate, jdEndDate).getMinutes();
 		if(minutes < 0)
 			minutes = Minutes.minutesBetween(jdEndDate, jdStartDate).getMinutes();
 		//System.out.println(minutes);
-		minutes = minutes % 60;
+		minutes = minutes % Constants.MINUTES_IN_HOUR;
 		
 		//System.out.println(timeEndString + " " + timeStartString + " " + hours + " " + minutes);
 		
-		return hours*60 + minutes;
+		return hours*Constants.MINUTES_IN_HOUR + minutes;
 	}
 
 	public RouteTrip getLeftRouteTrip() {
@@ -157,6 +162,22 @@ public class RouteTripDistance implements Serializable, Comparable<RouteTripDist
 
 	public void setRouteTripTimeDifferenceInMinutes(double routeTripTimeDifferenceInMinutes) {
 		this.routeTripTimeDifferenceInMinutes = routeTripTimeDifferenceInMinutes;
+	}
+
+	public double getCost() {
+		return cost;
+	}
+
+	public void setCost(double cost) {
+		this.cost = cost;
+	}
+
+	public double getRouteTripCostDifference() {
+		return routeTripCostDifference;
+	}
+
+	public void setRouteTripCostDifference(double routeTripCostDifference) {
+		this.routeTripCostDifference = routeTripCostDifference;
 	}
 
 	public boolean equals(Object o) {

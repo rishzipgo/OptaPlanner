@@ -33,6 +33,7 @@ import org.optaplanner.examples.driverallot.domain.Driver;
 import org.optaplanner.examples.driverallot.domain.DriverAllot;
 import org.optaplanner.examples.driverallot.domain.RouteTrip;
 import org.optaplanner.examples.driverallot.persistence.DriverAllotGenerator;
+import org.optaplanner.examples.driverallot.test.DriverAllotTestCase;
 import org.optaplanner.examples.driverallot.test.DriverTestCase;
 
 import javafx.util.Pair;
@@ -54,8 +55,9 @@ public class DriverAllotHelloWorld {
 				"org/optaplanner/examples/driverallot/solver/driverAllotSolverConfig.xml");
 		Solver solver = solverFactory.buildSolver();
 
-		for(int i =0; i < 17/*DriverTestCase.GLOBALDRIVERLIST.length*/; i++) {
-			DriverAllot unsolvedDriverAllot = new DriverAllotGenerator().createDriverAllot(i);
+		//for(int i =0; i < 17/*DriverTestCase.GLOBALDRIVERLIST.length*/; i++) {
+		for(int i =0; i < DriverAllotTestCase.testCaseList.length; i++) {
+			DriverAllot unsolvedDriverAllot = new DriverAllotGenerator().createDriverAllot(i, DriverAllotTestCase.testCaseList[i]);
 
 			// Solve the problem
 			solver.solve(unsolvedDriverAllot);
@@ -84,8 +86,9 @@ public class DriverAllotHelloWorld {
 		for(int i = 0; i < DriverAllotResults.size(); i++) {
 			DriverAllot solvedDriverAllot = DriverAllotResults.get(i);
 			boolean wrong = true;
-			for(int k = 0; k < DriverTestCase.GLOBALRESULTLIST[i].length; k++) {
-				Pair[] pairList = DriverTestCase.GLOBALRESULTLIST[i][k];
+			Pair[][] resultList = DriverAllotTestCase.testCaseList[i].getResultList();
+			for(int k = 0; k < resultList.length; k++) {
+				Pair[] pairList = resultList[k];
 				boolean wrongTestCaseResult = false;
 				for(int j = 0; j < solvedDriverAllot.getRouteTripList().size(); j++) {
 					RouteTrip routeTrip = solvedDriverAllot.getRouteTripList().get(j);

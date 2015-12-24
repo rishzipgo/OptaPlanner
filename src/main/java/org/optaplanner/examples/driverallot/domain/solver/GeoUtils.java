@@ -1,8 +1,9 @@
 package org.optaplanner.examples.driverallot.domain.solver;
 
+import org.optaplanner.examples.driverallot.domain.Constants;
+
 public class GeoUtils {
-	private static final double EARTH_RADIUS_IN_KM = 6371.0088;
-    private static final double KM_TO_METERS = 1000;
+	
 
 
     /**
@@ -22,7 +23,7 @@ public class GeoUtils {
         longitudeA = Math.toRadians(longitudeA);
         latitudeB = Math.toRadians(latitudeB);
         longitudeB = Math.toRadians(longitudeB);
-        return 2 * EARTH_RADIUS_IN_KM * Math.asin(Math.sqrt(
+        return 2 * Constants.EARTH_RADIUS_IN_KM * Math.asin(Math.sqrt(
         		Math.pow(Math.sin((latitudeB - latitudeA) / 2), 2) +
         		Math.cos(latitudeA) * Math.cos(latitudeB) *
         		Math.pow((Math.sin((longitudeB - longitudeA) / 2)), 2)));
@@ -46,12 +47,12 @@ public class GeoUtils {
         longitudeA = Math.toRadians(longitudeA);
         latitudeB = Math.toRadians(latitudeB);
         longitudeB = Math.toRadians(longitudeB);
-        double distance = 2 * EARTH_RADIUS_IN_KM * Math.asin(Math.sqrt(
+        double distance = 2 * Constants.EARTH_RADIUS_IN_KM * Math.asin(Math.sqrt(
         		Math.pow(Math.sin((latitudeB - latitudeA) / 2), 2) +
                 Math.cos(latitudeA) * Math.cos(latitudeB) *
                 Math.pow((Math.sin((longitudeB - longitudeA) / 2)), 2)));
         if (inMeters) {
-            return distance * KM_TO_METERS;
+            return distance * Constants.METERS_IN_KILOMETERS;
         }
         return distance;
     }
@@ -62,7 +63,7 @@ public class GeoUtils {
      * @param km kilometers
      */
     public static double kmToMeters(double km) {
-        return km * KM_TO_METERS;
+        return km * Constants.METERS_IN_KILOMETERS;
     }
 
     /**
@@ -71,6 +72,6 @@ public class GeoUtils {
      * @param meters meters
      */
     public static double metersToKm(double meters) {
-        return meters / KM_TO_METERS;
+        return meters / Constants.METERS_IN_KILOMETERS;
     }
 }
