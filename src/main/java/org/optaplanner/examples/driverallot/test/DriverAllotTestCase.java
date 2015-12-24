@@ -171,15 +171,74 @@ public class DriverAllotTestCase {
 			0,
 			-2965
 		);
+	
 
+	static TestCase testCase21 = new TestCase(
+			new Driver[]{
 
+					new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+					new Driver(1, 950, 2020, 12.914015, 77.63813, Driver.NON_FIXED_DRIVER),
+					new Driver(2, 700, 2120, 12.8420, 77.6631, Driver.NON_FIXED_DRIVER),
+					new Driver(3, 700, 2020, 12.9365, 77.5447, Driver.NON_FIXED_DRIVER)
+
+			},
+			new RouteTrip[]{
+				
+				new RouteTrip(1000, 1250, 1, 12.914015, 77.63813, 13.0426, 77.620, "HSR To Manyata"),
+				new RouteTrip(1300, 1430, 1, 13.0426, 77.620, 12.9413, 77.62103, "Manyata To Kor"),
+				new RouteTrip(1500, 1820, 1, 12.9413, 77.62103, 13.0426, 77.62, "Kor To Manyata"),
+				new RouteTrip(1830, 2010, 1, 13.0426, 77.620, 12.914015, 77.63813, "Manyata To HSR"),
+
+				new RouteTrip(710, 820, 1, 12.8420, 77.6631, 12.9365, 77.5447, "Electronic City To Banashankari"),
+				new RouteTrip(830, 1050, 1, 12.9365, 77.5447, 13.0426, 77.620, "Banashankari To Manyata "),
+				new RouteTrip(1100, 1350, 1, 13.0426, 77.620, 12.9413, 77.62103, "Manyata To Koramangala "),
+				new RouteTrip(1400, 1650, 1, 12.9413, 77.62103, 13.0426, 77.620, "Koramangala To Manyata "),
+				new RouteTrip(1810, 1950, 1, 13.0426, 77.620, 12.9365, 77.5447, "Manyata To Banashankari"),
+				new RouteTrip(2010, 2100, 1, 12.9365, 77.5447, 12.8420, 77.6631, "Banashankari To Electronic City"),
+
+				new RouteTrip(700, 930, 1, 12.9365, 77.5447, 12.987, 77.737, "Banashankari To ITPL"),
+				new RouteTrip(940, 1150, 1, 12.987, 77.737, 12.9365, 77.5447, "Itpl To Banashankari"),
+				new RouteTrip(1200, 1410, 1, 12.9365, 77.5447, 12.987, 77.737, "Banashankari To ITPL "),
+				new RouteTrip(1440, 1600, 1, 12.987, 77.737, 12.96, 77.64, "Itpl To Domlur "),
+				new RouteTrip(1610, 1710, 1, 12.96, 77.64, 12.987, 77.737, "Domlur To Itpl "),
+				new RouteTrip(1730, 2010, 1, 12.987, 77.737, 12.9365, 77.5447, "Itpl To Banashankari"),
+				new RouteTrip(650, 850, 1, 12.9365, 77.5447, 12.987, 77.737, "Banashankari To ITPL"),
+				new RouteTrip(900, 1250, 1, 12.987, 77.737, 12.9365, 77.5447, "Itpl To Banashankari")
+			},
+			new Pair[][]{
+				{
+				new Pair(0, 1),
+				new Pair(1, 1),
+				new Pair(2, 1),
+				new Pair(3, 1),
+				new Pair(4, 2),
+				new Pair(5, 2),
+				new Pair(6, 2),
+				new Pair(7, 2),
+				new Pair(8, 2),
+				new Pair(9, 2),
+				new Pair(10, 3),
+				new Pair(11, 3),
+				new Pair(12, 3),
+				new Pair(13, 3),
+				new Pair(14, 3),
+				new Pair(15, 3),
+				new Pair(16, 0),
+				new Pair(17, 0)
+			}
+			},
+			0,
+			0
+		);
+	
 	public static TestCase[] testCaseList = {
-			testCase1,
-			testCase2,
-			testCase3,
-			testCase4,
-			testCase18,
-			testCase19,
-			testCase20
+			//testCase1,
+			//testCase2,
+			//testCase3,
+			//testCase4,
+			//testCase18,
+			//testCase19,
+			testCase20,
+			testCase21
 	};
 }
