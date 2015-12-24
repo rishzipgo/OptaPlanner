@@ -50,15 +50,16 @@ public class DriverAllotHelloWorld {
 
 		ArrayList<DriverAllot> DriverAllotResults = new ArrayList<>();
 		int countCorrect = 0;
+		int totCount = 0;
 		// Build the Solver
 		SolverFactory solverFactory = SolverFactory.createFromXmlResource(
 				"org/optaplanner/examples/driverallot/solver/driverAllotSolverConfig.xml");
 		Solver solver = solverFactory.buildSolver();
 
-		for(int i =0; i < DriverTestCase.GLOBALDRIVERLIST.length; i++) {
-		//for(int i =0; i < DriverAllotTestCase.testCaseList.length; i++) {
-			DriverAllot unsolvedDriverAllot = new DriverAllotGenerator().createDriverAllot(i);
-			//DriverAllot unsolvedDriverAllot = new DriverAllotGenerator().createDriverAllot(i, DriverAllotTestCase.testCaseList[i]);
+		//for(int i =0; i < DriverTestCase.GLOBALDRIVERLIST.length; i++) {
+		for(int i =0; i < DriverAllotTestCase.testCaseList.length; i++) {
+			//DriverAllot unsolvedDriverAllot = new DriverAllotGenerator().createDriverAllot(i);
+			DriverAllot unsolvedDriverAllot = new DriverAllotGenerator().createDriverAllot(i, DriverAllotTestCase.testCaseList[i]);
 
 			// Solve the problem
 			solver.solve(unsolvedDriverAllot);
@@ -83,12 +84,13 @@ public class DriverAllotHelloWorld {
 			DriverAllotResults.add(solvedDriverAllot);
 			
 			printResults(i, solvedDriverAllot);
+			totCount ++;
 		}
 		for(int i = 0; i < DriverAllotResults.size(); i++) {
 			DriverAllot solvedDriverAllot = DriverAllotResults.get(i);
 			boolean wrong = true;
-			Pair[][] resultList = DriverTestCase.GLOBALRESULTLIST[i];
-			//Pair[][] resultList = DriverAllotTestCase.testCaseList[i].getResultList();
+			//Pair[][] resultList = DriverTestCase.GLOBALRESULTLIST[i];
+			Pair[][] resultList = DriverAllotTestCase.testCaseList[i].getResultList();
 			for(int k = 0; k < resultList.length; k++) {
 				Pair[] pairList = resultList[k];
 				boolean wrongTestCaseResult = false;
@@ -98,7 +100,13 @@ public class DriverAllotHelloWorld {
 					if(driver != null) {
 						Integer testRouteTripId = (Integer)pairList[j].getKey();
 						Integer testDriverId = (Integer)pairList[j].getValue();
-						if(!(routeTrip.getId() == testRouteTripId.longValue() && driver.getId() == testDriverId.longValue())) {
+						if(!(routeTrip.getId() == testRouteTripId.longValue() 
+								&& driver.getId() == testDriverId.longValue() 
+								&& DriverAllotTestCase.testCaseList[i].getHardScore() == solvedDriverAllot.getScore().getHardScore()
+								&& DriverAllotTestCase.testCaseList[i].getSoftScore() == solvedDriverAllot.getScore().getSoftScore())
+								) {
+							System.out.println(DriverAllotTestCase.testCaseList[i].getHardScore() + " " + solvedDriverAllot.getScore().getHardScore());
+							System.out.println(DriverAllotTestCase.testCaseList[i].getSoftScore() + " " +  solvedDriverAllot.getScore().getSoftScore());
 							wrongTestCaseResult = true;
 							break;
 						}
@@ -112,7 +120,7 @@ public class DriverAllotHelloWorld {
 			else
 				countCorrect ++;
 		}
-		System.out.println("\n" + countCorrect + " test cases out of " + DriverTestCase.GLOBALDRIVERLIST.length + " were correct");
+		System.out.println("\n" + countCorrect + " test cases out of " + totCount + " were correct");
 	}
 
 	private static void printResults(int i, DriverAllot solvedDriverAllot) {

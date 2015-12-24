@@ -9,12 +9,23 @@ public class TestCase {
 	public Driver[] driverList;
 	public RouteTrip[] routeTripList;
 	public Pair[][] resultList;
+	int hardScore;
+	int softScore;
 	
 	public TestCase(Driver[] driverList, RouteTrip[] routeTripList, Pair[][] resultList) {
 		super();
 		this.driverList = driverList;
 		this.routeTripList = routeTripList;
 		this.resultList = resultList;
+	}
+
+	public TestCase(Driver[] driverList, RouteTrip[] routeTripList, Pair[][] resultList, int hardScore, int softScore) {
+		super();
+		this.driverList = driverList;
+		this.routeTripList = routeTripList;
+		this.resultList = resultList;
+		this.hardScore = hardScore;
+		this.softScore = softScore;
 	}
 
 	public Driver[] getDriverList() {
@@ -39,6 +50,22 @@ public class TestCase {
 
 	public void setResultList(Pair[][] resultList) {
 		this.resultList = resultList;
+	}
+
+	public int getHardScore() {
+		return hardScore;
+	}
+
+	public void setHardScore(int hardScore) {
+		this.hardScore = hardScore;
+	}
+
+	public int getSoftScore() {
+		return softScore;
+	}
+
+	public void setSoftScore(int softScore) {
+		this.softScore = softScore;
 	}
 
 }
