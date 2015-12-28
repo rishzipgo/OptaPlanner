@@ -48,7 +48,10 @@ public class RouteTripDistance implements Serializable, Comparable<RouteTripDist
     private double cost;
     private boolean possibleToAttendBoth;
     private double routeTripTimeDifferenceInMinutes;
-    private double routeTripCostDifference;
+    private double routeTripShortRestCostDifference;
+	private double longRestRouteTripTimeDifferenceInMinutes;
+	private double shortRestRouteTripTimeDifferenceInMinutes;
+	private double routeTripLongRestCostDifference;
 
     
 
@@ -69,7 +72,10 @@ public class RouteTripDistance implements Serializable, Comparable<RouteTripDist
 		
 		
 		this.routeTripTimeDifferenceInMinutes = timeDifferenceMilitaryFormat(leftRouteTrip.getTimeEnd(), rightRouteTrip.getTimeStart());
-		this.routeTripCostDifference = (this.routeTripTimeDifferenceInMinutes/Constants.MINUTES_IN_HOUR)*Constants.AVG_SPEED_DRIVER*Constants.COST_PER_KM;
+		this.longRestRouteTripTimeDifferenceInMinutes = this.routeTripTimeDifferenceInMinutes - (this.timeInMinutes + Constants.LONG_REST_TIME_BETWEEN_TRIPS);
+		this.shortRestRouteTripTimeDifferenceInMinutes = this.routeTripTimeDifferenceInMinutes - (this.timeInMinutes + Constants.SHORT_REST_TIME_BETWEEN_TRIPS);
+		this.routeTripShortRestCostDifference = Math.max(0, (this.shortRestRouteTripTimeDifferenceInMinutes/Constants.MINUTES_IN_HOUR)*Constants.AVG_SPEED_DRIVER*Constants.COST_PER_KM);
+		this.routeTripLongRestCostDifference = Math.max(0, (this.longRestRouteTripTimeDifferenceInMinutes/Constants.MINUTES_IN_HOUR)*Constants.AVG_SPEED_DRIVER*Constants.COST_PER_KM);
 	}
 
 	private double timeDifferenceMilitaryFormat(int timeEnd, int timeStart) throws ParseException {
@@ -172,12 +178,36 @@ public class RouteTripDistance implements Serializable, Comparable<RouteTripDist
 		this.cost = cost;
 	}
 
-	public double getRouteTripCostDifference() {
-		return routeTripCostDifference;
+	public double getRouteTripShortRestCostDifference() {
+		return routeTripShortRestCostDifference;
 	}
 
-	public void setRouteTripCostDifference(double routeTripCostDifference) {
-		this.routeTripCostDifference = routeTripCostDifference;
+	public void setRouteTripShortRestCostDifference(double routeTripShortRestCostDifference) {
+		this.routeTripShortRestCostDifference = routeTripShortRestCostDifference;
+	}
+
+	public double getLongRestRouteTripTimeDifferenceInMinutes() {
+		return longRestRouteTripTimeDifferenceInMinutes;
+	}
+
+	public void setLongRestRouteTripTimeDifferenceInMinutes(double longRestRouteTripTimeDifferenceInMinutes) {
+		this.longRestRouteTripTimeDifferenceInMinutes = longRestRouteTripTimeDifferenceInMinutes;
+	}
+
+	public double getShortRestRouteTripTimeDifferenceInMinutes() {
+		return shortRestRouteTripTimeDifferenceInMinutes;
+	}
+
+	public void setShortRestRouteTripTimeDifferenceInMinutes(double shortRestRouteTripTimeDifferenceInMinutes) {
+		this.shortRestRouteTripTimeDifferenceInMinutes = shortRestRouteTripTimeDifferenceInMinutes;
+	}
+
+	public double getRouteTripLongRestCostDifference() {
+		return routeTripLongRestCostDifference;
+	}
+
+	public void setRouteTripLongRestCostDifference(double routeTripLongRestCostDifference) {
+		this.routeTripLongRestCostDifference = routeTripLongRestCostDifference;
 	}
 
 	public boolean equals(Object o) {
