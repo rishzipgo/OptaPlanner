@@ -21,13 +21,13 @@ public class TimeSlot {
 			this.type = TimeSlot.MORNINGPEAK;
 			this.percentOccupancy = 70;
 		}
-		if(interval.overlaps(TimeSlot.AFTERNOONINTERVAL)) {
-			this.type = TimeSlot.AFTERNOON;
-			this.percentOccupancy = 20;
-		}
-		if(interval.overlaps(TimeSlot.EVENINGPEAKINTERVAL)) {
+		else if(interval.overlaps(TimeSlot.EVENINGPEAKINTERVAL)) {
 			this.type = TimeSlot.EVENINGPEAK;
 			this.percentOccupancy = 70;
+		}
+		else if(interval.overlaps(TimeSlot.AFTERNOONINTERVAL)) {
+			this.type = TimeSlot.AFTERNOON;
+			this.percentOccupancy = 20;
 		}
 	}
 

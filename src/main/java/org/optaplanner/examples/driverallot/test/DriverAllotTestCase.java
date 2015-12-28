@@ -113,6 +113,217 @@ public class DriverAllotTestCase {
 			-78
 			);
 	
+	static TestCase testCase5 = new TestCase(
+			new Driver[]{
+					new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+					new Driver(1, 700, 1500, Driver.NON_FIXED_DRIVER),
+					new Driver(2, 900, 1300, Driver.NON_FIXED_DRIVER)
+			},
+			new RouteTrip[]{
+					new RouteTrip(950, 1100, 2),
+					new RouteTrip(730, 830, 2),
+					new RouteTrip(1100, 1200, 2),
+					new RouteTrip(815, 1200, 1)
+			},
+			new Pair[][]{
+				{
+					new Pair(0, 2),
+					new Pair(1, 0),
+					new Pair(2, 2),
+					new Pair(3, 1)
+				},
+				{
+					new Pair(0, 2),
+					new Pair(1, 1),
+					new Pair(2, 2),
+					new Pair(3, 0)
+				}
+			},
+			0,
+			-498848
+			);
+	
+	static TestCase testCase6 = new TestCase(
+			new Driver[]{
+					new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+					new Driver(1, 700, 1500, Driver.NON_FIXED_DRIVER),
+					new Driver(2, 900, 1300, Driver.NON_FIXED_DRIVER)	
+			},
+			new RouteTrip[]{
+					new RouteTrip(950, 1100, 2),
+					new RouteTrip(730, 830, 1),
+					new RouteTrip(1100, 1200, 2),
+					new RouteTrip(815, 1200, 2)	
+			},
+			new Pair[][]{
+				{
+					new Pair(0, 1),
+					new Pair(1, 1),
+					new Pair(2, 1),
+					new Pair(3, 0)
+				},
+				{
+					new Pair(0, 2),
+					new Pair(1, 1),
+					new Pair(2, 1),
+					new Pair(3, 0)
+				},
+				{
+					new Pair(0, 2),
+					new Pair(1, 1),
+					new Pair(2, 2),
+					new Pair(3, 0)
+				}
+			},
+			0,
+			-498848
+			);
+	
+	static TestCase testCase7 = new TestCase(
+			new Driver[]{
+					new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+					new Driver(1, 700, 1500, 12, 13, Driver.NON_FIXED_DRIVER),
+					new Driver(2, 900, 1300, 13, 14, Driver.NON_FIXED_DRIVER)
+			},
+			new RouteTrip[]{
+					new RouteTrip(730, 830, 1, 14.0, 15.0),
+					new RouteTrip(950, 1100, 2, 12.0, 14.0),
+					new RouteTrip(1100, 1200, 2, 15.0, 13.0),
+					new RouteTrip(815, 1200, 2, 14.0, 15.0)
+			},
+			new Pair[][]{
+				{
+					new Pair(0, 0),
+					new Pair(1, 1),
+					new Pair(2, 2),
+					new Pair(3, 0)
+				}
+			},
+			0,
+			-1132245
+			);
+	
+	static TestCase testCase8 = new TestCase(
+			new Driver[]{
+					new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+					new Driver(1, 700, 1500, 12, 13, Driver.NON_FIXED_DRIVER),
+					new Driver(2, 900, 1300, 13, 14, Driver.NON_FIXED_DRIVER)
+			},
+			new RouteTrip[]{
+					new RouteTrip(730, 830, 1, 14.0, 15.0, 14.0, 15.0),
+					new RouteTrip(950, 1100, 2, 12.0, 14.0, 12.0, 14.0),
+					new RouteTrip(1100, 1200, 2, 15.0, 13.0, 15.0, 13.0),
+					new RouteTrip(815, 1200, 2, 14.0, 15.0, 14.0, 15.0)
+			},
+			new Pair[][]{
+				{
+					new Pair(0, 0),
+					new Pair(1, 1),
+					new Pair(2, 2),
+					new Pair(3, 0)
+				}
+			},
+			0,
+			-1020706
+			);
+	
+	static TestCase testCase9 = new TestCase(
+			new Driver[]{
+					new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+					new Driver(1, 700, 1500, 12, 13, Driver.NON_FIXED_DRIVER),
+					new Driver(2, 810, 1300, 13, 14, Driver.NON_FIXED_DRIVER)
+			},
+			new RouteTrip[]{
+					new RouteTrip(730, 830, 1, 14.0, 15.0, 12.0, 14.0),
+					new RouteTrip(950, 1100, 2, 12.0, 14.0, 15.0, 13.0),
+					new RouteTrip(1100, 1200, 2, 15.0, 13.0, 15.0, 13.0),
+					new RouteTrip(815, 1200, 2, 14.0, 15.0, 14.0, 15.0)
+			},
+			new Pair[][]{
+				{
+					new Pair(0, 1),
+					new Pair(1, 1),
+					new Pair(2, 1),
+					new Pair(3, 2)
+				}
+			},
+			0,
+			-28328
+			);
+	
+	static TestCase testCase10 = new TestCase(
+			new Driver[]{
+					new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+					new Driver(1, 700, 1500, 14, 15, Driver.NON_FIXED_DRIVER)
+			},
+			new RouteTrip[]{
+					new RouteTrip(730, 810, 1, 14.0, 15.0, 12.0, 14.0),
+					new RouteTrip(950, 1100, 2, 12.0, 14.0, 15.0, 13.0),
+					new RouteTrip(815, 1100, 2, 12.0, 14.0, 15.0, 13.0)
+			},
+			new Pair[][]{
+				{
+					new Pair(0, 1),
+					new Pair(1, 0),
+					new Pair(2, 1)
+				},
+				{
+					new Pair(0, 1),
+					new Pair(1, 1),
+					new Pair(2, 0)
+				}
+			},
+			0,
+			-506323
+		);
+	
+	static TestCase testCase11 = new TestCase(
+			new Driver[]{
+					new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+					new Driver(1, 630, 1500, 14.0, 15.0, Driver.NON_FIXED_DRIVER)
+			},
+			new RouteTrip[]{
+					new RouteTrip(700, 1000, 1, 14.0, 15.0, 12.0, 14.0),
+					new RouteTrip(800, 1100, 1, 14.0, 15.0, 12.0, 14.0),
+					new RouteTrip(900, 1200, 1, 12.0, 14.0, 14.0, 15.0),
+					new RouteTrip(1030, 1400, 1, 12.0, 14.0, 14.0, 15.0)
+			},
+			new Pair[][]{
+				{
+					new Pair(0, 1),
+					new Pair(1, 0),
+					new Pair(2, 0),
+					new Pair(3, 1)
+				}
+			},
+			0,
+			-999727
+		);
+	
+	static TestCase testCase12 = new TestCase(
+			new Driver[]{
+					new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
+					new Driver(1, 630, 1500, 14.0, 15.0, Driver.NON_FIXED_DRIVER),
+					new Driver(1, 630, 1500, 8.0, 9.0, Driver.NON_FIXED_DRIVER)
+			},
+			new RouteTrip[]{
+					new RouteTrip(700, 1000, 1, 14.0, 15.0, 12.0, 14.0),
+					new RouteTrip(800, 1100, 1, 14.0, 15.0, 12.0, 14.0),
+					new RouteTrip(900, 1200, 1, 12.0, 13.0, 14.0, 15.0),
+					new RouteTrip(1030, 1400, 1, 12.0, 14.0, 14.0, 15.0)
+			},
+			new Pair[][]{
+				{
+					new Pair(0, 1),
+					new Pair(1, 0),
+					new Pair(2, 2),
+					new Pair(3, 1)
+				}
+			},
+			0,
+			-546347
+		);
+	
 	static TestCase testCase18 = new TestCase(
 			new Driver[]{
 				new Driver(0, 2359, 0.0, 0.0, "Universal Driver", Driver.UNIVERSAL_DRIVER, 0, 0, 0, Cab.UNIVERSAL),
@@ -177,10 +388,11 @@ public class DriverAllotTestCase {
 			new Driver[]{
 
 					new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
-					new Driver(1, 950, 2020, 12.914015, 77.63813, Driver.NON_FIXED_DRIVER),
-					new Driver(2, 700, 2120, 12.8420, 77.6631, Driver.NON_FIXED_DRIVER),
-					new Driver(3, 700, 2020, 12.9365, 77.5447, Driver.NON_FIXED_DRIVER)
-
+					new Driver(950, 2020, 12.914015, 77.63813, "Shiv1",Driver.NON_FIXED_DRIVER,30,30,1000,1),
+					new Driver(700, 2120, 12.8420, 77.6631, "Shiv2",Driver.NON_FIXED_DRIVER,30,30,1000,1),
+					new Driver(700, 2020, 12.9365, 77.5447, "Shiv3",Driver.NON_FIXED_DRIVER,30,30,1000,1)
+					//(int timeIn, int timeOut, double latitude, double longitude, String driverName, int type,
+						//	int minimumDistance, int costPerKm, int fixedCost, int cabType)
 			},
 			new RouteTrip[]{
 				
@@ -194,16 +406,16 @@ public class DriverAllotTestCase {
 				new RouteTrip(1100, 1350, 1, 13.0426, 77.620, 12.9413, 77.62103, "Manyata To Koramangala "),
 				new RouteTrip(1400, 1650, 1, 12.9413, 77.62103, 13.0426, 77.620, "Koramangala To Manyata "),
 				new RouteTrip(1810, 1950, 1, 13.0426, 77.620, 12.9365, 77.5447, "Manyata To Banashankari"),
-				new RouteTrip(2010, 2100, 1, 12.9365, 77.5447, 12.8420, 77.6631, "Banashankari To Electronic City"),
+				new RouteTrip(2030, 2100, 1, 12.9365, 77.5447, 12.8420, 77.6631, "Banashankari To Electronic City")
 
-				new RouteTrip(700, 930, 1, 12.9365, 77.5447, 12.987, 77.737, "Banashankari To ITPL"),
+				,new RouteTrip(700, 930, 1, 12.9365, 77.5447, 12.987, 77.737, "Banashankari To ITPL"),
 				new RouteTrip(940, 1150, 1, 12.987, 77.737, 12.9365, 77.5447, "Itpl To Banashankari"),
-				new RouteTrip(1200, 1410, 1, 12.9365, 77.5447, 12.987, 77.737, "Banashankari To ITPL "),
+				new RouteTrip(1200, 1310, 1, 12.9365, 77.5447, 12.987, 77.737, "Banashankari To ITPL "),
 				new RouteTrip(1440, 1600, 1, 12.987, 77.737, 12.96, 77.64, "Itpl To Domlur "),
 				new RouteTrip(1610, 1710, 1, 12.96, 77.64, 12.987, 77.737, "Domlur To Itpl "),
-				new RouteTrip(1730, 2010, 1, 12.987, 77.737, 12.9365, 77.5447, "Itpl To Banashankari"),
-				new RouteTrip(650, 850, 1, 12.9365, 77.5447, 12.987, 77.737, "Banashankari To ITPL"),
-				new RouteTrip(900, 1250, 1, 12.987, 77.737, 12.9365, 77.5447, "Itpl To Banashankari")
+				new RouteTrip(1730, 2010, 1, 12.987, 77.737, 12.9365, 77.5447, "Itpl To Banashankari")
+	//			new RouteTrip(650, 850, 1, 12.9365, 77.5447, 12.987, 77.737, "Banashankari To ITPL"),
+//				new RouteTrip(900, 1250, 1, 12.987, 77.737, 12.9365, 77.5447, "Itpl To Banashankari")
 			},
 			new Pair[][]{
 				{
@@ -222,9 +434,9 @@ public class DriverAllotTestCase {
 				new Pair(12, 3),
 				new Pair(13, 3),
 				new Pair(14, 3),
-				new Pair(15, 3),
-				new Pair(16, 0),
-				new Pair(17, 0)
+				new Pair(15, 3)
+//				new Pair(16, 0),
+//				new Pair(17, 0)
 			}
 			},
 			0,
@@ -238,7 +450,22 @@ public class DriverAllotTestCase {
 			//testCase4,
 			//testCase18,
 			//testCase19,
-			testCase20,
+			//testCase20,
 			testCase21
+			//testCase1,
+			//testCase2,
+			//testCase3,
+			//testCase4,
+//			testCase5,
+//			testCase6,
+//			testCase7,
+//			testCase8,
+//			testCase9,
+//			testCase10,
+//			testCase11,
+//			testCase12,
+//			testCase18,
+//			testCase19,
+//			testCase20
 	};
 }

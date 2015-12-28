@@ -69,10 +69,48 @@ public class RouteTripDistance implements Serializable, Comparable<RouteTripDist
 		
 		
 		this.routeTripTimeDifferenceInMinutes = timeDifferenceMilitaryFormat(leftRouteTrip.getTimeEnd(), rightRouteTrip.getTimeStart());
+//		this.routeTripTimeDifferenceInMinutes = (leftRouteTrip.getTimeEnd() - rightRouteTrip.getTimeStart());
 		this.routeTripCostDifference = (this.routeTripTimeDifferenceInMinutes/Constants.MINUTES_IN_HOUR)*Constants.AVG_SPEED_DRIVER*Constants.COST_PER_KM;
-	}
+//		this.routeTripCostDifference = (this.routeTripTimeDifferenceInMinutes);
+				//Constants.MINUTES_IN_HOUR)*Constants.AVG_SPEED_DRIVER*Constants.COST_PER_KM;
+    
+    }
 
-	private double timeDifferenceMilitaryFormat(int timeEnd, int timeStart) throws ParseException {
+//	private double timeDifferenceMilitaryFormat(int timeEnd, int timeStart) throws ParseException 
+	private double timeDifferenceMilitaryFormat(int timeEnd, int timeStart)  
+	{
+		// public static void main(String[] args) {
+//		        int startTime = 130;
+//		        int endTime = 1730;
+		        int startMinutes = minutesSinceMidnight(timeStart);
+		        int endMinutes = minutesSinceMidnight(timeEnd);
+
+//		        System.out.println(timeStart + " (" + startMinutes + ")");
+//		        System.out.println(timeEnd + " (" + endMinutes + ")");
+
+		        int dif = - endMinutes + startMinutes;
+
+		        int hour = dif / 60;
+		        int min = dif % 60;
+		        return dif;	
+//		        System.out.println(hour + ":" + min);
+
+	}
+	private int minutesSinceMidnight(int milTime) {
+		// TODO Auto-generated method stub
+		//return 0;
+	
+		        double time = milTime / 100d;
+
+		        int hours = (int) Math.floor(time);
+		        int minutes = milTime % 100;
+
+//		        System.out.println(hours + ":" + minutes);
+
+		        return (hours * 60) + minutes;
+		    }
+
+		/*
 		SimpleDateFormat format = new SimpleDateFormat("hhmm");
 		String timeEndString = String.valueOf(timeEnd);
 		if(timeEndString.length() < 4)
@@ -98,7 +136,10 @@ public class RouteTripDistance implements Serializable, Comparable<RouteTripDist
 		//System.out.println(timeEndString + " " + timeStartString + " " + hours + " " + minutes);
 		
 		return hours*Constants.MINUTES_IN_HOUR + minutes;
-	}
+	*/
+	
+	
+	
 
 	public RouteTrip getLeftRouteTrip() {
 		return leftRouteTrip;

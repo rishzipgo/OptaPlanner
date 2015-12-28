@@ -172,7 +172,7 @@ rule "fixedCostTotal"
 			$fixedCost : fixedCost,
 			type != Driver.UNIVERSAL_DRIVER
 		)
-        RouteTrip($driver == driver)
+        exists RouteTrip($driver == driver)
 	then
 		scoreHolder.addSoftConstraintMatch(kcontext, - $fixedCost);
         System.out.println("fixedCostTotal " + $driver + " " + $fixedCost);

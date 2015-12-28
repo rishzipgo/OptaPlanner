@@ -46,7 +46,7 @@ public class DriverAllotHelloWorld {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		
-		//System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream("sysoutfile"))));
+		System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream("sysoutfile"))));
 
 		ArrayList<DriverAllot> DriverAllotResults = new ArrayList<>();
 		int countCorrect = 0;
