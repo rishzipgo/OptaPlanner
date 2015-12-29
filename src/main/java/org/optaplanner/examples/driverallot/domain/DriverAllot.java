@@ -99,7 +99,7 @@ public class DriverAllot extends AbstractPersistable implements Solution<HardSof
 		for (Driver driver : driverList)
 			for (RouteTrip routeTrip : routeTripList) {
 				driverRouteTripDistanceList.add(new DriverRouteTripDistance(driver, routeTrip));
-				System.out.println(driver + " " + routeTrip + " " + driverRouteTripDistanceList.get(driverRouteTripDistanceList.size()-1).getTimeToStartInMinutes() + " " + driverRouteTripDistanceList.get(driverRouteTripDistanceList.size()-1).getTimeToEndInMinutes());
+				System.out.println(driver + " " + routeTrip + " " + driverRouteTripDistanceList.get(driverRouteTripDistanceList.size()-1).getCostToStart() + " " + driverRouteTripDistanceList.get(driverRouteTripDistanceList.size()-1).getCostToEnd());
 			}
 		return driverRouteTripDistanceList;
 	}
@@ -124,7 +124,7 @@ public class DriverAllot extends AbstractPersistable implements Solution<HardSof
 							routeTripDistanceList.add(new RouteTripDistance(rightRouteTrip, leftRouteTrip));
 							System.out.print(rightRouteTrip + " " + leftRouteTrip + " ");
 						}
-						System.out.println(routeTripDistanceList.get(routeTripDistanceList.size()-1).getTimeInMinutes() + " " + routeTripDistanceList.get(routeTripDistanceList.size()-1).getRouteTripTimeDifferenceInMinutes());
+						System.out.println(routeTripDistanceList.get(routeTripDistanceList.size()-1).getCost() + " " + routeTripDistanceList.get(routeTripDistanceList.size()-1).getRouteTripShortRestCostDifference() + " " + routeTripDistanceList.get(routeTripDistanceList.size()-1).getRouteTripLongRestCostDifference());
 					}
 				}
 			}
