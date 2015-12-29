@@ -63,6 +63,9 @@ public class DriverRouteTripDistance implements Serializable, Comparable<DriverR
 			this.timeToStartInMinutes = timeToStart*Constants.MINUTES_IN_HOUR;
 			this.timeToEnd = distanceToEnd/Constants.AVG_SPEED_DRIVER;
 			this.timeToEndInMinutes = timeToEnd*Constants.MINUTES_IN_HOUR;
+			this.revenue = (routeTrip.getTimeSlot().getPercentOccupancy()*driver.getCab().getSeats()*Constants.AVG_SEAT_REVENUE)/100;
+			this.costToStart = this.distanceToStart*Constants.COST_PER_KM;
+			this.costToEnd = this.distanceToEnd*Constants.COST_PER_KM;
 		}
 		else{
 			this.distanceToStart = 0;
@@ -71,10 +74,10 @@ public class DriverRouteTripDistance implements Serializable, Comparable<DriverR
 			this.distanceToEndInMeters = 0;
 			this.timeToStart = 0;
 			this.timeToEnd = 0;
+			this.revenue = 0;
+			this.costToStart = 0;
+			this.costToEnd = 0;
 		}
-		this.revenue = (routeTrip.getTimeSlot().getPercentOccupancy()*driver.getCab().getSeats()*Constants.AVG_SEAT_REVENUE)/100;
-		this.costToStart = this.distanceToStart*Constants.COST_PER_KM;
-		this.costToEnd = this.distanceToEnd*Constants.COST_PER_KM;
 	}
 
 
