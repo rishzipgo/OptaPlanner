@@ -22,12 +22,8 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScoreHolder;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
-import org.optaplanner.core.api.solver.event.BestSolutionChangedEvent;
-import org.optaplanner.core.api.solver.event.SolverEventListener;
-import org.optaplanner.core.impl.score.director.ScoreDirector;
 import org.optaplanner.examples.curriculumcourse.app.CurriculumCourseApp;
 import org.optaplanner.examples.driverallot.domain.Driver;
 import org.optaplanner.examples.driverallot.domain.DriverAllot;
@@ -57,6 +53,31 @@ public class DriverAllotHelloWorld {
 		Solver solver = solverFactory.buildSolver();
 
 		//for(int i =0; i < DriverTestCase.GLOBALDRIVERLIST.length; i++) {
+		//String filesPath = "/Users/neerajpaliwal/Desktop/demo/";
+		String filesPath = args[0];
+		String locationFileName = "latlon.csv";
+		String driverFileName = "driver.csv";
+		String tripFileName = "trip.csv";
+		String outFileName = filesPath +  "/output.csv";
+
+		try{
+			DriverAllotTestCase.readInputFiles(	filesPath + "/" + driverFileName, 
+												filesPath + "/" + tripFileName, 
+												filesPath +  "/" +locationFileName);
+			DriverAllot unsolvedDriverAllot = new DriverAllotGenerator().createDriverAllot(0, DriverAllotTestCase.testCase);
+
+			// Solve the problem
+			solver.solve(unsolvedDriverAllot);
+			
+			DriverAllot solvedDriverAllot = (DriverAllot) solver.getBestSolution();
+
+			DriverAllotResults.add(solvedDriverAllot);
+			
+			printResult(solvedDriverAllot, outFileName);
+	
+		}catch(Exception e){
+			System.err.println(e.getMessage());
+		}
 		for(int i =0; i < DriverAllotTestCase.testCaseList.length; i++) {
 			//DriverAllot unsolvedDriverAllot = new DriverAllotGenerator().createDriverAllot(i);
 			DriverAllot unsolvedDriverAllot = new DriverAllotGenerator().createDriverAllot(i, DriverAllotTestCase.testCaseList[i]);
@@ -64,21 +85,6 @@ public class DriverAllotHelloWorld {
 			// Solve the problem
 			solver.solve(unsolvedDriverAllot);
 			
-
-			/*solver.addEventListener(new SolverEventListener<DriverAllot>() {
-
-			@Override
-			public void bestSolutionChanged(BestSolutionChangedEvent<DriverAllot> event) {
-				// TODO Auto-generated method stub
-				//if (event.isNewBestSolutionInitialized()
-	            //        && event.getNewBestSolution().getScore().isFeasible()) {
-					System.out.println("We have a feasible solution");
-				//}
-			}
-
-        	});*/
-
-
 			DriverAllot solvedDriverAllot = (DriverAllot) solver.getBestSolution();
 
 			DriverAllotResults.add(solvedDriverAllot);
@@ -86,11 +92,13 @@ public class DriverAllotHelloWorld {
 			printResults(i, solvedDriverAllot);
 			totCount ++;
 		}
-		for(int i = 0; i < DriverAllotResults.size(); i++) {
+		for(int i = 0; i < DriverAllotTestCase.testCaseList.length; i++) {
 			DriverAllot solvedDriverAllot = DriverAllotResults.get(i);
 			boolean wrong = true;
-			//Pair[][] resultList = DriverTestCase.GLOBALRESULTLIST[i];
+		
 			Pair[][] resultList = DriverAllotTestCase.testCaseList[i].getResultList();
+			if(resultList == null)
+				continue;
 			for(int k = 0; k < resultList.length; k++) {
 				Pair[] pairList = resultList[k];
 				boolean wrongTestCaseResult = false;
@@ -120,7 +128,8 @@ public class DriverAllotHelloWorld {
 			else
 				countCorrect ++;
 		}
-		System.out.println("\n" + countCorrect + " test cases out of " + totCount + " were correct");
+		if(totCount > 0)
+			System.out.println("\n" + countCorrect + " test cases out of " + totCount + " were correct");
 	}
 
 	private static void printResults(int i, DriverAllot solvedDriverAllot) {
@@ -130,17 +139,34 @@ public class DriverAllotHelloWorld {
 		for(Driver driver : solvedDriverAllot.getDriverList()) {
 			System.out.println(driver.tostring());
 			System.out.println(driver.getDriverTripList());
-			//System.out.println(driver.getRouteTripList());
-			//System.out.println(driver.getLabel() + "\t" + driver.getTimeIn() + "\t" + driver.getTimeOut());
+			System.out.println(driver.getRouteTripList());
+			System.out.println(driver.getLabel() + "\t" + driver.getTimeIn() + "\t" + driver.getTimeOut());
 		}
 		System.out.println();
 		for(RouteTrip routeTrip : solvedDriverAllot.getRouteTripList()) {
 			System.out.println(routeTrip.tostring());
 			System.out.println(routeTrip.getPreviousTrip());
-			//System.out.println(routeTrip.getLabel() + "\t" + routeTrip.getTimeStart() + "\t" + routeTrip.getTimeEnd());
+			System.out.println(routeTrip.getLabel() + "\t" + routeTrip.getTimeStart() + "\t" + routeTrip.getTimeEnd());
 		}
 	}
 
+	private static void printResult(DriverAllot solvedDriverAllot, String outputFile) throws FileNotFoundException {
+		int numActualDrivers = solvedDriverAllot.getDriverList().size() - 1;
+		StringBuilder displayString = new StringBuilder();
+		for (RouteTrip routeTrip : solvedDriverAllot.getRouteTripList()) {
+			Driver driver = routeTrip.getDriver();
+			if(driver != null && driver.getType() != Driver.UNIVERSAL_DRIVER)
+				displayString.append("  ").append(routeTrip.getLabel()).append(" -> ")
+				.append(driver == null ? null : driver.getLabel()).append("\n");
+		}
+		System.out.println("\nSolved DriverAllot with " + numActualDrivers + " drivers and " + solvedDriverAllot.getRouteTripList().size() + " routeTrips:\n"
+				+ displayString.toString());
+		if(outputFile != null){
+			System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream(outputFile)), true));
+			System.out.println(displayString.toString());
+		}
+	}
+	
 	public static String toDisplayString(DriverAllot solvedDriverAllot) {
 		StringBuilder displayString = new StringBuilder();
 		for (RouteTrip routeTrip : solvedDriverAllot.getRouteTripList()) {

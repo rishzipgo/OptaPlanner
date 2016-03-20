@@ -4,7 +4,7 @@ public class Constants {
 
 	//Universal Constant
 	public final static int MINUTES_IN_HOUR = 60;
-	public final static int METERS_IN_KILOMETERS = 60;
+	public final static int METERS_IN_KILOMETERS = 1000;
 	public final static int HOURS_IN_DAY = 24;
 	public final static double EARTH_RADIUS_IN_KM = 6371.0088;
 	

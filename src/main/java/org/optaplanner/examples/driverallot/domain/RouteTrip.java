@@ -108,6 +108,21 @@ public class RouteTrip extends AbstractPersistable {
 		this.timeSlot = new TimeSlot(timeStart, timeEnd);
 		this.distance = distance;
 	}
+	
+	public RouteTrip(int timeStart, int timeEnd, double startLatitude, double startLongitude, double endLatitude,
+			double endLongitude, String tripName, double distance, int avgOrder) {
+		super();
+		this.timeStart = timeStart;
+		this.timeEnd = timeEnd;
+		this.startLatitude = startLatitude;
+		this.startLongitude = startLongitude;
+		this.endLatitude = endLatitude;
+		this.endLongitude = endLongitude;
+		this.tripName = tripName;
+		int percentageOccupancy = 100*avgOrder/12;
+		this.timeSlot = new TimeSlot(timeStart, timeEnd, percentageOccupancy);
+		this.distance = distance;
+	}
 
 	public RouteTrip() {
     	super();
@@ -149,6 +164,12 @@ public class RouteTrip extends AbstractPersistable {
 	public int getTimeEnd() {
 		return timeEnd;
 	}
+	
+	public int getTimeEndInMinutes() {
+		int timeEndHr = timeEnd / 100;
+		int timeEndMin = timeEnd - 100*timeEndHr;
+		return timeEndHr*60 + timeEndMin;
+	}
 
 
 	public void setTimeEnd(int timeEnd) {
@@ -158,6 +179,12 @@ public class RouteTrip extends AbstractPersistable {
 
 	public int getTimeStart() {
 		return timeStart;
+	}
+	
+	public int getTimeStartInMinutes() {
+		int timeStartHr = timeStart / 60;
+		int timeStartMin = timeStart - 60*timeStartHr;
+		return timeStartHr*60 + timeStartMin;
 	}
     
 
@@ -233,7 +260,7 @@ public class RouteTrip extends AbstractPersistable {
 	}
 
 	public String getLabel() {
-        return "RouteTrip " + id;
+        return "RouteTrip " + tripName;
     }
     
     public String tostring() {

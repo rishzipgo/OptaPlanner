@@ -1,13 +1,25 @@
 package org.optaplanner.examples.driverallot.test;
 
-import org.optaplanner.core.impl.score.buildin.hardsoft.HardSoftScoreDefinition;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.optaplanner.examples.driverallot.app.MyTimeUtil;
 import org.optaplanner.examples.driverallot.domain.Cab;
 import org.optaplanner.examples.driverallot.domain.Driver;
 import org.optaplanner.examples.driverallot.domain.RouteTrip;
 
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+
 import javafx.util.Pair;
 
 public class DriverAllotTestCase {
+	@SuppressWarnings("unchecked")
 	static TestCase testCase1 = new TestCase(
 				new Driver[]{
 						new Driver(500000, 0, 2400, Driver.UNIVERSAL_DRIVER),
@@ -22,7 +34,7 @@ public class DriverAllotTestCase {
 				},
 				new Pair[][] {
 					{
-						new Pair(0, 2),
+						new Pair<Integer, Integer>(0, 2),
 						new Pair(1, 1),
 						new Pair(2, 2),
 						new Pair(3, 0)
@@ -513,8 +525,93 @@ public class DriverAllotTestCase {
 		);
 
 
+	
+	
+	public static HashMap<String, Pair<Double, Double>> locations 	= new HashMap<>();
+	public static ArrayList<Driver> driversList 					= new ArrayList();
+	public static ArrayList<RouteTrip> tripsList 					= new ArrayList();
+	public static TestCase testCase;
+	
+	public static void readInputFiles(String driverFile, String tripFile, String locationsFile) throws IOException{
+		//Read all stops location
+		BufferedReader br = new BufferedReader(new FileReader(new File(locationsFile)));
+		br.readLine();
+		String strLin;
+		while((strLin = br.readLine()) != null) {
+			System.out.println(strLin);
+			String[] strSplit = strLin.split(",");
+			if(strSplit.length != 3){
+				continue;
+			}
+			String stopName = strSplit[0].replaceAll("\\\"", "");
+			double stopLat = Double.parseDouble(strSplit[1].replaceAll("\\\"", ""));
+			double stopLong = Double.parseDouble(strSplit[2].replaceAll("\\\"", ""));
+			locations.put(stopName, new Pair(stopLat, stopLong));
+
+			
+		}
+		br.close();
+		
+		//Read all drivers details
+		BufferedReader brD = new BufferedReader(new FileReader(new File(driverFile)));
+		brD.readLine();
+		driversList.add(new Driver(0, 2359, 0.0, 0.0, "Universal Driver", 
+						Driver.UNIVERSAL_DRIVER, 0, 0, 0, Cab.UNIVERSAL));
+		while((strLin = brD.readLine()) != null) {
+			System.out.println(strLin);
+			String[] strSplit = strLin.split(",");
+			if(strSplit.length != 5){
+				continue;
+			}
+			String driverName = strSplit[0].replaceAll("\\\"", "");
+			String stopName = strSplit[1].replaceAll("\\\"", "");
+			int startTime 	= Integer.parseInt(strSplit[2].replaceAll("\\\"", ""));
+			int endTime 	= Integer.parseInt(strSplit[3].replaceAll("\\\"", ""));
+
+			Pair<Double, Double> prefLocation = locations.get(stopName);
+			driversList.add(new Driver(startTime, endTime, prefLocation.getKey(), prefLocation.getValue(), 
+								driverName,  Driver.FIXED_DRIVER, 40, 30, 1200, Cab.TT));
+			
+		}
+		brD.close();
+		
+		//Read all trips details
+		BufferedReader brT = new BufferedReader(new FileReader(new File(tripFile)));
+		brT.readLine();
+		while((strLin = brT.readLine()) != null) {
+			System.out.println(strLin);
+			String[] strSplit = strLin.split(",");
+			if(strSplit.length != 8){
+				continue;
+			}
+			String tripName 	 = strSplit[0].replaceAll("\\\"", "");
+			String startStopName = strSplit[1].replaceAll("\\\"", "");
+			String endStopName 	 = strSplit[2].replaceAll("\\\"", "");
+			String viaName 		 = strSplit[3].replaceAll("\\\"", "");
+
+			int startTime 	= Integer.parseInt(strSplit[4].replaceAll("\\\"", ""));
+			int tripDuration 	= Integer.parseInt(strSplit[5].replaceAll("\\\"", ""));
+			int endTime = MyTimeUtil.min2format(tripDuration + MyTimeUtil.format2Min(startTime));
+			double distance = Double.parseDouble(strSplit[6].replaceAll("\\\"", ""));
+			int avgCust 	= Integer.parseInt(strSplit[7].replaceAll("\\\"", ""));
+
+
+			Pair<Double, Double> startLocation = locations.get(startStopName);
+			Pair<Double, Double> endLocation = locations.get(endStopName);
+
+			tripsList.add(new RouteTrip(startTime, endTime, startLocation.getKey(), startLocation.getValue(), 
+					endLocation.getKey(), endLocation.getValue(), tripName, distance, avgCust));
+			
+		}
+		brT.close();
+		
+		//Initialize testcase
+		testCase = new TestCase(driversList.toArray(new Driver[driversList.size()]),
+								tripsList.toArray(new RouteTrip[tripsList.size()]), null);
+	}
+	
 	public static TestCase[] testCaseList = {
-			testCase1,
+			/*testCase1,
 			testCase2,
 			testCase3,
 			testCase4,
@@ -533,6 +630,6 @@ public class DriverAllotTestCase {
 			testCase17,
 			testCase18,
 			testCase19,
-			testCase20
+			testCase20*/
 	};
 }

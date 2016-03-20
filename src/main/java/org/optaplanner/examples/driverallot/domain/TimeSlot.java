@@ -30,6 +30,11 @@ public class TimeSlot {
 			this.percentOccupancy = 20;
 		}
 	}
+	
+	TimeSlot(int timeStart, int timeEnd, int percentageOccupancy) {
+		this(timeStart, timeEnd);
+		this.percentOccupancy = percentageOccupancy;
+	}
 
 	public int getPercentOccupancy() {
 		return percentOccupancy;
