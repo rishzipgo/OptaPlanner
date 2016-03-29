@@ -24,13 +24,11 @@ import java.util.ArrayList;
 
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
-import org.optaplanner.examples.curriculumcourse.app.CurriculumCourseApp;
 import org.optaplanner.examples.driverallot.domain.Driver;
 import org.optaplanner.examples.driverallot.domain.DriverAllot;
 import org.optaplanner.examples.driverallot.domain.RouteTrip;
 import org.optaplanner.examples.driverallot.persistence.DriverAllotGenerator;
 import org.optaplanner.examples.driverallot.test.DriverAllotTestCase;
-import org.optaplanner.examples.driverallot.test.DriverTestCase;
 
 import javafx.util.Pair;
 
@@ -53,7 +51,7 @@ public class DriverAllotHelloWorld {
 		Solver solver = solverFactory.buildSolver();
 
 		//for(int i =0; i < DriverTestCase.GLOBALDRIVERLIST.length; i++) {
-		//String filesPath = "/Users/neerajpaliwal/Desktop/demo/";
+		//String filesPath = "/Users/neerajpaliwal/Desktop/zipgoplanner/demo1/";
 		String filesPath = args[0];
 		String locationFileName = "latlon.csv";
 		String driverFileName = "driver.csv";

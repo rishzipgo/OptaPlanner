@@ -22,7 +22,6 @@ import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.optaplanner.examples.driverallot.domain.RouteTrip;
-import org.optaplanner.examples.examination.domain.Topic;
 
 /**
  * Calculated during initialization, not modified during score calculation.

@@ -30,7 +30,6 @@ import org.joda.time.Minutes;
 import org.optaplanner.examples.driverallot.app.MyTimeUtil;
 import org.optaplanner.examples.driverallot.domain.Constants;
 import org.optaplanner.examples.driverallot.domain.RouteTrip;
-import org.optaplanner.examples.examination.domain.Topic;
 
 /**
  * Calculated during initialization, not modified during score calculation.

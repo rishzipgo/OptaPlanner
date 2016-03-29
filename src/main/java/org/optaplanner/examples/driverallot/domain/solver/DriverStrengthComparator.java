@@ -20,7 +20,6 @@ import java.io.Serializable;
 import java.util.Comparator;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
-import org.optaplanner.examples.cloudbalancing.domain.CloudComputer;
 import org.optaplanner.examples.driverallot.domain.Driver;
 
 public class DriverStrengthComparator implements Comparator<Driver>, Serializable {
