@@ -289,13 +289,14 @@ public class Driver extends AbstractPersistable implements Labeled {
     }
     
     public String tostring() {
-    	return this.getLabel() + "\t" + this.getTimeIn() + "\t" + this.getTimeOut() + "\t" + this.getRank() + "\t" + this.latitude + "," + this.longitude;
+    	return getLabel() + "," + this.getDriverName();
+    	//return this.getLabel() + "\t" + this.getTimeIn() + "\t" + this.getTimeOut() + "\t" + this.getRank() + "\t" + this.latitude + "," + this.longitude;
     }
 
 	public void addRouteTrip(RouteTrip routeTrip) {
 		routeTripList.add(routeTrip);
 		sort(routeTripList);
-		System.out.println(this.toString() + routeTripList);
+		//System.out.println(this.toString() + routeTripList);
 		if(routeTripList.size() > 0) {
 			routeTripList.get(0).setPreviousTrip(null);
 			routeTripList.get(routeTripList.size()-1).setNextTrip(null);
@@ -309,8 +310,8 @@ public class Driver extends AbstractPersistable implements Labeled {
 		
 		
 
-		for(RouteTrip routeTripPrint : routeTripList)
-			System.out.println(routeTripPrint.getPreviousTrip() + " " + routeTripPrint + " " + routeTripPrint.getNextTrip());
+		//for(RouteTrip routeTripPrint : routeTripList)
+			//System.out.println(routeTripPrint.getPreviousTrip() + " " + routeTripPrint + " " + routeTripPrint.getNextTrip());
 	}
 
 }

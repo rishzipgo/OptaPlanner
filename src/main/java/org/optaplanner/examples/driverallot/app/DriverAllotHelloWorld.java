@@ -40,7 +40,7 @@ public class DriverAllotHelloWorld {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		
-		//System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream("sysoutfile"))));
+		System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream("sysoutfile"))));
 
 		ArrayList<DriverAllot> DriverAllotResults = new ArrayList<>();
 		int countCorrect = 0;
@@ -76,7 +76,7 @@ public class DriverAllotHelloWorld {
 		}catch(Exception e){
 			System.err.println(e.getMessage());
 		}
-		for(int i =0; i < DriverAllotTestCase.testCaseList.length; i++) {
+		/*for(int i =0; i < DriverAllotTestCase.testCaseList.length; i++) {
 			//DriverAllot unsolvedDriverAllot = new DriverAllotGenerator().createDriverAllot(i);
 			DriverAllot unsolvedDriverAllot = new DriverAllotGenerator().createDriverAllot(i, DriverAllotTestCase.testCaseList[i]);
 
@@ -128,6 +128,7 @@ public class DriverAllotHelloWorld {
 		}
 		if(totCount > 0)
 			System.out.println("\n" + countCorrect + " test cases out of " + totCount + " were correct");
+			*/
 	}
 
 	private static void printResults(int i, DriverAllot solvedDriverAllot) {
@@ -154,8 +155,8 @@ public class DriverAllotHelloWorld {
 		for (RouteTrip routeTrip : solvedDriverAllot.getRouteTripList()) {
 			Driver driver = routeTrip.getDriver();
 			if(driver != null && driver.getType() != Driver.UNIVERSAL_DRIVER)
-				displayString.append("  ").append(routeTrip.getLabel()).append(" -> ")
-				.append(driver == null ? null : driver.getLabel()).append("\n");
+				displayString.append("").append(routeTrip.tostring()).append(",")
+				.append(driver == null ? null : driver.tostring()).append("\n");
 		}
 		System.out.println("\nSolved DriverAllot with " + numActualDrivers + " drivers and " + solvedDriverAllot.getRouteTripList().size() + " routeTrips:\n"
 				+ displayString.toString());

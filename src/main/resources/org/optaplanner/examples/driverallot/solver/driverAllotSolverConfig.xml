@@ -27,7 +27,7 @@
     <terminationCompositionStyle>OR</terminationCompositionStyle>
   	<!-- <bestScoreFeasible>true</bestScoreFeasible> -->
   	<!-- <bestScoreLimit>0hard/-4999soft</bestScoreLimit> -->
-    <secondsSpentLimit>3</secondsSpentLimit>
+    <secondsSpentLimit>1500</secondsSpentLimit>
   </termination>
   
   

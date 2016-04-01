@@ -76,10 +76,10 @@ public class RouteTripDistance implements Serializable, Comparable<RouteTripDist
 				- (this.timeInMinutes + Constants.SHORT_REST_TIME_BETWEEN_TRIPS);
 		this.routeTripShortRestCostDifference = Math.max(0,
 				(this.shortRestRouteTripTimeDifferenceInMinutes / Constants.MINUTES_IN_HOUR)
-						* Constants.AVG_SPEED_DRIVER/2 * Constants.COST_PER_KM);
+						* Constants.AVG_SPEED_DRIVER * Constants.COST_PER_KM * Constants.DRIVER_REST_COST);
 		this.routeTripLongRestCostDifference = Math.max(0,
 				(this.longRestRouteTripTimeDifferenceInMinutes / Constants.MINUTES_IN_HOUR) 
-						* Constants.AVG_SPEED_DRIVER/2 * Constants.COST_PER_KM);
+						* Constants.AVG_SPEED_DRIVER * Constants.COST_PER_KM * Constants.DRIVER_REST_COST);
 	}
 
 	private double timeDifferenceMilitaryFormat(int timeEnd, int timeStart) throws ParseException {

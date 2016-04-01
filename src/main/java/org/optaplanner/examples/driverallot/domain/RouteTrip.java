@@ -260,11 +260,12 @@ public class RouteTrip extends AbstractPersistable {
 	}
 
 	public String getLabel() {
-        return "RouteTrip " + tripName;
+        return "RouteTrip " + id;
     }
     
     public String tostring() {
-    	return this.getLabel() + "\t" + this.getTimeStart() + "\t" + this.getTimeEnd() + "\t" + this.getRank() + "\t" + this.getStartLatitude() + ", " + this.startLongitude + "\t" + this.endLatitude + "\t" + this.endLongitude;
+    	return getLabel() + "," + this.getTripName();
+    	//return this.getLabel() + "\t" + this.getTimeStart() + "\t" + this.getTimeEnd() + "\t" + this.getRank() + "\t" + this.getStartLatitude() + ", " + this.startLongitude + "\t" + this.endLatitude + "\t" + this.endLongitude;
     }
 
 }

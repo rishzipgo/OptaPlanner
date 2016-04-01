@@ -115,7 +115,7 @@ rule "enoughTimeBetweenTrips"
 		)
 	then
 		scoreHolder.addHardConstraintMatch(kcontext, -5);
-		System.out.println("enoughTimeBetweenTrips " + $previousRouteTrip + " " + $routeTrip);
+		//System.out.println("enoughTimeBetweenTrips " + $previousRouteTrip + " " + $routeTrip);
 end
 
 rule "longRestAfterEveryThirdTripHard"
@@ -165,7 +165,7 @@ rule "longRestAfterEveryThirdTripHard"
 		)
 	then
 		scoreHolder.addHardConstraintMatch(kcontext, -5);
-		System.out.println("longRestAfterEveryThirdTripHard " + ($position.intValue()+1) + ". "+ $driver + " " + $previousRouteTrip + " " + $routeTrip + " " + -5);
+		//System.out.println("longRestAfterEveryThirdTripHard " + ($position.intValue()+1) + ". "+ $driver + " " + $previousRouteTrip + " " + $routeTrip + " " + -5);
 end
 
 // ############################################################################
@@ -191,7 +191,7 @@ rule "addRevenue"
         )
 	then
 		scoreHolder.addSoftConstraintMatch(kcontext, (int)$revenue);
-        System.out.println("addRevenue " + $driver + " " + $routeTrip + " " + -(int)$revenue);
+        //System.out.println("addRevenue " + $driver + " " + $routeTrip + " " + -(int)$revenue);
 end
 
 /*rule "minimumDrivers"
@@ -221,7 +221,7 @@ rule "universalDriverRankHigh"
         RouteTrip($driver == driver)
     then
         scoreHolder.addSoftConstraintMatch(kcontext, - Constants.UNIVERSAL_DRIVER_RANK);
-        System.out.println("driverRankHigh " + $driver + " " + Constants.UNIVERSAL_DRIVER_RANK);
+        //System.out.println("driverRankHigh " + $driver + " " + Constants.UNIVERSAL_DRIVER_RANK);
 end
 
 rule "fixedCostTotal"
@@ -233,7 +233,7 @@ rule "fixedCostTotal"
         exists RouteTrip($driver == driver)
 	then
 		scoreHolder.addSoftConstraintMatch(kcontext, - $fixedCost);
-        System.out.println("fixedCostTotal " + $driver + " " + $fixedCost);
+        //System.out.println("fixedCostTotal " + $driver + " " + $fixedCost);
 end
 
 /*rule "routeRankHigh"
@@ -311,7 +311,7 @@ rule "minimumDistanceNotTravelled"
         )
 	then
 		scoreHolder.addSoftConstraintMatch(kcontext, - (int)(($minimumDistance - $sumDistanceTravelled.intValue()) * Constants.COST_PER_KM));
-		System.out.println("minimumDistanceNotTravelled " + $driver + " " + $minimumDistance + " " + $sumDistanceTravelled.intValue() + " " + (int)(($minimumDistance - $sumDistanceTravelled.intValue()) * Constants.COST_PER_KM));
+		//System.out.println("minimumDistanceNotTravelled " + $driver + " " + $minimumDistance + " " + $sumDistanceTravelled.intValue() + " " + (int)(($minimumDistance - $sumDistanceTravelled.intValue()) * Constants.COST_PER_KM));
 end
 
 rule "extraChargeThanMinimumDistance"
@@ -333,7 +333,7 @@ rule "extraChargeThanMinimumDistance"
         )
 	then
 		scoreHolder.addSoftConstraintMatch(kcontext, - (int)(($sumDistanceTravelled.intValue() - $minimumDistance) * $costPerKm));
-		System.out.println("extraChargeThanMinimumDistance " + $driver + " " + $minimumDistance + " " + $sumDistanceTravelled.intValue() + " " + (int)(($sumDistanceTravelled.intValue() - $minimumDistance) * $costPerKm));
+		//System.out.println("extraChargeThanMinimumDistance " + $driver + " " + $minimumDistance + " " + $sumDistanceTravelled.intValue() + " " + (int)(($sumDistanceTravelled.intValue() - $minimumDistance) * $costPerKm));
 end
 
 rule "firstTripDriverProximity"
@@ -363,7 +363,7 @@ rule "firstTripDriverProximity"
 		)
 	then
 		scoreHolder.addSoftConstraintMatch(kcontext, -(int)$costToStart);
-		System.out.println("firstTripDriverProximity " + $driver + " " + $routeTrip + " " + $costToStart);
+		//System.out.println("firstTripDriverProximity " + $driver + " " + $routeTrip + " " + $costToStart);
 end
 
 
@@ -444,9 +444,9 @@ rule "twoTripsStartEndProximity"
 		)
 	then
 		scoreHolder.addSoftConstraintMatch(kcontext, -(int)($cost + $routeTripShortRestCostDifference));
-		System.out.println("twoTripsStartEndProximity " + $previousRouteTrip + " " + $routeTrip + " " + $cost);
+		//System.out.println("twoTripsStartEndProximity " + $previousRouteTrip + " " + $routeTrip + " " + $cost);
 		//scoreHolder.addSoftConstraintMatch(kcontext, -(int)$routeTripShortRestCostDifference);
-		System.out.println("twoTripsStartEndTimeProximity " + ($position.intValue()+1) + ". " + $previousRouteTrip + " " + $routeTrip + " " + $startTime + " " + $endTime + " " + $routeTripShortRestCostDifference);
+		//System.out.println("twoTripsStartEndTimeProximity " + ($position.intValue()+1) + ". " + $previousRouteTrip + " " + $routeTrip + " " + $startTime + " " + $endTime + " " + $routeTripShortRestCostDifference);
 end
 
 rule "longRestAfterEveryThirdTripSoft"
@@ -497,9 +497,9 @@ rule "longRestAfterEveryThirdTripSoft"
 		)
 	then
 		scoreHolder.addSoftConstraintMatch(kcontext, -(int)($cost + $routeTripLongRestCostDifference));
-		System.out.println("longRestAfterEveryThirdTripProximity " + ($position.intValue()+1) + ". "+ $driver + " " + $previousRouteTrip + " " + $routeTrip + " " + (int)$cost);
+		//System.out.println("longRestAfterEveryThirdTripProximity " + ($position.intValue()+1) + ". "+ $driver + " " + $previousRouteTrip + " " + $routeTrip + " " + (int)$cost);
 		//scoreHolder.addSoftConstraintMatch(kcontext, -(int)$routeTripLongRestCostDifference);
-		System.out.println("longRestAfterEveryThirdTripSoft " + ($position.intValue()+1) + ". "+ $driver + " " + $previousRouteTrip + " " + $routeTrip + " " + (int)$routeTripLongRestCostDifference);
+		//System.out.println("longRestAfterEveryThirdTripSoft " + ($position.intValue()+1) + ". "+ $driver + " " + $previousRouteTrip + " " + $routeTrip + " " + (int)$routeTripLongRestCostDifference);
 end
 
 rule "lastTripDriverProximity"
@@ -530,7 +530,7 @@ rule "lastTripDriverProximity"
 		)
 	then
 		scoreHolder.addSoftConstraintMatch(kcontext, -(int)$costToEnd);
-		System.out.println("lastTripDriverProximity " + $driver + " " + $routeTrip + " " + $costToEnd);
+		//System.out.println("lastTripDriverProximity " + $driver + " " + $routeTrip + " " + $costToEnd);
 end
 
 

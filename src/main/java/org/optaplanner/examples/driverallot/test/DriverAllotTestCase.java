@@ -534,13 +534,13 @@ public class DriverAllotTestCase {
 	
 	public static void readInputFiles(String driverFile, String tripFile, String locationsFile) throws IOException{
 		//Read all stops location
-		BufferedReader br = new BufferedReader(new FileReader(new File(locationsFile)));
-		br.readLine();
 		String strLin;
+		/*BufferedReader br = new BufferedReader(new FileReader(new File(locationsFile)));
+		br.readLine();
 		while((strLin = br.readLine()) != null) {
 			System.out.println(strLin);
 			String[] strSplit = strLin.split(",");
-			if(strSplit.length != 3){
+			if(strSplit.length < 3){
 				continue;
 			}
 			String stopName = strSplit[0].replaceAll("\\\"", "");
@@ -550,7 +550,7 @@ public class DriverAllotTestCase {
 
 			
 		}
-		br.close();
+		br.close();*/
 		
 		//Read all drivers details
 		BufferedReader brD = new BufferedReader(new FileReader(new File(driverFile)));
@@ -558,17 +558,22 @@ public class DriverAllotTestCase {
 		driversList.add(new Driver(0, 2359, 0.0, 0.0, "Universal Driver", 
 						Driver.UNIVERSAL_DRIVER, 0, 0, 0, Cab.UNIVERSAL));
 		while((strLin = brD.readLine()) != null) {
-			System.out.println(strLin);
+			//System.out.println(strLin);
+			if(strLin.contains("NA"))
+				continue;
 			String[] strSplit = strLin.split(",");
-			if(strSplit.length != 5){
+			if(strSplit.length < 5){
 				continue;
 			}
 			String driverName = strSplit[0].replaceAll("\\\"", "");
-			String stopName = strSplit[1].replaceAll("\\\"", "");
-			int startTime 	= Integer.parseInt(strSplit[2].replaceAll("\\\"", ""));
-			int endTime 	= Integer.parseInt(strSplit[3].replaceAll("\\\"", ""));
+			//String stopName = strSplit[1].replaceAll("\\\"", "");
+			double startLat = Double.parseDouble(strSplit[1].replaceAll("\\\"", ""));
+			double startLong = Double.parseDouble(strSplit[2].replaceAll("\\\"", ""));
+			int startTime 	= Integer.parseInt(strSplit[3].replaceAll("\\\"", ""));
+			int endTime 	= Integer.parseInt(strSplit[4].replaceAll("\\\"", ""));
 
-			Pair<Double, Double> prefLocation = locations.get(stopName);
+			//Pair<Double, Double> prefLocation = locations.get(stopName);
+			Pair<Double, Double> prefLocation = new Pair(startLat, startLong);
 			driversList.add(new Driver(startTime, endTime, prefLocation.getKey(), prefLocation.getValue(), 
 								driverName,  Driver.FIXED_DRIVER, 40, 30, 1200, Cab.TT));
 			
@@ -579,25 +584,28 @@ public class DriverAllotTestCase {
 		BufferedReader brT = new BufferedReader(new FileReader(new File(tripFile)));
 		brT.readLine();
 		while((strLin = brT.readLine()) != null) {
-			System.out.println(strLin);
+			//System.out.println(strLin);
+			if(strLin.contains("NA"))
+				continue;
 			String[] strSplit = strLin.split(",");
-			if(strSplit.length != 8){
+			if(strSplit.length < 9){
 				continue;
 			}
 			String tripName 	 = strSplit[0].replaceAll("\\\"", "");
-			String startStopName = strSplit[1].replaceAll("\\\"", "");
-			String endStopName 	 = strSplit[2].replaceAll("\\\"", "");
-			String viaName 		 = strSplit[3].replaceAll("\\\"", "");
-
-			int startTime 	= Integer.parseInt(strSplit[4].replaceAll("\\\"", ""));
-			int tripDuration 	= Integer.parseInt(strSplit[5].replaceAll("\\\"", ""));
+			double startLat 	 = Double.parseDouble(strSplit[1].replaceAll("\\\"", ""));
+			double startLong 	 = Double.parseDouble(strSplit[2].replaceAll("\\\"", ""));
+			double endLat 	 	 = Double.parseDouble(strSplit[3].replaceAll("\\\"", ""));
+			double endLong 	 	 = Double.parseDouble(strSplit[4].replaceAll("\\\"", ""));
+			
+			int startTime 	= Integer.parseInt(strSplit[5].replaceAll("\\\"", ""));
+			int tripDuration 	= (int) Double.parseDouble(strSplit[6].replaceAll("\\\"", ""));
 			int endTime = MyTimeUtil.min2format(tripDuration + MyTimeUtil.format2Min(startTime));
-			double distance = Double.parseDouble(strSplit[6].replaceAll("\\\"", ""));
-			int avgCust 	= Integer.parseInt(strSplit[7].replaceAll("\\\"", ""));
+			double distance = Double.parseDouble(strSplit[7].replaceAll("\\\"", ""));
+			int avgCust 	= Integer.parseInt(strSplit[8].replaceAll("\\\"", ""));
 
 
-			Pair<Double, Double> startLocation = locations.get(startStopName);
-			Pair<Double, Double> endLocation = locations.get(endStopName);
+			Pair<Double, Double> startLocation = new Pair(startLat, startLong);
+			Pair<Double, Double> endLocation = new Pair(endLat, endLong);
 
 			tripsList.add(new RouteTrip(startTime, endTime, startLocation.getKey(), startLocation.getValue(), 
 					endLocation.getKey(), endLocation.getValue(), tripName, distance, avgCust));

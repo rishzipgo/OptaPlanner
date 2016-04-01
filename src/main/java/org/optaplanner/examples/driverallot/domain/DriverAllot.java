@@ -99,7 +99,7 @@ public class DriverAllot extends AbstractPersistable implements Solution<HardSof
 		for (Driver driver : driverList)
 			for (RouteTrip routeTrip : routeTripList) {
 				driverRouteTripDistanceList.add(new DriverRouteTripDistance(driver, routeTrip));
-				System.out.println(driver + " " + routeTrip + " " + driverRouteTripDistanceList.get(driverRouteTripDistanceList.size()-1).getCostToStart() + " " + driverRouteTripDistanceList.get(driverRouteTripDistanceList.size()-1).getCostToEnd());
+				//System.out.println(driver + " " + routeTrip + " " + driverRouteTripDistanceList.get(driverRouteTripDistanceList.size()-1).getCostToStart() + " " + driverRouteTripDistanceList.get(driverRouteTripDistanceList.size()-1).getCostToEnd());
 			}
 		return driverRouteTripDistanceList;
 	}
@@ -118,13 +118,13 @@ public class DriverAllot extends AbstractPersistable implements Solution<HardSof
 					if(!intersects(leftInterval, rightInterval)) {
 						if(leftEndTime <= rightStartTime) {
 							routeTripDistanceList.add(new RouteTripDistance(leftRouteTrip, rightRouteTrip));
-							System.out.print(leftRouteTrip + " " + rightRouteTrip + " ");
+							//System.out.print(leftRouteTrip + " " + rightRouteTrip + " ");
 						}
 						else {
 							routeTripDistanceList.add(new RouteTripDistance(rightRouteTrip, leftRouteTrip));
-							System.out.print(rightRouteTrip + " " + leftRouteTrip + " ");
+							//System.out.print(rightRouteTrip + " " + leftRouteTrip + " ");
 						}
-						System.out.println(routeTripDistanceList.get(routeTripDistanceList.size()-1).getCost() + " " + routeTripDistanceList.get(routeTripDistanceList.size()-1).getRouteTripShortRestCostDifference() + " " + routeTripDistanceList.get(routeTripDistanceList.size()-1).getRouteTripLongRestCostDifference());
+						//System.out.println(routeTripDistanceList.get(routeTripDistanceList.size()-1).getCost() + " " + routeTripDistanceList.get(routeTripDistanceList.size()-1).getRouteTripShortRestCostDifference() + " " + routeTripDistanceList.get(routeTripDistanceList.size()-1).getRouteTripLongRestCostDifference());
 					}
 				}
 			}
@@ -145,8 +145,8 @@ public class DriverAllot extends AbstractPersistable implements Solution<HardSof
 					Interval rightInterval = new Interval(rightStartTime, rightEndTime);
 					if(intersects(leftInterval, rightInterval)) {
 						routeTripConflictList.add(new RouteTripConflict(leftRouteTrip, rightRouteTrip));
-						System.out.println(leftInterval.getLowerBound() + "-" + leftInterval.getUpperBound() + "\t" + 
-								rightInterval.getLowerBound() + "-" + rightInterval.getUpperBound());
+						//System.out.println(leftInterval.getLowerBound() + "-" + leftInterval.getUpperBound() + "\t" + 
+						//		rightInterval.getLowerBound() + "-" + rightInterval.getUpperBound());
 					}
 				}
 			}

@@ -15,4 +15,5 @@ public class Constants {
 	public final static int UNIVERSAL_DRIVER_RANK = 500000;
 	public final static double SHORT_REST_TIME_BETWEEN_TRIPS = 15;
 	public final static double LONG_REST_TIME_BETWEEN_TRIPS = 30;
+	public static final double DRIVER_REST_COST = 0.5;
 }
