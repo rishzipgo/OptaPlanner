@@ -58,7 +58,7 @@ public class RouteTripDistance implements Serializable, Comparable<RouteTripDist
 		this.rightRouteTrip = rightRouteTrip;
 		this.distance = GeoUtils.distance(leftRouteTrip.getEndLatitude(), leftRouteTrip.getEndLongitude(),
 				rightRouteTrip.getStartLatitude(), rightRouteTrip.getStartLongitude());
-		this.distanceInMeters = distance * Constants.METERS_IN_KILOMETERS;
+		this.distanceInMeters = distance * Constants.METERS_IN_KILOMETERS*Constants.CROW_FACTOR;
 		this.time = distance / AVG_SPEED_DRIVER;
 		this.timeInMinutes = time * Constants.MINUTES_IN_HOUR;
 		this.cost = this.distance * Constants.COST_PER_KM;

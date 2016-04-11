@@ -52,7 +52,7 @@ public class GeoUtils {
                 Math.cos(latitudeA) * Math.cos(latitudeB) *
                 Math.pow((Math.sin((longitudeB - longitudeA) / 2)), 2)));
         if (inMeters) {
-            return distance * Constants.METERS_IN_KILOMETERS;
+            return distance * Constants.METERS_IN_KILOMETERS*Constants.CROW_FACTOR;
         }
         return distance;
     }
@@ -63,7 +63,7 @@ public class GeoUtils {
      * @param km kilometers
      */
     public static double kmToMeters(double km) {
-        return km * Constants.METERS_IN_KILOMETERS;
+        return km * Constants.METERS_IN_KILOMETERS*Constants.CROW_FACTOR;
     }
 
     /**
@@ -72,6 +72,6 @@ public class GeoUtils {
      * @param meters meters
      */
     public static double metersToKm(double meters) {
-        return meters / Constants.METERS_IN_KILOMETERS;
+        return meters / Constants.METERS_IN_KILOMETERS*Constants.CROW_FACTOR;
     }
 }

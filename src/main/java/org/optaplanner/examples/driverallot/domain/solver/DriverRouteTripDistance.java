@@ -55,7 +55,7 @@ public class DriverRouteTripDistance implements Serializable, Comparable<DriverR
 		if(driver.getType() != Driver.UNIVERSAL_DRIVER) {
 			this.distanceToStart = GeoUtils.distance(driver.getLatitude(), driver.getLongitude(),
 					routeTrip.getStartLatitude(), routeTrip.getStartLongitude());
-			this.distanceToStartInMeters = distanceToStart*Constants.METERS_IN_KILOMETERS;
+			this.distanceToStartInMeters = distanceToStart*Constants.METERS_IN_KILOMETERS*Constants.CROW_FACTOR;
 			this.distanceToEnd = GeoUtils.distance(driver.getLatitude(), driver.getLongitude(),
 					routeTrip.getEndLatitude(), routeTrip.getEndLongitude());
 			this.distanceToEndInMeters = distanceToEnd*Constants.METERS_IN_KILOMETERS;

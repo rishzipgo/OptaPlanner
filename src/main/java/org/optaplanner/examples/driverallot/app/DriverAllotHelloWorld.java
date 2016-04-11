@@ -62,14 +62,17 @@ public class DriverAllotHelloWorld {
 			DriverAllotTestCase.readInputFiles(	filesPath + "/" + driverFileName, 
 												filesPath + "/" + tripFileName, 
 												filesPath +  "/" +locationFileName);
+			
 			DriverAllot unsolvedDriverAllot = new DriverAllotGenerator().createDriverAllot(0, DriverAllotTestCase.testCase);
-
+		
+			
 			// Solve the problem
 			solver.solve(unsolvedDriverAllot);
 			
 			DriverAllot solvedDriverAllot = (DriverAllot) solver.getBestSolution();
 
 			DriverAllotResults.add(solvedDriverAllot);
+			
 			
 			printResult(solvedDriverAllot, outFileName);
 	
@@ -161,6 +164,7 @@ public class DriverAllotHelloWorld {
 		System.out.println("\nSolved DriverAllot with " + numActualDrivers + " drivers and " + solvedDriverAllot.getRouteTripList().size() + " routeTrips:\n"
 				+ displayString.toString());
 		if(outputFile != null){
+			System.out.println(displayString.toString());
 			System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream(outputFile)), true));
 			System.out.println(displayString.toString());
 		}
